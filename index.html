@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网站导航</title>
+    <link rel="icon" type="image/png" href="https://www.likunming.cn/logo.png">
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -64,32 +65,50 @@
         .search-tab {
             padding: 5px 10px;
             cursor: pointer;
-            color: #666;
             font-size: 14px;
+            position: relative;
         }
-        .search-tab.active To {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
+        .search-tab.active {
+            border-bottom: 2px solid #4285f4;
+        }
+        .search-tab.active span {
+            font-weight: bold;
+        }
+        .google-text {
+            font-weight: normal;
+        }
+        .google-text .g1 { color: #4285f4; } /* G - Blue */
+        .google-text .g2 { color: #ea4335; } /* o - Red */
+        .google-text .g3 { color: #fbbc05; } /* o - Yellow */
+        .google-text .g4 { color: #4285f4; } /* g - Blue */
+        .google-text .g5 { color: #34a853; } /* l - Green */
+        .google-text .g6 { color: #ea4335; } /* e - Red */
+        .baidu-text {
+            color: #2932e1;
+            font-weight: normal;
         }
         .search-form {
             display: flex;
             width: 100%;
             max-width: 600px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         .search-form input[type="text"] {
             width: 100%;
             max-width: 500px;
             padding: 8px;
             font-size: 14px;
-            border: 1px solid #ccc;
+            border: none;
             border-radius: 5px 0 0 5px;
             margin-right: 0;
+            background-color: transparent;
         }
         .search-form input[type="submit"] {
             padding: 8px 15px;
             font-size: 14px;
-            border: 1px solid #ccc;
-            border-left: none;
+            border: none;
             border-radius: 0 5px 5px 0;
             background-color: #444;
             color: white;
@@ -101,11 +120,17 @@
     <div class="search-container">
         <div style="width: 100%; max-width: 600px;">
             <div class="search-tabs">
-                <span class="search-tab active" onclick="switchSearch('google')">谷歌</span>
-                <span class="search-tab" onclick="switchSearch('baidu')">百度</span>
+                <span class="search-tab active" onclick="switchSearch('google')">
+                    <span class="google-text">
+                        <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span>
+                    </span>
+                </span>
+                <span class="search-tab" onclick="switchSearch('baidu')">
+                    <span class="baidu-text">百度</span>
+                </span>
             </div>
             <form id="searchForm" class="search-form" action="https://www.google.com/search" method="get" target="_blank">
-                <input type="text" name="q" placeholder="谷歌搜索...">
+                <input type="text" name="q" placeholder="Google Search...">
                 <input type="submit" value="🔍">
             </form>
         </div>
@@ -134,10 +159,6 @@
                 <img src="https://www.dw.com/favicon.png" alt="德国之声中文网">
                 <span>德国之声中文网</span>
             </a>
-            <a href="https://www.mingpao.com" class="news-btn" target="_blank">
-                <img src="https://creative.mingpao.com/image/mplogos/mingpao.png" alt="明报">
-                <span>明报</span>
-            </a>
             <a href="https://news.stheadline.com" class="news-btn" target="_blank">
                 <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="星岛日报">
                 <span>星岛日报</span>
@@ -146,17 +167,9 @@
                 <img src="https://china.kyodonews.net/favicon.ico" alt="共同网中文">
                 <span>共同网中文</span>
             </a>
-            <a href="https://www.caixin.com" class="news-btn" target="_blank">
-                <img src="https://www.caixin.com/favicon.ico" alt="财新网">
-                <span>财新网</span>
-            </a>
             <a href="https://www.rfi.fr/cn/" class="news-btn" target="_blank">
                 <img src="https://www.rfi.fr/favicon.ico" alt="法国国际广播电台中文">
                 <span>法国国际广播电台中文</span>
-            </a>
-            <a href="https://udn.com/news/index" class="news-btn" target="_blank">
-                <img src="https://udn.com/static/img/favicon.ico" alt="联合新闻网">
-                <span>联合新闻网</span>
             </a>
         </div>
     </div>
@@ -168,8 +181,8 @@
                 <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
                 <span>ChatGPT</span>
             </a>
-            <a href="https://grok.x.ai/" class="ai-btn" target="_blank">
-                <img src="https://x.ai/favicon.ico" alt="Grok">
+            <a href="https://grok.com/?referrer=website" class="ai-btn" target="_blank">
+                <img src="https://grok.com/images/favicon-light.png" alt="Grok">
                 <span>Grok</span>
             </a>
             <a href="https://chat.deepseek.com/sign_in" class="ai-btn" target="_blank">
@@ -195,16 +208,16 @@
         <h2>视频</h2>
         <div class="container">
             <a href="https://www.youtube.com/" class="video-btn" target="_blank">
-                <img src="https://www.youtube.com/favicon.ico" alt="YouTube">
+                <img src="https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon_144x144.png" alt="YouTube">
                 <span>YouTube</span>
             </a>
             <a href="https://www.bilibili.com/" class="video-btn" target="_blank">
                 <img src="https://www.bilibili.com/favicon.ico" alt="Bilibili">
                 <span>Bilibili</span>
             </a>
-            <a href="https://www.ixigua.com/" class="video-btn" target="_blank">
-                <img src="https://www.ixigua.com/favicon.ico" alt="西瓜视频">
-                <span>西瓜视频</span>
+            <a href="https://www.yfsp.tv/" class="video-btn" target="_blank">
+                <img src="https://www.yfsp.tv/android-icon-196x196.png" alt="爱壹帆">
+                <span>爱壹帆</span>
             </a>
             <a href="https://www.tiktok.com/" class="video-btn" target="_blank">
                 <img src="https://www.tiktok.com/favicon.ico" alt="TikTok">
@@ -279,7 +292,7 @@
             if (engine === 'google') {
                 form.action = 'https://www.google.com/search';
                 input.name = 'q';
-                input.placeholder = '谷歌搜索...';
+                input.placeholder = 'Google Search...';
             } else if (engine === 'baidu') {
                 form.action = 'https://www.baidu.com/s';
                 input.name = 'wd';
