@@ -36,9 +36,37 @@
             font-size: 12px;
             line-height: 1.2;
         }
+        .search-container {
+            max-width: 600px;
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .search-container input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-container input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <div class="search-container">
+        <form action="https://www.google.com/search" method="get">
+            <input type="text" name="q" placeholder="Google 搜索...">
+            <input type="submit" value="搜索">
+        </form>
+    </div>
     <div class="container">
         <a href="https://cn.nytimes.com" class="news-btn" target="_blank">
             <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网">
@@ -100,6 +128,11 @@
             <img src="https://www.hk01.com/favicon.ico" alt="香港01">
             <span>香港01</span>
         </a>
+        <a href="https://chatgpt.com/" class="news-btn" target="_blank">
+            <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
+            <span>ChatGPT</span>
+        </a>
     </div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93314e116b666732',t:'MTc0NTExNzEyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
