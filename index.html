@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新闻网站导航</title>
+    <title>网站导航</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -13,13 +13,23 @@
             align-items: center;
             padding: 20px;
         }
+        .category {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        .category h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: left;
+        }
         .container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            max-width: 600px;
         }
-        .news-btn {
+        .news-btn, .ai-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -27,13 +37,13 @@
             text-decoration: none;
             color: black;
         }
-        .news-btn img {
+        .news-btn img, .ai-btn img {
             width: 60px;
             height: 60px;
             border-radius: 12px;
             margin-bottom: 8px;
         }
-        .news-btn span {
+        .news-btn span, .ai-btn span {
             font-size: 12px;
             line-height: 1.2;
         }
@@ -95,61 +105,92 @@
                 <span class="search-tab" onclick="switchSearch('baidu')">百度</span>
             </div>
             <form id="searchForm" class="search-form" action="https://www.google.com/search" method="get" target="_blank">
-                <input type="text" name="q" placeholder="百度一下">
+                <input type="text" name="q" placeholder="谷歌搜索...">
                 <input type="submit" value="🔍">
             </form>
         </div>
     </div>
-    <div class="container">
-        <a href="https://cn.nytimes.com" class="news-btn" target="_blank">
-            <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网">
-            <span>纽约时报中文网</span>
-        </a>
-        <a href="https://www.bbc.com/zhongwen/simp" class="news-btn" target="_blank">
-            <img src="https://static.files.bbci.co.uk/ws/simorgh-assets/public/zhongwen/images/icons/icon-144x144.png" alt="BBC中文网">
-            <span>BBC中文网</span>
-        </a>
-        <a href="https://cn.wsj.com/zh-hans" class="news-btn" target="_blank">
-            <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报中文网">
-            <span>华尔街日报中文网</span>
-        </a>
-        <a href="https://www.ftchinese.com" class="news-btn" target="_blank">
-            <img src="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square?source=update-logos&width=180&height=180&format=png" alt="FT中文网">
-            <span>FT中文网</span>
-        </a>
-        <a href="https://www.dw.com/zh" class="news-btn" target="_blank">
-            <img src="https://www.dw.com/favicon.png" alt="德国之声中文网">
-            <span>德国之声中文网</span>
-        </a>
-        <a href="https://www.mingpao.com" class="news-btn" target="_blank">
-            <img src="https://creative.mingpao.com/image/mplogos/mingpao.png" alt="明报">
-            <span>明报</span>
-        </a>
-        <a href="https://news.stheadline.com" class="news-btn" target="_blank">
-            <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="星岛日报">
-            <span>星岛日报</span>
-        </a>
-        <a href="https://china.kyodonews.net/" class="news-btn" target="_blank">
-            <img src="https://china.kyodonews.net/favicon.ico" alt="共同网中文">
-            <span>共同网中文</span>
-        </a>
-        <a href="https://www.caixin.com" class="news-btn" target="_blank">
-            <img src="https://www.caixin.com/favicon.ico" alt="财新网">
-            <span>财新网</span>
-        </a>
-        <a href="https://www.rfi.fr/cn/" class="news-btn" target="_blank">
-            <img src="https://www.rfi.fr/favicon.ico" alt="法国国际广播电台中文">
-            <span>法国国际广播电台中文</span>
-        </a>
-        <a href="https://udn.com/news/index" class="news-btn" target="_blank">
-            <img src="https://udn.com/static/img/favicon.ico" alt="联合新闻网">
-            <span>联合新闻网</span>
-        </a>
-        <a href="https://chatgpt.com/" class="news-btn" target="_blank">
-            <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
-            <span>ChatGPT</span>
-        </a>
+
+    <div class="category">
+        <h2>新闻</h2>
+        <div class="container">
+            <a href="https://cn.nytimes.com" class="news-btn" target="_blank">
+                <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网">
+                <span>纽约时报中文网</span>
+            </a>
+            <a href="https://www.bbc.com/zhongwen/simp" class="news-btn" target="_blank">
+                <img src="https://static.files.bbci.co.uk/ws/simorgh-assets/public/zhongwen/images/icons/icon-144x144.png" alt="BBC中文网">
+                <span>BBC中文网</span>
+            </a>
+            <a href="https://cn.wsj.com/zh-hans" class="news-btn" target="_blank">
+                <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报中文网">
+                <span>华尔街日报中文网</span>
+            </a>
+            <a href="https://www.ftchinese.com" class="news-btn" target="_blank">
+                <img src="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square?source=update-logos&width=180&height=180&format=png" alt="FT中文网">
+                <span>FT中文网</span>
+            </a>
+            <a href="https://www.dw.com/zh" class="news-btn" target="_blank">
+                <img src="https://www.dw.com/favicon.png" alt="德国之声中文网">
+                <span>德国之声中文网</span>
+            </a>
+            <a href="https://www.mingpao.com" class="news-btn" target="_blank">
+                <img src="https://creative.mingpao.com/image/mplogos/mingpao.png" alt="明报">
+                <span>明报</span>
+            </a>
+            <a href="https://news.stheadline.com" class="news-btn" target="_blank">
+                <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="星岛日报">
+                <span>星岛日报</span>
+            </a>
+            <a href="https://china.kyodonews.net/" class="news-btn" target="_blank">
+                <img src="https://china.kyodonews.net/favicon.ico" alt="共同网中文">
+                <span>共同网中文</span>
+            </a>
+            <a href="https://www.caixin.com" class="news-btn" target="_blank">
+                <img src="https://www.caixin.com/favicon.ico" alt="财新网">
+                <span>财新网</span>
+            </a>
+            <a href="https://www.rfi.fr/cn/" class="news-btn" target="_blank">
+                <img src="https://www.rfi.fr/favicon.ico" alt="法国国际广播电台中文">
+                <span>法国国际广播电台中文</span>
+            </a>
+            <a href="https://udn.com/news/index" class="news-btn" target="_blank">
+                <img src="https://udn.com/static/img/favicon.ico" alt="联合新闻网">
+                <span>联合新闻网</span>
+            </a>
+        </div>
     </div>
+
+    <div class="category">
+        <h2>AI</h2>
+        <div class="container">
+            <a href="https://chatgpt.com/" class="ai-btn" target="_blank">
+                <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
+                <span>ChatGPT</span>
+            </a>
+            <a href="https://grok.x.ai/" class="ai-btn" target="_blank">
+                <img src="https://x.ai/favicon.ico" alt="Grok">
+                <span>Grok</span>
+            </a>
+            <a href="https://www.deepseek.com/" class="ai-btn" target="_blank">
+                <img src="https://www.deepseek.com/favicon.ico" alt="DeepSeek">
+                <span>DeepSeek</span>
+            </a>
+            <a href="https://gemini.google.com/" class="ai-btn" target="_blank">
+                <img src="https://gemini.google.com/favicon.ico" alt="Gemini">
+                <span>Gemini</span>
+            </a>
+            <a href="https://yuanbao.tencent.com/" class="ai-btn" target="_blank">
+                <img src="https://yuanbao.tencent.com/favicon.ico" alt="腾讯元宝">
+                <span>腾讯元宝</span>
+            </a>
+            <a href="https://copilot.microsoft.com/" class="ai-btn" target="_blank">
+                <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
+                <span>Copilot</span>
+            </a>
+        </div>
+    </div>
+
     <script>
         function switchSearch(engine) {
             const form = document.getElementById('searchForm');
