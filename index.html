@@ -114,9 +114,70 @@
             color: white;
             cursor: pointer;
         }
+        /* 提示窗口样式 */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            max-width: 300px;
+            width: 90%;
+            z-index: 1000;
+        }
+        .popup.hidden {
+            display: none;
+        }
+        .popup-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 8px;
+        }
+        .popup-content {
+            flex: 1;
+        }
+        .popup-content h3 {
+            font-size: 16px;
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        .popup-content p {
+            font-size: 12px;
+            color: #666;
+            margin: 0;
+        }
+        .popup-content a {
+            color: #4285f4;
+            text-decoration: none;
+        }
+        .popup-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 16px;
+            color: #999;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <!-- 提示窗口 -->
+    <div id="popup" class="popup">
+        <img src="https://www.likunming.cn/logo.png" alt="Icon" class="popup-icon">
+        <div class="popup-content">
+            <h3>网址导航</h3>
+            <p>点击下方“<a href="#" onclick="alert('添加到主屏幕功能需手动实现！')">添加到主屏幕</a>”</p>
+            <p>然后选择“添加到主屏幕”</p>
+        </div>
+        <span class="popup-close" onclick="closePopup()">✖</span>
+    </div>
+
     <div class="search-container">
         <div style="width: 100%; max-width: 600px;">
             <div class="search-tabs">
@@ -293,7 +354,7 @@
         <div class="container">
             <a href="https://sfz.tools.likunming.cn" class="image-btn" target="_blank">
                 <img src="https://www.likunming.cn/suiyin.png" alt="加水印">
-                <span>图片加水印</span>
+                <span>加水印</span>
             </a>
             <a href="https://www.remove.bg/zh" class="image-btn" target="_blank">
                 <img src="https://www.remove.bg/favicon.ico" alt="背景消除">
@@ -321,8 +382,13 @@
                 input.placeholder = '百度一下';
             }
         }
+
+        // 关闭提示窗口
+        function closePopup() {
+            document.getElementById('popup').classList.add('hidden');
+        }
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934032aefd92458d',t:'MTc0NTI3MzI4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
