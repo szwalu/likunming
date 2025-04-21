@@ -127,19 +127,33 @@
             border-radius: 8px;
             padding: 8px 12px;
             z-index: 1000;
-            width: 80%; /* 宽度占屏幕的80% */
-            max-width: 320px; /* 最大宽度限制 */
+            width: 50%; /* 宽度占屏幕的50% */
+            max-width: 300px; /* 最大宽度限制 */
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
+        /* 底部箭头 */
+        .toast-bar::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #fff;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+        }
         .toast-content {
             display: flex;
             align-items: center;
-            font-size: 12px; /* 字体更小 */
+            font-size: 12px;
         }
         .toast-icon {
-            width: 20px; /* 图标更小 */
+            width: 20px;
             height: 20px;
             margin-right: 8px;
         }
@@ -288,7 +302,7 @@
                 <span>小红书</span>
             </a>
             <a href="https://www.facebook.com/" class="video-btn" target="_blank">
-                <img src="https://www.facebook.com/favicon.ico" alt="Facebook">
+                <img src="https://www.facebook.com/favicons/android-chrome-192x192.png" alt="Facebook">
                 <span>Facebook</span>
             </a>
             <a href="https://www.instagram.com/" class="video-btn" target="_blank">
