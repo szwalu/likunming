@@ -393,96 +393,77 @@
     </div>
 
     <script>
-        function switchSearch(engine) {
-            const form = document.getElementById('searchForm');
-            const input = form.querySelector('input[type="text"]');
-            const tabs = document.querySelectorAll('.search-tab');
-            
-            tabs.forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+    function switchSearch(engine) {
+        const form = document.getElementById('searchForm');
+        const input = form.querySelector('input[type="text"]');
+        const tabs = document.querySelectorAll('.search-tab');
 
-            if (engine === 'google') {
-                form.action = 'https://www.google.com/search';
-                input.name = 'q';
-                input.placeholder = 'Google Search...';
-            } else if (engine === 'baidu') {
-                form.action = 'https://www.baidu.com/s';
-                input.name = 'wd';
-                input.placeholder = '百度一下';
-            }
+        tabs.forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+
+        if (engine === 'google') {
+            form.action = 'https://www.google.com/search';
+            input.name = 'q';
+            input.placeholder = 'Google Search...';
+        } else if (engine === 'baidu') {
+            form.action = 'https://www.baidu.com/s';
+            input.name = 'wd';
+            input.placeholder = '百度一下';
         }
+    }
 
-        // 判断是否为移动端
-        function isMobileDevice() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            // 检查常见的移动端 userAgent
-            const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
-            const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
-            // 结合屏幕宽度判断（小于 768px 通常为移动设备）
-            const isSmallScreen = window.innerWidth <= 768;
-            return isMobileUA || isSmallScreen;
+    function isMobileDevice() {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+        const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
+        const isSmallScreen = window.innerWidth <= 768;
+        return isMobileUA || isSmallScreen;
+    }
+
+    let toastManuallyClosed = false;
+
+    function showToast() {
+        const toastBar = document.getElementById('toastBar');
+        if (toastBar && isMobileDevice() && !toastManuallyClosed) {
+            toastBar.style.display = 'block';
+            toastBar.style.visibility = 'visible';
+            toastBar.style.position = 'fixed';
+            toastBar.style.bottom = '20px';
         }
+    }
 
-        // 确保提示窗口在移动端显示
-        window.onload = function() {
-            const toastBar = document.getElementById('toastBar');
-            if (toastBar) {
-                if (isMobileDevice()) {
-                    toastBar.style.display = 'block';
-                    toastBar.style.visibility = 'visible';
-                    toastBar.style.position = 'fixed';
-                    toastBar.style.bottom = '20px';
-                } else {
-                    toastBar.style.display = 'none'; // 非移动端隐藏
-                }
-            }
-        };
+    function hideToast() {
+        const toastBar = document.getElementById('toastBar');
+        if (toastBar) {
+            toastBar.style.display = 'none';
+        }
+    }
 
-        // 监听滚动事件，确保提示窗口在移动端始终固定
-        window.addEventListener('scroll', function() {
-            const toastBar = document.getElementById('toastBar');
-            if (toastBar && isMobileDevice()) {
-                toastBar.style.position = 'fixed';
-                toastBar.style.bottom = '20px';
+    window.onload = function () {
+        showToast();
+        setTimeout(function () {
+            if (!toastManuallyClosed) {
+                hideToast();
             }
+        }, 30000);
+    };
+
+    window.addEventListener('scroll', function () {
+        showToast();
+    });
+
+    window.addEventListener('resize', function () {
+        showToast();
+    });
+
+    const toastClose = document.getElementById('toastClose');
+    if (toastClose) {
+        toastClose.addEventListener('click', function () {
+            toastManuallyClosed = true;
+            hideToast();
         });
-
-        // 监听窗口大小变化，动态调整提示窗口显示
-        window.addEventListener('resize', function() {
-            const toastBar = document.getElementById('toastBar');
-            if (toastBar) {
-                if (isMobileDevice()) {
-                    toastBar.style.display = 'block';
-                    toastBar.style.visibility = 'visible';
-                    toastBar.style.position = 'fixed';
-                    toastBar.style.bottom = '20px';
-                } else {
-                    toastBar.style.display = 'none';
-                }
-            }
-        });
-
-        // 关闭提示窗口
-        const toastClose = document.getElementById('toastClose');
-        if (toastClose) {
-            toastClose.addEventListener('click', function() {
-                const toastBar = document.getElementById('toastBar');
-                if (toastBar) {
-                    toastBar.style.display = 'none';
-                }
-            });
-        }
-
-        // 30秒后自动关闭提示窗口（仅在移动端）
-        if (isMobileDevice()) {
-            setTimeout(function() {
-                const toastBar = document.getElementById('toastBar');
-                if (toastBar) {
-                    toastBar.style.display = 'none';
-                }
-            }, 30000); // 30000毫秒 = 30秒
-        }
-    </script>
+    }
+</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
