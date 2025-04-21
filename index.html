@@ -130,8 +130,9 @@
             width: 50%; /* 宽度占屏幕的50% */
             max-width: 300px; /* 最大宽度限制 */
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            align-items: flex-start; /* 顶部对齐 */
+            justify-content: center; /* 居中对齐 */
+            position: relative; /* 为关闭按钮定位提供上下文 */
         }
         /* 底部箭头 */
         .toast-bar::after {
@@ -149,39 +150,37 @@
         }
         .toast-content {
             display: flex;
-            align-items: flex-start; /* 顶部对齐 */
+            align-items: flex-start;
             font-size: 12px;
-            flex-direction: row; /* 水平排列图标和文字 */
+            flex-direction: row;
             text-align: left;
-        }
-        .toast-icon {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
         }
         .toast-text {
             color: #333;
-            line-height: 1.4; /* 增加行距 */
+            line-height: 1.4;
             display: flex;
             flex-direction: column;
         }
         .inline-icon {
-            width: 12px; /* 与字体大小一致 */
+            width: 12px;
             height: 12px;
-            vertical-align: middle; /* 与文字垂直居中 */
-            margin: 0 2px; /* 微调间距 */
+            vertical-align: middle;
+            margin: 0 2px;
         }
         .highlight-icon {
             color: #007bff;
             font-weight: bold;
         }
         .toast-close {
+            position: absolute; /* 绝对定位到右上角 */
+            top: 5px;
+            right: 5px;
             background: none;
             border: none;
             font-size: 16px;
             color: #999;
             cursor: pointer;
-            padding: 0 5px;
+            padding: 0;
         }
         .toast-close:hover {
             color: #333;
@@ -377,7 +376,6 @@
     <!-- 提示窗口 -->
     <div class="toast-bar">
         <div class="toast-content">
-            <img src="https://www.likunming.cn/logo.png" alt="网址导航" class="toast-icon">
             <span class="toast-text">
                 <span>添加网址导航到桌面</span>
                 <span>点击下面的 <img src="https://www.likunming.cn/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
