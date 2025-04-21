@@ -6,14 +6,21 @@
     <title>网址导航</title>
     <link rel="icon" type="image/png" href="https://www.likunming.cn/logo.png">
     <style>
-        body {
+        html, body {
+            margin: 0;
+            padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: #f5f5f7;
+            min-height: 100vh; /* 确保页面高度足够 */
+            overflow-x: hidden; /* 防止水平滚动 */
+            position: static; /* 确保 body 不干扰 fixed 定位 */
+        }
+        body {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            padding-bottom: 60px; /* 为底部提示窗口留出空间 */
+            padding-bottom: 80px; /* 增加底部空间，确保提示窗口不会被遮挡 */
         }
         .category {
             width: 100%;
@@ -117,20 +124,21 @@
         }
         /* 提示窗口样式 */
         .toast-bar {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: fixed; /* 固定在视口 */
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            margin: 0 auto; /* 水平居中 */
             background-color: #fff;
             border: 1px solid #ddd;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            padding: 8px 12px;
-            z-index: 1000;
-            width: 50%; /* 宽度占屏幕的50% */
-            max-width: 300px; /* 最大宽度限制 */
-            display: block; /* 确保显示 */
-            position: relative; /* 为关闭按钮和箭头定位 */
+            padding: 10px;
+            z-index: 9999; /* 确保在最上层 */
+            width: 90%;
+            max-width: 300px;
+            display: block;
+            visibility: visible;
         }
         /* 底部箭头 */
         .toast-bar::after {
@@ -138,20 +146,21 @@
             position: absolute;
             bottom: -10px;
             left: 50%;
-            transform: translateX(-50%);
+            margin-left: -10px;
             width: 0;
             height: 0;
             border-left: 10px solid transparent;
             border-right: 10px solid transparent;
             border-top: 10px solid #fff;
-            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
         }
         .toast-content {
             display: flex;
-            flex-direction: column; /* 垂直排列 */
-            align-items: center; /* 居中对齐 */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             font-size: 12px;
-            text-align: center; /* 文字居中 */
+            text-align: center;
+            min-height: 50px;
         }
         .toast-text {
             color: #333;
@@ -372,7 +381,7 @@
     </div>
 
     <!-- 提示窗口 -->
-    <div class="toast-bar">
+    <div class="toast-bar" id="toastBar">
         <div class="toast-content">
             <span class="toast-text">
                 <span>添加网址导航到桌面</span>
@@ -380,7 +389,7 @@
                 <span>然后选择“添加到主屏幕”</span>
             </span>
         </div>
-        <button class="toast-close">×</button>
+        <button class="toast-close" id="toastClose">×</button>
     </div>
 
     <script>
@@ -403,20 +412,40 @@
             }
         }
 
-        // 确保提示窗口可见
-        document.addEventListener('DOMContentLoaded', function() {
-            const toastBar = document.querySelector('.toast-bar');
-            toastBar.style.display = 'block'; // 强制显示
+        // 确保提示窗口可见并固定
+        window.onload = function() {
+            const toastBar = document.getElementById('toastBar');
+            if (toastBar) {
+                toastBar.style.display = 'block';
+                toastBar.style.visibility = 'visible';
+                toastBar.style.position = 'fixed'; // 确保 position 是 fixed
+                toastBar.style.bottom = '20px'; // 确保 bottom 属性正确
+            }
+        };
+
+        // 监听滚动事件，确保提示窗口始终固定
+        window.addEventListener('scroll', function() {
+            const toastBar = document.getElementById('toastBar');
+            if (toastBar) {
+                toastBar.style.position = 'fixed';
+                toastBar.style.bottom = '20px';
+            }
         });
 
         // 关闭提示窗口
-        document.querySelector('.toast-close').addEventListener('click', function() {
-            document.querySelector('.toast-bar').style.display = 'none';
-        });
+        const toastClose = document.getElementById('toastClose');
+        if (toastClose) {
+            toastClose.addEventListener('click', function() {
+                const toastBar = document.getElementById('toastBar');
+                if (toastBar) {
+                    toastBar.style.display = 'none';
+                }
+            });
+        }
 
         // 30秒后自动关闭提示窗口
         setTimeout(function() {
-            const toastBar = document.querySelector('.toast-bar');
+            const toastBar = document.getElementById('toastBar');
             if (toastBar) {
                 toastBar.style.display = 'none';
             }
