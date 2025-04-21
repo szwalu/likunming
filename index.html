@@ -135,9 +135,9 @@
             border-radius: 8px;
             padding: 10px;
             z-index: 9999; /* 确保在最上层 */
-            width: 50%; /* 宽度设置为页面50% */
+            width: 40%; /* 宽度设置为页面40% */
             max-width: 300px;
-            display: block;
+            display: none; /* 默认隐藏，等待 JavaScript 判断 */
             visibility: visible;
         }
         /* 底部箭头 */
@@ -412,23 +412,53 @@
             }
         }
 
-        // 确保提示窗口可见并固定
+        // 判断是否为移动端
+        function isMobileDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            // 检查常见的移动端 userAgent
+            const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+            const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
+            // 结合屏幕宽度判断（小于 768px 通常为移动设备）
+            const isSmallScreen = window.innerWidth <= 768;
+            return isMobileUA || isSmallScreen;
+        }
+
+        // 确保提示窗口在移动端显示
         window.onload = function() {
             const toastBar = document.getElementById('toastBar');
             if (toastBar) {
-                toastBar.style.display = 'block';
-                toastBar.style.visibility = 'visible';
-                toastBar.style.position = 'fixed'; // 确保 position 是 fixed
-                toastBar.style.bottom = '20px'; // 确保 bottom 属性正确
+                if (isMobileDevice()) {
+                    toastBar.style.display = 'block';
+                    toastBar.style.visibility = 'visible';
+                    toastBar.style.position = 'fixed';
+                    toastBar.style.bottom = '20px';
+                } else {
+                    toastBar.style.display = 'none'; // 非移动端隐藏
+                }
             }
         };
 
-        // 监听滚动事件，确保提示窗口始终固定
+        // 监听滚动事件，确保提示窗口在移动端始终固定
         window.addEventListener('scroll', function() {
             const toastBar = document.getElementById('toastBar');
-            if (toastBar) {
+            if (toastBar && isMobileDevice()) {
                 toastBar.style.position = 'fixed';
                 toastBar.style.bottom = '20px';
+            }
+        });
+
+        // 监听窗口大小变化，动态调整提示窗口显示
+        window.addEventListener('resize', function() {
+            const toastBar = document.getElementById('toastBar');
+            if (toastBar) {
+                if (isMobileDevice()) {
+                    toastBar.style.display = 'block';
+                    toastBar.style.visibility = 'visible';
+                    toastBar.style.position = 'fixed';
+                    toastBar.style.bottom = '20px';
+                } else {
+                    toastBar.style.display = 'none';
+                }
             }
         });
 
@@ -443,13 +473,15 @@
             });
         }
 
-        // 30秒后自动关闭提示窗口
-        setTimeout(function() {
-            const toastBar = document.getElementById('toastBar');
-            if (toastBar) {
-                toastBar.style.display = 'none';
-            }
-        }, 30000); // 30000毫秒 = 30秒
+        // 30秒后自动关闭提示窗口（仅在移动端）
+        if (isMobileDevice()) {
+            setTimeout(function() {
+                const toastBar = document.getElementById('toastBar');
+                if (toastBar) {
+                    toastBar.style.display = 'none';
+                }
+            }, 30000); // 30000毫秒 = 30秒
+        }
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
