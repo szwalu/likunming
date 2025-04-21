@@ -129,9 +129,6 @@
             z-index: 1000;
             width: 50%; /* 宽度占屏幕的50% */
             max-width: 300px; /* 最大宽度限制 */
-            display: flex;
-            align-items: flex-start; /* 顶部对齐 */
-            justify-content: center; /* 居中对齐 */
             position: relative; /* 为关闭按钮定位提供上下文 */
         }
         /* 底部箭头 */
@@ -150,10 +147,10 @@
         }
         .toast-content {
             display: flex;
-            align-items: flex-start;
+            flex-direction: column; /* 垂直排列 */
+            align-items: center; /* 居中对齐 */
             font-size: 12px;
-            flex-direction: row;
-            text-align: left;
+            text-align: center; /* 文字居中 */
         }
         .toast-text {
             color: #333;
@@ -172,7 +169,7 @@
             font-weight: bold;
         }
         .toast-close {
-            position: absolute; /* 绝对定位到右上角 */
+            position: absolute;
             top: 5px;
             right: 5px;
             background: none;
@@ -379,7 +376,7 @@
             <span class="toast-text">
                 <span>添加网址导航到桌面</span>
                 <span>点击下面的 <img src="https://www.likunming.cn/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
-                <span>然后选择“添加至主屏幕”</span>
+                <span>然后选择“添加到主屏幕”</span>
             </span>
         </div>
         <button class="toast-close">×</button>
