@@ -149,8 +149,10 @@
         }
         .toast-content {
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* 顶部对齐 */
             font-size: 12px;
+            flex-direction: row; /* 水平排列图标和文字 */
+            text-align: left;
         }
         .toast-icon {
             width: 20px;
@@ -159,7 +161,15 @@
         }
         .toast-text {
             color: #333;
-            line-height: 1.2;
+            line-height: 1.4; /* 增加行距 */
+            display: flex;
+            flex-direction: column;
+        }
+        .inline-icon {
+            width: 12px; /* 与字体大小一致 */
+            height: 12px;
+            vertical-align: middle; /* 与文字垂直居中 */
+            margin: 0 2px; /* 微调间距 */
         }
         .highlight-icon {
             color: #007bff;
@@ -368,7 +378,11 @@
     <div class="toast-bar">
         <div class="toast-content">
             <img src="https://www.likunming.cn/logo.png" alt="网址导航" class="toast-icon">
-            <span class="toast-text">添加网址导航至桌面 点击下方“<span class="highlight-icon">↗</span>” 然后选择“添加到主屏幕”</span>
+            <span class="toast-text">
+                <span>添加网址导航到桌面</span>
+                <span>点击下面的 <img src="https://www.likunming.cn/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
+                <span>然后选择“添加至主屏幕”</span>
+            </span>
         </div>
         <button class="toast-close">×</button>
     </div>
