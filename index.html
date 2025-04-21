@@ -13,7 +13,6 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            padding-bottom: 60px; /* Add padding to prevent content from being hidden under the prompt bar */
         }
         .category {
             width: 100%;
@@ -113,32 +112,6 @@
             border-radius: 0 5px 5px 0;
             background-color: #444;
             color: white;
-            cursor: pointer;
-        }
-        /* Prompt bar styles */
-        .prompt-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #34c759; /* Green background like in the screenshot */
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            font-size: 14px;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 1000; /* Ensure it stays on top */
-        }
-        .prompt-bar span {
-            flex-grow: 1;
-        }
-        .prompt-bar button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 16px;
             cursor: pointer;
         }
     </style>
@@ -327,12 +300,6 @@
                 <span>背景消除</span>
             </a>
         </div>
-    </div>
-
-    <!-- Prompt bar -->
-    <div class="prompt-bar">
-        <span>添加网址导航至桌面，点击下面的...</span>
-        <button>...</button>
     </div>
 
     <script>
