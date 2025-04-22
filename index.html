@@ -280,67 +280,69 @@
         /* --- End Original Toast styles --- */
 
         /* --- Dark Mode Styles --- */
-        @media (prefers-color-scheme: dark) {
-            html, body {
-                background-color: #1c2526;
-            }
-            body {
-                color: #e0e0e0;
-            }
-            .category Icelandic h2 {
-                color: #e0e0e0;
-            }
-            .news-btn, .ai-btn, .video-btn, .shopping-btn, .image-btn {
-                color: #e0e0e0;
-            }
-            /* Search box */
-            .search-group ul.search-type label {
-                background-color: #2e3b3e;
-                color: #b0b0b0;
-            }
-            #super-search-fm {
-                background-color: #2e3b3e;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            }
-            .s-search.google-active #super-search-fm,
-            .s-search.baidu-active #super-search-fm {
-                background-color: #3a4b4e;
-                box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-            }
-            .s-search.google-active label[for='type-google'],
-            .s-search.baidu-active label[for='type-baidu'] {
-                background-color: #3a4b4e;
-                color: #e0e0e0;
-            }
-            .s-search.google-active label[for='type-baidu'],
-            .s-search.baidu-active label[for='type-google'] {
-                background-color: #2e3b3e;
-                color: #b0b0b0;
-            }
-            #search-text {
-                color: #e0e0e0;
-            }
-            #search-text::placeholder {
-                color: #888;
-            }
-            /* Toast notification */
-            .toast-bar {
-                background-color: #2e3b3e;
-                border: 1px solid #444;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            }
-            .toast-bar::after {
-                border-top: 10px solid #2e3b3e;
-            }
-            .toast-text {
-                color: #e0e0e0;
-            }
-            .toast-close {
-                color: #b0b0b0;
-            }
-            .toast-close:hover {
-                color: #e0e0e0;
-            }
+        html.dark-mode, html.dark-mode body {
+            background-color: #1c2526;
+        }
+        html.dark-mode body {
+            color: #e0e0e0;
+        }
+        html.dark-mode .category Icelandic h2 {
+            color: #e0e0e0;
+        }
+        html.dark-mode .news-btn,
+        html.dark-mode .ai-btn,
+        html.dark-mode .video-btn,
+        html.dark-mode .shopping-btn,
+        html.dark-mode .image-btn {
+            color: #e0e0e0;
+        }
+        /* Search box */
+        html.dark-mode .search-group ul.search-type label {
+            background-color: #2e3b3e;
+            color: #b0b0b0;
+        }
+        html.dark-mode #super-search-fm {
+            background-color: #2e3b3e;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        html.dark-mode .s-search.google-active #super-search-fm,
+        html.dark-mode .s-search.baidu-active #super-search-fm {
+            background-color: #3a4b4e;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+        html.dark-mode .s-search.google-active label[for='type-google'],
+        html.dark-mode .s-search.baidu-active label[for='type-baidu'] {
+            background-color: #3a4b4e;
+            color: #e0e0e0;
+        }
+        html.dark-mode .s-search.google-active label[for='type-baidu'],
+        html.dark-mode .s-search.baidu-active label[for='type-google'] {
+            background-color: #2e3b3e;
+            color: #b0b0b0;
+        }
+        html.dark-mode #search-text {
+            color: #e0e0e0;
+        }
+        html.dark-mode #search-text::placeholder {
+            color: #888;
+        }
+        /* Toast notification */
+        html.dark-mode .toast-bar {
+            background-color: #2e3b3e;
+            border: 1px solid #444;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        html.dark-mode .toast-bar::after {
+            border-top: 10px solid #2e3b3e;
+        }
+        html.dark-mode .toast-text {
+            color: #e0e0e0;
+        }
+        html.dark-mode .toast-close {
+            color: #b0b0b0;
+        }
+        html.dark-mode .toast-close:hover {
+            color: #e0e0e0;
         }
         /* --- End Dark Mode Styles --- */
     </style>
@@ -546,6 +548,23 @@
         <button class="toast-close" id="toastClose">×</button>
     </div>
     <script>
+        // --- Start: Dark Mode JavaScript ---
+        function updateTheme() {
+            const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark-mode');
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+            }
+        }
+
+        // Initial theme check
+        updateTheme();
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
+        // --- End: Dark Mode JavaScript ---
+
         // --- Start: Search Box JavaScript (Unchanged) ---
         document.addEventListener('DOMContentLoaded', function() {
             const searchContainer = document.getElementById('search');
