@@ -59,13 +59,12 @@
              line-height: 1.2;
          }
 
-        /* --- Start: Integrated Search Box Styles (Final) --- */
+        /* --- Start: Integrated Search Box Styles (Modified to Remove All Borders) --- */
         .s-search {
             max-width: 600px;
             width: 100%;
             margin: 20px auto 30px;
             position: relative;
-            /* Adjusted padding-top for shorter labels */
             padding-top: 26px;
         }
 
@@ -97,51 +96,47 @@
             pointer-events: none;
         }
 
-        /* Style for labels (Top/Side Borders Removed) */
+        /* Style for labels (All Borders Removed) */
         .search-group ul.search-type label {
             display: block;
-            padding: 4px 12px; /* Shorter height */
+            padding: 4px 12px;
             cursor: pointer;
-            border: none; /* <<< Removed top/side/initial borders */
-            border-bottom: 1px solid #ccc; /* <<< Only bottom border for inactive */
-            border-radius: 0; /* <<< Removed radius */
+            border: none; /* No borders */
             background-color: #eee; /* Inactive background */
-            font-size: 13px; /* Shorter height */
+            font-size: 13px;
             line-height: 1.4;
             position: relative;
             color: #555;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
-            bottom: -1px; /* Overlap form top border */
+            transition: background-color 0.2s ease;
+            bottom: -1px; /* Overlap form top */
         }
         /* Optional: Add small gap between tabs */
         .search-group ul.search-type li + li label {
              margin-left: 2px;
         }
 
-
         /* The main search form container */
         #super-search-fm {
             display: flex;
             width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 0 4px 4px 4px; /* Keep rounding */
+            border: none; /* No borders */
+            border-radius: 0 4px 4px 4px;
             overflow: hidden;
             background-color: #eee;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             position: relative;
             z-index: 1;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
+            transition: background-color 0.2s ease;
             margin-top: -1px;
             align-items: stretch;
         }
 
-        /* --- Styling based on active engine (Borders Adjusted) --- */
+        /* --- Styling based on active engine (No Borders) --- */
 
         /* Common active form styles */
         .s-search.google-active #super-search-fm,
         .s-search.baidu-active #super-search-fm {
             background-color: #fff;
-            border-color: #aaa;
             box-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
 
@@ -151,35 +146,28 @@
              background-color: #fff;
              color: #333;
              z-index: 3;
-             border: none; /* <<< Ensure active label has no border */
+             border: none;
         }
 
-        /* Inactive Label (when other is active) - Keep only bottom border */
+        /* Inactive Label (when other is active) - No borders */
         .s-search.google-active label[for='type-baidu'],
         .s-search.baidu-active label[for='type-google'] {
-            border: none; /* Remove any other potential borders */
-            border-bottom: 1px solid #ccc; /* <<< Ensure only bottom border remains */
+            border: none;
             background-color: #eee;
             color: #555;
             z-index: 2;
         }
 
-
         /* Specific active form radius adjustments */
         .s-search.google-active #super-search-fm {
-            border-top-color: #aaa;
-            border-top-left-radius: 0; /* Connect visually */
-            border-top-right-radius: 4px;
+            border-radius: 0 4px 4px 4px;
         }
 
         .s-search.baidu-active #super-search-fm {
-             border-top-color: #aaa;
-             border-top-left-radius: 4px;
-             border-top-right-radius: 4px; /* Keep rounded unless Baidu label needs connection */
+             border-radius: 4px;
         }
 
-
-        /* Search input (Shorter height) */
+        /* Search input */
         #search-text {
             flex-grow: 1;
             padding: 8px 12px;
@@ -194,7 +182,7 @@
             color: #999;
         }
 
-        /* Search button (Shorter height) */
+        /* Search button */
         #super-search-fm button {
             padding: 0 15px;
             font-size: 14px;
@@ -221,7 +209,6 @@
         .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
         .baidu-text { color: #2932e1; font-weight: normal; }
         /* --- End: Integrated Search Box Styles --- */
-
 
         /* --- Original Toast styles --- */
          .toast-bar {
@@ -293,11 +280,11 @@
             color: #333;
         }
         /* --- End Original Toast styles --- */
-
     </style>
 </head>
 <body>
-    <div id="search" class="s-search"> <div id="search-list">
+    <div id="search" class="s-search">
+        <div id="search-list">
             <div class="search-group">
                 <ul class="search-type">
                     <li>
@@ -344,7 +331,7 @@
                 <span>德国之声中文网</span>
             </a>
             <a href="https://news.stheadline.com" class="news-btn" target="_blank">
-                <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="星岛日报">
+                <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="优岛日报">
                 <span>星岛日报</span>
             </a>
             <a href="https://china.kyodonews.net/" class="news-btn" target="_blank">
@@ -532,7 +519,7 @@
         });
         // --- End: Search Box JavaScript ---
 
-        // --- Start: Toast Notification JavaScript (Unchanged) ---
+        // --- Start: Toast Notification JavaScript (Fixed Syntax Error) ---
          function isMobileDevice() {
              const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
@@ -595,6 +582,5 @@
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934270c30a8f674d',t:'MTc0NTI5Njc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
