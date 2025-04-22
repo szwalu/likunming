@@ -453,7 +453,7 @@
             }
 
             const elapsed = Date.now() - toastStartTime;
-            if (elapsed >= 30000) {
+            if (elapsed >= 20000) {
                 hideToast();
                 clearInterval(interval);
             }
