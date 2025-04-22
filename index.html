@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网址导航</title>
-    <link rel="icon" type="image/png" href="https://www.likunming.cn/logo.png">
+    <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* --- Base styles --- */
@@ -59,7 +59,7 @@
              line-height: 1.2;
          }
 
-        /* --- Start: Integrated Search Box Styles (Modified to Remove All Borders) --- */
+        /* --- Start: Integrated Search Box Styles (Modified) --- */
         .s-search {
             max-width: 600px;
             width: 100%;
@@ -101,16 +101,15 @@
             display: block;
             padding: 4px 12px;
             cursor: pointer;
-            border: none; /* No borders */
-            background-color: #eee; /* Inactive background */
+            border: none;
+            background-color: #eee;
             font-size: 13px;
             line-height: 1.4;
             position: relative;
             color: #555;
             transition: background-color 0.2s ease;
-            bottom: -1px; /* Overlap form top */
+            bottom: -1px;
         }
-        /* Optional: Add small gap between tabs */
         .search-group ul.search-type li + li label {
              margin-left: 2px;
         }
@@ -119,8 +118,8 @@
         #super-search-fm {
             display: flex;
             width: 100%;
-            border: none; /* No borders */
-            border-radius: 0 4px 4px 4px;
+            border: none;
+            border-radius: 0 8px 8px 8px; /* Increased border-radius for more rounded corners */
             overflow: hidden;
             background-color: #eee;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -132,15 +131,12 @@
         }
 
         /* --- Styling based on active engine (No Borders) --- */
-
-        /* Common active form styles */
         .s-search.google-active #super-search-fm,
         .s-search.baidu-active #super-search-fm {
             background-color: #fff;
             box-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
 
-        /* Active Label - No borders */
         .s-search.google-active label[for='type-google'],
         .s-search.baidu-active label[for='type-baidu'] {
              background-color: #fff;
@@ -149,7 +145,6 @@
              border: none;
         }
 
-        /* Inactive Label (when other is active) - No borders */
         .s-search.google-active label[for='type-baidu'],
         .s-search.baidu-active label[for='type-google'] {
             border: none;
@@ -160,18 +155,18 @@
 
         /* Specific active form radius adjustments */
         .s-search.google-active #super-search-fm {
-            border-radius: 0 4px 4px 4px;
+            border-radius: 0 8px 8px 8px; /* Adjusted for more rounded corners */
         }
 
         .s-search.baidu-active #super-search-fm {
-             border-radius: 4px;
+             border-radius: 8px; /* Adjusted for more rounded corners */
         }
 
-        /* Search input */
+        /* Search input (Larger font size) */
         #search-text {
             flex-grow: 1;
             padding: 8px 12px;
-            font-size: 14px;
+            font-size: 16px; /* Increased font size */
             border: none;
             outline: none;
             background: transparent;
@@ -180,6 +175,7 @@
         }
         #search-text::placeholder {
             color: #999;
+            font-size: 16px; /* Match placeholder font size */
         }
 
         /* Search button */
@@ -391,11 +387,11 @@
                 <span>YouTube</span>
             </a>
             <a href="https://www.bilibili.com/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/blibili.ico" alt="Bilibili">
+                <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili">
                 <span>Bilibili</span>
             </a>
             <a href="https://www.yfsp.tv/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/ayf.png" alt="爱壹帆">
+                <img src="https://www.likunming.cn/image/ayf.png" alt="爱壹帆">
                 <span>爱壹帆</span>
             </a>
             <a href="https://www.tiktok.com/" class="video-btn" target="_blank">
@@ -411,7 +407,7 @@
                 <span>小红书</span>
             </a>
             <a href="https://www.facebook.com/" class="video-btn" target="_blank">
-                <img src="https://www.facebook.com/favicons/android-chrome-192x192.png" alt="Facebook">
+                <img src="https://www.likunming.cn/image/facebook.ico" alt="Facebook">
                 <span>Facebook</span>
             </a>
             <a href="https://www.instagram.com/" class="video-btn" target="_blank">
@@ -463,8 +459,8 @@
         <h2>图像</h2>
         <div class="container">
             <a href="https://sfz.tools.likunming.cn" class="image-btn" target="_blank">
-                <img src="https://www.likunming.cn/suiyin.png" alt="加水印">
-                <span>加水印</span>
+                <img src="https://www.likunming.cn/image/suiyin.png" alt="图片加水印">
+                <span>图片加水印</span>
             </a>
             <a href="https://www.remove.bg/zh" class="image-btn" target="_blank">
                 <img src="https://www.remove.bg/favicon.ico" alt="背景消除">
@@ -476,7 +472,7 @@
          <div class="toast-content">
             <span class="toast-text">
                 <span>添加网址导航到桌面</span>
-                <span>点击下面的 <img src="https://www.likunming.cn/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
+                <span>点击下面的 <img src="https://www.likunming.cn/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
                 <span>然后选择“添加到主屏幕”</span>
             </span>
         </div>
