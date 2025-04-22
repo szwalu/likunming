@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网址导航</title>
     <link rel="icon" type="image/png" href="https://www.likunming.cn/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         html, body {
             margin: 0;
@@ -56,91 +57,129 @@
             font-size: 12px;
             line-height: 1.2;
         }
-        .search-container {
-            max-width: 600px;
-            margin-bottom: 20px;
+
+        /* --- Start: New Search Box Styles inspired by 12.html --- */
+        .s-search {
+            max-width: 600px; /* Match original container width */
             width: 100%;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .search-tabs {
-            display: flex;
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 5px;
-        }
-        .search-tab {
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 14px;
+            margin: 20px auto 30px; /* Add margin like original search-container */
             position: relative;
         }
-        .search-tab.active {
-            border-bottom: 2px solid #4285f4;
+
+        #search-list {
+            margin-bottom: 10px;
+            text-align: center;
         }
-        .search-tab.active span {
-            font-weight: bold;
+
+        .search-group ul.search-type {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-block;
         }
-        .google-text {
-            font-weight: normal;
+
+        .search-group ul.search-type li {
+            display: inline-block;
+            margin: 0 5px;
         }
-        .google-text .g1 { color: #4285f4; } /* G - Blue */
-        .google-text .g2 { color: #ea4335; } /* o - Red */
-        .google-text .g3 { color: #fbbc05; } /* o - Yellow */
-        .google-text .g4 { color: #4285f4; } /* g - Blue */
-        .google-text .g5 { color: #34a853; } /* l - Green */
-        .google-text .g6 { color: #ea4335; } /* e - Red */
-        .baidu-text {
-            color: #2932e1;
-            font-weight: normal;
+
+        .search-group ul.search-type label {
+            display: inline-block;
+            padding: 6px 15px; /* Adjusted padding */
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            line-height: 1.4; /* Ensure text vertical alignment */
         }
-        .search-form {
+
+        /* Style for the selected label */
+        .search-group ul.search-type input[type="radio"]:checked + label {
+            background-color: #e0e0e0;
+            border-color: #aaa;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Google/Baidu text styles (can reuse or adapt) */
+        .google-text { font-weight: normal; }
+        .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
+        .baidu-text { color: #2932e1; font-weight: normal; }
+
+        #super-search-fm {
             display: flex;
             width: 100%;
-            max-width: 600px;
-            background-color: white;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 24px; /* Rounded corners */
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1); /* Subtle shadow */
         }
-        .search-form input[type="text"] {
-            width: 100%;
-            max-width: 500px;
-            padding: 8px;
-            font-size: 14px;
+
+        #search-text {
+            flex-grow: 1;
+            padding: 10px 15px;
+            font-size: 16px;
             border: none;
-            border-radius: 5px 0 0 5px;
-            margin-right: 0;
-            background-color: transparent;
+            outline: none;
+            background: transparent;
+            color: #333;
         }
-        .search-form input[type="submit"] {
-            padding: 8px 15px;
-            font-size: 14px;
+         #search-text::placeholder { /* Style placeholder */
+             color: #999;
+         }
+
+        #super-search-fm button {
+            padding: 0 18px; /* Adjust padding */
+            font-size: 16px;
             border: none;
-            border-radius: 0 5px 5px 0;
-            background-color: #444;
+            /* A blue matching Google's blue */
+            background-color: #4285f4;
             color: white;
             cursor: pointer;
+            border-radius: 0;
+            margin-left: -1px; /* Slight overlap */
+            transition: background-color 0.2s ease;
+            display: flex; /* Center icon */
+            align-items: center;
+            justify-content: center;
         }
-        /* 提示窗口样式 */
+         #super-search-fm button:hover {
+             background-color: #357ae8; /* Darker blue on hover */
+         }
+         #super-search-fm button i {
+             font-size: 1em; /* Adjust icon size if needed */
+         }
+
+
+        /* Hide the actual radio button */
+        #search-list input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        /* --- End: New Search Box Styles --- */
+
+
+        /* Original Toast styles - Keep these */
         .toast-bar {
-            position: fixed; /* 固定在视口 */
+            position: fixed;
             bottom: 20px;
             left: 0;
             right: 0;
-            margin: 0 auto; /* 水平居中 */
+            margin: 0 auto;
             background-color: #fff;
             border: 1px solid #ddd;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             padding: 10px;
-            z-index: 9999; /* 确保在最上层 */
-            width: 40%; /* 宽度设置为页面40% */
+            z-index: 9999;
+            width: 40%;
             max-width: 300px;
-            display: none; /* 默认隐藏，等待 JavaScript 判断 */
+            display: none;
             visibility: visible;
         }
-        /* 底部箭头 */
         .toast-bar::after {
             content: '';
             position: absolute;
@@ -195,25 +234,30 @@
     </style>
 </head>
 <body>
-    <div class="search-container">
-        <div style="width: 100%; max-width: 600px;">
-            <div class="search-tabs">
-                <span class="search-tab active" onclick="switchSearch('google')">
-                    <span class="google-text">
-                        <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span>
-                    </span>
-                </span>
-                <span class="search-tab" onclick="switchSearch('baidu')">
-                    <span class="baidu-text">百度</span>
-                </span>
+    <div id="search" class="s-search">
+        <div id="search-list">
+            <div class="search-group">
+                <ul class="search-type">
+                    <li>
+                        <input checked type="radio" name="type" id="type-google" value="https://www.google.com/search" data-placeholder="Google Search..." data-name="q">
+                        <label for="type-google">
+                            <span class="google-text">
+                                <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span>
+                            </span>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" name="type" id="type-baidu" value="https://www.baidu.com/s" data-placeholder="百度一下" data-name="wd">
+                        <label for="type-baidu"><span class="baidu-text">百度</span></label>
+                    </li>
+                </ul>
             </div>
-            <form id="searchForm" class="search-form" action="https://www.google.com/search" method="get" target="_blank">
-                <input type="text" name="q" placeholder="Google Search...">
-                <input type="submit" value="🔍">
-            </form>
         </div>
+        <form action="https://www.google.com/search" method="get" target="_blank" id="super-search-fm">
+             <input type="text" id="search-text" name="q" placeholder="Google Search..." autocomplete="off">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
     </div>
-
     <div class="category">
         <h2>新闻</h2>
         <div class="container">
@@ -255,38 +299,38 @@
     <div class="category">
         <h2>AI</h2>
         <div class="container">
-            <a href="https://chatgpt.com/" class="ai-btn" target="_blank">
-                <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
-                <span>ChatGPT</span>
-            </a>
-            <a href="https://grok.com/?referrer=website" class="ai-btn" target="_blank">
-                <img src="https://grok.com/images/favicon-light.png" alt="Grok">
-                <span>Grok</span>
-            </a>
-            <a href="https://chat.deepseek.com/sign_in" class="ai-btn" target="_blank">
-                <img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek">
-                <span>DeepSeek</span>
-            </a>
-            <a href="https://gemini.google.com/" class="ai-btn" target="_blank">
-                <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini">
-                <span>Gemini</span>
-            </a>
-            <a href="https://yuanbao.tencent.com/" class="ai-btn" target="_blank">
-                <img src="https://yuanbao.tencent.com/logo-v2.png" alt="腾讯元宝">
-                <span>腾讯元宝</span>
-            </a>
-            <a href="https://copilot.microsoft.com/" class="ai-btn" target="_blank">
-                <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
-                <span>Copilot</span>
-            </a>
-            <a href="https://zh.1lib.sk/" class="ai-btn" target="_blank">
-                <img src="https://zh.1lib.sk/favicon.ico" alt="Z-Library">
-                <span>Z-Library</span>
-            </a>
-            <a href="https://m.douban.com/home_guide" class="ai-btn" target="_blank">
-                <img src="https://www.douban.com/favicon.ico" alt="豆瓣">
-                <span>豆瓣</span>
-            </a>
+             <a href="https://chatgpt.com/" class="ai-btn" target="_blank">
+                 <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
+                 <span>ChatGPT</span>
+             </a>
+             <a href="https://grok.com/?referrer=website" class="ai-btn" target="_blank">
+                 <img src="https://grok.com/images/favicon-light.png" alt="Grok">
+                 <span>Grok</span>
+             </a>
+             <a href="https://chat.deepseek.com/sign_in" class="ai-btn" target="_blank">
+                 <img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek">
+                 <span>DeepSeek</span>
+             </a>
+             <a href="https://gemini.google.com/" class="ai-btn" target="_blank">
+                 <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini">
+                 <span>Gemini</span>
+             </a>
+             <a href="https://yuanbao.tencent.com/" class="ai-btn" target="_blank">
+                 <img src="https://yuanbao.tencent.com/logo-v2.png" alt="腾讯元宝">
+                 <span>腾讯元宝</span>
+             </a>
+             <a href="https://copilot.microsoft.com/" class="ai-btn" target="_blank">
+                 <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
+                 <span>Copilot</span>
+             </a>
+             <a href="https://zh.1lib.sk/" class="ai-btn" target="_blank">
+                 <img src="https://zh.1lib.sk/favicon.ico" alt="Z-Library">
+                 <span>Z-Library</span>
+             </a>
+             <a href="https://m.douban.com/home_guide" class="ai-btn" target="_blank">
+                 <img src="https://www.douban.com/favicon.ico" alt="豆瓣">
+                 <span>豆瓣</span>
+             </a>
         </div>
     </div>
 
@@ -331,38 +375,38 @@
     <div class="category">
         <h2>购物</h2>
         <div class="container">
-            <a href="https://www.amazon.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.amazon.com/favicon.ico" alt="Amazon">
-                <span>Amazon</span>
-            </a>
-            <a href="https://www.taobao.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.taobao.com/favicon.ico" alt="淘宝">
-                <span>淘宝</span>
-            </a>
-            <a href="https://www.homedepot.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.homedepot.com/favicon.ico" alt="Home Depot">
-                <span>Home Depot</span>
-            </a>
-            <a href="https://www.temu.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.temu.com/favicon.ico" alt="Temu">
-                <span>Temu</span>
-            </a>
-            <a href="https://www.walmart.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.walmart.com/favicon.ico" alt="Walmart">
-                <span>Walmart</span>
-            </a>
-            <a href="https://www.target.com/" class="shopping-btn" target="_blank">
-                <img src="https://assets.targetimg1.com/static/images/apple-touch-icon-precomposed.png" alt="Target">
-                <span>Target</span>
-            </a>
-            <a href="https://www.ikea.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.ikea.com/favicon.ico" alt="IKEA">
-                <span>宜家家居</span>
-            </a>
-            <a href="https://www.sayweee.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.sayweee.com/favicons/apple-touch-icon.png" alt="weee">
-                <span>Weee生鲜</span>
-            </a>
+             <a href="https://www.amazon.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.amazon.com/favicon.ico" alt="Amazon">
+                 <span>Amazon</span>
+             </a>
+             <a href="https://www.taobao.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.taobao.com/favicon.ico" alt="淘宝">
+                 <span>淘宝</span>
+             </a>
+             <a href="https://www.homedepot.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.homedepot.com/favicon.ico" alt="Home Depot">
+                 <span>Home Depot</span>
+             </a>
+             <a href="https://www.temu.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.temu.com/favicon.ico" alt="Temu">
+                 <span>Temu</span>
+             </a>
+             <a href="https://www.walmart.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.walmart.com/favicon.ico" alt="Walmart">
+                 <span>Walmart</span>
+             </a>
+             <a href="https://www.target.com/" class="shopping-btn" target="_blank">
+                 <img src="https://assets.targetimg1.com/static/images/apple-touch-icon-precomposed.png" alt="Target">
+                 <span>Target</span>
+             </a>
+             <a href="https://www.ikea.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.ikea.com/favicon.ico" alt="IKEA">
+                 <span>宜家家居</span>
+             </a>
+             <a href="https://www.sayweee.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.sayweee.com/favicons/apple-touch-icon.png" alt="weee">
+                 <span>Weee生鲜</span>
+             </a>
         </div>
     </div>
 
@@ -379,8 +423,6 @@
             </a>
         </div>
     </div>
-
-    <!-- 提示窗口 -->
     <div class="toast-bar" id="toastBar">
         <div class="toast-content">
             <span class="toast-text">
@@ -393,25 +435,49 @@
     </div>
 
     <script>
-    function switchSearch(engine) {
-        const form = document.getElementById('searchForm');
-        const input = form.querySelector('input[type="text"]');
-        const tabs = document.querySelectorAll('.search-tab');
+    // --- Start: New Search Box JavaScript ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchForm = document.getElementById('super-search-fm');
+        const searchInput = document.getElementById('search-text');
+        const engineRadios = document.querySelectorAll('input[name="type"]');
 
-        tabs.forEach(tab => tab.classList.remove('active'));
-        event.target.classList.add('active');
-
-        if (engine === 'google') {
-            form.action = 'https://www.google.com/search';
-            input.name = 'q';
-            input.placeholder = 'Google Search...';
-        } else if (engine === 'baidu') {
-            form.action = 'https://www.baidu.com/s';
-            input.name = 'wd';
-            input.placeholder = '百度一下';
+        function updateSearchEngine() {
+            // Find the checked radio button
+            const selectedRadio = document.querySelector('input[name="type"]:checked');
+            if (selectedRadio) {
+                // Update form's action URL
+                searchForm.action = selectedRadio.value;
+                // Update input's placeholder text
+                searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
+                // Update input's name attribute ('q' for google, 'wd' for baidu)
+                searchInput.name = selectedRadio.getAttribute('data-name');
+            }
         }
-    }
 
+        // Add event listeners to radio buttons
+        engineRadios.forEach(radio => {
+            radio.addEventListener('change', updateSearchEngine);
+        });
+
+        // Initialize search engine settings on page load based on default checked radio
+        updateSearchEngine();
+
+        // Ensure form always opens in a new tab
+        searchForm.target = '_blank';
+
+        // Optional: Prevent submitting an empty search query
+        searchForm.addEventListener('submit', function(e) {
+             if (searchInput.value.trim() === '') {
+                 searchInput.focus(); // Focus the input if it's empty
+                 e.preventDefault(); // Stop the form submission
+                 return false;
+             }
+        });
+    });
+    // --- End: New Search Box JavaScript ---
+
+
+    // --- Start: Original Toast Notification JavaScript ---
     function isMobileDevice() {
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
@@ -426,11 +492,13 @@
 
     function showToast() {
         const toastBar = document.getElementById('toastBar');
+        // Only show on mobile and if not closed manually or already hidden by timeout
         if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
 
         toastBar.style.display = 'block';
         toastBar.style.visibility = 'visible';
 
+        // Start timer only once
         if (!toastStartTime) {
             toastStartTime = Date.now();
             checkToastTimeout();
@@ -441,29 +509,33 @@
         const toastBar = document.getElementById('toastBar');
         if (toastBar) {
             toastBar.style.display = 'none';
-            toastAlreadyHidden = true;
+            toastAlreadyHidden = true; // Mark as hidden to prevent reappearing on scroll/resize
         }
     }
 
+    // Check every second if 20 seconds have passed
     function checkToastTimeout() {
         const interval = setInterval(() => {
+            // Stop if closed manually or already hidden
             if (toastManuallyClosed || toastAlreadyHidden) {
                 clearInterval(interval);
                 return;
             }
 
             const elapsed = Date.now() - toastStartTime;
-            if (elapsed >= 20000) {
+            if (elapsed >= 20000) { // 20 seconds timeout
                 hideToast();
                 clearInterval(interval);
             }
         }, 1000);
     }
 
+    // Show toast when page loads
     window.onload = function () {
         showToast();
     };
 
+    // Show toast again on scroll or resize if conditions are met
     window.addEventListener('scroll', function () {
         showToast();
     });
@@ -472,16 +544,20 @@
         showToast();
     });
 
+    // Handle manual closing
     const toastClose = document.getElementById('toastClose');
     if (toastClose) {
         toastClose.addEventListener('click', function () {
-            toastManuallyClosed = true;
+            toastManuallyClosed = true; // Mark as manually closed
             hideToast();
         });
     }
+    // --- End: Original Toast Notification JavaScript ---
 </script>
+
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
 </body>
 </html>
