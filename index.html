@@ -12,16 +12,16 @@
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: #f5f5f7;
-            min-height: 100vh; /* 确保页面高度足够 */
-            overflow-x: hidden; /* 防止水平滚动 */
-            position: static; /* 确保 body 不干扰 fixed 定位 */
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: static;
         }
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            padding-bottom: 80px; /* 增加底部空间，确保提示窗口不会被遮挡 */
+            padding-bottom: 80px;
         }
         .category {
             width: 100%;
@@ -58,100 +58,36 @@
             line-height: 1.2;
         }
 
-        /* --- Start: New Search Box Styles inspired by 12.html --- */
+        /* --- Start: Integrated Search Box Styles --- */
         .s-search {
-            max-width: 600px; /* Match original container width */
+            max-width: 600px;
             width: 100%;
-            margin: 20px auto 30px; /* Add margin like original search-container */
-            position: relative;
+            margin: 20px auto 30px;
+            position: relative; /* Needed for absolute positioning of labels */
+             padding-top: 32px; /* Create space for the labels above the form */
         }
 
         #search-list {
-            margin-bottom: 10px;
-            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* Take full width for alignment */
+            margin-bottom: 0; /* Remove space */
+            text-align: left; /* Align labels to the left */
+             z-index: 2; /* Ensure labels are clickable above the form */
         }
 
         .search-group ul.search-type {
             list-style: none;
             padding: 0;
             margin: 0;
-            display: inline-block;
+            display: flex; /* Use flex for alignment */
         }
 
         .search-group ul.search-type li {
-            display: inline-block;
-            margin: 0 5px;
+            display: block; /* Let flex control layout */
+            margin: 0; /* Remove list item margin */
         }
-
-        .search-group ul.search-type label {
-            display: inline-block;
-            padding: 6px 15px; /* Adjusted padding */
-            cursor: pointer;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-            transition: all 0.2s ease;
-            font-size: 14px;
-            line-height: 1.4; /* Ensure text vertical alignment */
-        }
-
-        /* Style for the selected label */
-        .search-group ul.search-type input[type="radio"]:checked + label {
-            background-color: #e0e0e0;
-            border-color: #aaa;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        /* Google/Baidu text styles (can reuse or adapt) */
-        .google-text { font-weight: normal; }
-        .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
-        .baidu-text { color: #2932e1; font-weight: normal; }
-
-        #super-search-fm {
-            display: flex;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 24px; /* Rounded corners */
-            overflow: hidden;
-            background-color: #fff;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1); /* Subtle shadow */
-        }
-
-        #search-text {
-            flex-grow: 1;
-            padding: 10px 15px;
-            font-size: 16px;
-            border: none;
-            outline: none;
-            background: transparent;
-            color: #333;
-        }
-         #search-text::placeholder { /* Style placeholder */
-             color: #999;
-         }
-
-        #super-search-fm button {
-            padding: 0 18px; /* Adjust padding */
-            font-size: 16px;
-            border: none;
-            /* A blue matching Google's blue */
-            background-color: #4285f4;
-            color: white;
-            cursor: pointer;
-            border-radius: 0;
-            margin-left: -1px; /* Slight overlap */
-            transition: background-color 0.2s ease;
-            display: flex; /* Center icon */
-            align-items: center;
-            justify-content: center;
-        }
-         #super-search-fm button:hover {
-             background-color: #357ae8; /* Darker blue on hover */
-         }
-         #super-search-fm button i {
-             font-size: 1em; /* Adjust icon size if needed */
-         }
-
 
         /* Hide the actual radio button */
         #search-list input[type="radio"] {
@@ -159,11 +95,141 @@
             opacity: 0;
             pointer-events: none;
         }
-        /* --- End: New Search Box Styles --- */
+
+        /* Style for labels */
+        .search-group ul.search-type label {
+            display: block;
+            padding: 6px 15px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-bottom: none; /* Remove bottom border initially */
+            border-radius: 5px 5px 0 0; /* Round top corners */
+            background-color: #eee; /* Default inactive background */
+            font-size: 14px;
+            line-height: 1.4;
+            position: relative; /* For z-index and positioning */
+            margin-right: -1px; /* Overlap adjacent borders */
+            color: #555; /* Default text color for inactive */
+             transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* The main search form container */
+        #super-search-fm {
+            display: flex;
+            width: 100%;
+            border: 1px solid #ccc; /* Default border */
+            border-radius: 0 5px 5px 5px; /* Round corners except top-left */
+            overflow: hidden;
+            background-color: #eee; /* Default background matching inactive tabs */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: relative; /* For z-index context */
+            z-index: 1; /* Below the labels */
+             transition: background-color 0.2s ease, border-color 0.2s ease;
+             margin-top: -1px; /* Pull up slightly to connect with labels */
+        }
+
+        /* --- Styling based on active engine --- */
+
+        /* When Google is active */
+        .s-search.google-active label[for='type-google'] {
+            background-color: #fff; /* Active label is white */
+            border-color: #aaa; /* Match active form border */
+            border-bottom-color: #fff; /* Hide bottom border by matching background */
+            color: #333; /* Darker text color for active */
+            z-index: 3; /* Ensure active label is on top */
+        }
+        .s-search.google-active #super-search-fm {
+            background-color: #fff; /* Active form is white */
+            border-color: #aaa; /* Match active label border */
+            border-top-color: #aaa; /* Ensure top border is visible */
+            border-top-left-radius: 0; /* Sharp corner under active google tab */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Enhance shadow */
+        }
+        .s-search.google-active label[for='type-baidu'] {
+             border-bottom: 1px solid #ccc; /* Ensure inactive tabs show bottom border */
+         }
+
+
+        /* When Baidu is active */
+        .s-search.baidu-active label[for='type-baidu'] {
+            background-color: #fff;
+            border-color: #aaa;
+            border-bottom-color: #fff;
+            color: #333;
+            z-index: 3;
+        }
+        .s-search.baidu-active #super-search-fm {
+            background-color: #fff;
+            border-color: #aaa;
+            border-top-color: #aaa;
+             /* Adjust radius depending on Baidu tab position */
+             /* Assuming Baidu is second, need to adjust top-left and potentially top-right */
+             border-top-left-radius: 5px; /* Keep default */
+             border-top-right-radius: 0; /* Sharp corner under active Baidu tab (if needed) */
+             /* This logic gets complex if tabs move. Let's simplify and use overlap */
+             border-top-left-radius: 5px; /* Or reset based on general form rounding */
+             border-top-right-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+         .s-search.baidu-active label[for='type-google'] {
+             border-bottom: 1px solid #ccc;
+         }
+
+
+        /* Re-style the search input */
+        #search-text {
+            flex-grow: 1;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            background: transparent; /* Input background must be transparent */
+            color: #333;
+        }
+        #search-text::placeholder {
+            color: #999;
+        }
+
+        /* Re-style the search button */
+        #super-search-fm button {
+            padding: 0 18px;
+            font-size: 16px;
+            border: none;
+            background-color: #4285f4;
+            color: white;
+            cursor: pointer;
+            border-radius: 0;
+            margin-left: -1px;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #super-search-fm button:hover {
+            background-color: #357ae8;
+        }
+        #super-search-fm button i {
+            font-size: 1em;
+        }
+
+        /* Google/Baidu text colors */
+        .google-text { font-weight: normal; }
+        .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
+        .baidu-text { color: #2932e1; font-weight: normal; }
+        /* --- End: Integrated Search Box Styles --- */
 
 
         /* Original Toast styles - Keep these */
-        .toast-bar {
+        .toast-bar { /* ...omitted for brevity... */ }
+        .toast-bar::after { /* ...omitted for brevity... */ }
+        .toast-content { /* ...omitted for brevity... */ }
+        .toast-text { /* ...omitted for brevity... */ }
+        .inline-icon { /* ...omitted for brevity... */ }
+        .highlight-icon { /* ...omitted for brevity... */ }
+        .toast-close { /* ...omitted for brevity... */ }
+        .toast-close:hover { /* ...omitted for brevity... */ }
+         /* Keep original toast styles here */
+         .toast-bar {
             position: fixed;
             bottom: 20px;
             left: 0;
@@ -234,8 +300,7 @@
     </style>
 </head>
 <body>
-    <div id="search" class="s-search">
-        <div id="search-list">
+    <div id="search" class="s-search"> <div id="search-list">
             <div class="search-group">
                 <ul class="search-type">
                     <li>
@@ -254,7 +319,7 @@
             </div>
         </div>
         <form action="https://www.google.com/search" method="get" target="_blank" id="super-search-fm">
-             <input type="text" id="search-text" name="q" placeholder="Google Search..." autocomplete="off">
+            <input type="text" id="search-text" name="q" placeholder="Google Search..." autocomplete="off">
             <button type="submit"><i class="fas fa-search"></i></button>
         </form>
     </div>
@@ -435,22 +500,28 @@
     </div>
 
     <script>
-    // --- Start: New Search Box JavaScript ---
+    // --- Start: Updated Search Box JavaScript ---
     document.addEventListener('DOMContentLoaded', function() {
+        const searchContainer = document.getElementById('search'); // The main container
         const searchForm = document.getElementById('super-search-fm');
         const searchInput = document.getElementById('search-text');
         const engineRadios = document.querySelectorAll('input[name="type"]');
 
         function updateSearchEngine() {
-            // Find the checked radio button
             const selectedRadio = document.querySelector('input[name="type"]:checked');
             if (selectedRadio) {
-                // Update form's action URL
+                // Update form attributes
                 searchForm.action = selectedRadio.value;
-                // Update input's placeholder text
                 searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
-                // Update input's name attribute ('q' for google, 'wd' for baidu)
                 searchInput.name = selectedRadio.getAttribute('data-name');
+
+                // Update container class for styling active state
+                searchContainer.classList.remove('google-active', 'baidu-active'); // Remove previous classes
+                if (selectedRadio.id === 'type-google') {
+                    searchContainer.classList.add('google-active');
+                } else if (selectedRadio.id === 'type-baidu') {
+                    searchContainer.classList.add('baidu-active');
+                }
             }
         }
 
@@ -459,7 +530,7 @@
             radio.addEventListener('change', updateSearchEngine);
         });
 
-        // Initialize search engine settings on page load based on default checked radio
+        // Initialize search engine settings and container class on page load
         updateSearchEngine();
 
         // Ensure form always opens in a new tab
@@ -468,30 +539,28 @@
         // Optional: Prevent submitting an empty search query
         searchForm.addEventListener('submit', function(e) {
              if (searchInput.value.trim() === '') {
-                 searchInput.focus(); // Focus the input if it's empty
-                 e.preventDefault(); // Stop the form submission
+                 searchInput.focus();
+                 e.preventDefault();
                  return false;
              }
         });
     });
-    // --- End: New Search Box JavaScript ---
+    // --- End: Updated Search Box JavaScript ---
 
 
     // --- Start: Original Toast Notification JavaScript ---
-    function isMobileDevice() {
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    function isMobileDevice() { /* ...omitted for brevity... */
+         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
         const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
         const isSmallScreen = window.innerWidth <= 768;
         return isMobileUA || isSmallScreen;
     }
-
-    let toastManuallyClosed = false;
-    let toastStartTime = null;
-    let toastAlreadyHidden = false;
-
-    function showToast() {
-        const toastBar = document.getElementById('toastBar');
+    let toastManuallyClosed = false; /* ...omitted for brevity... */
+    let toastStartTime = null; /* ...omitted for brevity... */
+    let toastAlreadyHidden = false; /* ...omitted for brevity... */
+    function showToast() { /* ...omitted for brevity... */
+         const toastBar = document.getElementById('toastBar');
         // Only show on mobile and if not closed manually or already hidden by timeout
         if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
 
@@ -503,19 +572,16 @@
             toastStartTime = Date.now();
             checkToastTimeout();
         }
-    }
-
-    function hideToast() {
-        const toastBar = document.getElementById('toastBar');
+     }
+    function hideToast() { /* ...omitted for brevity... */
+         const toastBar = document.getElementById('toastBar');
         if (toastBar) {
             toastBar.style.display = 'none';
             toastAlreadyHidden = true; // Mark as hidden to prevent reappearing on scroll/resize
         }
-    }
-
-    // Check every second if 20 seconds have passed
-    function checkToastTimeout() {
-        const interval = setInterval(() => {
+     }
+    function checkToastTimeout() { /* ...omitted for brevity... */
+         const interval = setInterval(() => {
             // Stop if closed manually or already hidden
             if (toastManuallyClosed || toastAlreadyHidden) {
                 clearInterval(interval);
@@ -529,23 +595,16 @@
             }
         }, 1000);
     }
-
-    // Show toast when page loads
-    window.onload = function () {
+    window.onload = function () { /* ...omitted for brevity... */
         showToast();
-    };
-
-    // Show toast again on scroll or resize if conditions are met
-    window.addEventListener('scroll', function () {
-        showToast();
-    });
-
-    window.addEventListener('resize', function () {
-        showToast();
-    });
-
-    // Handle manual closing
-    const toastClose = document.getElementById('toastClose');
+     };
+    window.addEventListener('scroll', function () { /* ...omitted for brevity... */
+         showToast();
+     });
+    window.addEventListener('resize', function () { /* ...omitted for brevity... */
+         showToast();
+     });
+    const toastClose = document.getElementById('toastClose'); /* ...omitted for brevity... */
     if (toastClose) {
         toastClose.addEventListener('click', function () {
             toastManuallyClosed = true; // Mark as manually closed
