@@ -550,11 +550,24 @@
     <script>
         // --- Start: Dark Mode JavaScript ---
         function updateTheme() {
+            const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
             const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (isDarkMode) {
-                document.documentElement.classList.add('dark-mode');
+
+            // In Chrome, default to light mode unless system explicitly indicates dark mode
+            if (isChrome) {
+                // Additional check: only apply dark mode if system is explicitly dark
+                if (isDarkMode && window.matchMedia('(prefers-color-scheme: dark)').media !== 'not all') {
+                    document.documentElement.classList.add('dark-mode');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                }
             } else {
-                document.documentElement.classList.remove('dark-mode');
+                // For non-Chrome browsers (e.g., Safari), follow system theme
+                if (isDarkMode) {
+                    document.documentElement.classList.add('dark-mode');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                }
             }
         }
 
@@ -601,7 +614,7 @@
         });
         // --- End: Search Box JavaScript ---
 
-        // --- Start: Toast Notification JavaScript (Fixed Syntax Error) ---
+        // --- Start: Toast Notification JavaScript (Unchanged) ---
          function isMobileDevice() {
              const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
