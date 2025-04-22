@@ -1,210 +1,226 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网址导航</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="https://www.likunming.cn/image/logo.png">
-    <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>:root {
-  --font-small: 12px;
-  --font-medium: 16px;
-  --color-primary: #333;
-  --color-bg: #f5f5f7;
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--color-bg);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  padding-bottom: 80px;
-}
-.category {
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 30px;
-}
-.category h2 {
-  font-size: 18px;
-  color: var(--color-primary);
-  margin-bottom: 10px;
-  text-align: left;
-}
-.container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-.link-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  text-decoration: none;
-  color: black;
-}
-.link-btn img {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  margin-bottom: 8px;
-}
-.link-btn span {
-  font-size: var(--font-small);
-  line-height: 1.2;
-}
-.toast-bar {
-  position: fixed;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 10px;
-  z-index: 9999;
-  width: 40%;
-  max-width: 300px;
-  display: none;
-}
-.toast-bar::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  margin-left: -10px;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #fff;
-}
-.toast-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: var(--font-small);
-  text-align: center;
-  min-height: 50px;
-}
-.toast-text {
-  color: var(--color-primary);
-  line-height: 1.4;
-}
-.inline-icon {
-  width: 12px;
-  height: 12px;
-  vertical-align: middle;
-  margin: 0 2px;
-}
-.highlight-icon {
-  color: #007bff;
-  font-weight: bold;
-}
-.toast-close {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  color: #999;
-  cursor: pointer;
-}
-.toast-close:hover {
-  color: var(--color-primary);
-}
-</style>
+<title>网址导航</title>
+  <meta name="description" content="常用中文网站导航，快速访问新闻、AI、视频、购物与图像工具。">
+  <meta name="keywords" content="网址导航, 中文网站, 新闻, AI工具, 视频平台, 购物网站, 实用工具">
+  <meta name="author" content="likunming.cn">
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="网址导航 - likunming.cn">
+  <meta property="og:description" content="常用中文网站快捷入口，快速访问你喜爱的网站。">
+  <meta property="og:image" content="https://www.likunming.cn/image/logo.png">
+  <meta property="og:url" content="https://www.likunming.cn">
+  <meta property="og:type" content="website">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.likunming.cn/image/logo.png">
+  <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root {
+      --font-small: 12px;
+      --font-medium: 16px;
+      --color-primary: #333;
+      --color-bg: #f5f5f7;
+      --color-dark-bg: #1c1c1e;
+      --color-dark-text: #eee;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--color-bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--color-primary);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      background-color: var(--color-dark-bg);
+      color: var(--color-dark-text);
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      padding-bottom: 80px;
+    }
+    .category {
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 30px;
+    }
+    .category h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 20px;
+    }
+    .link-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+    }
+    .link-btn img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+    .link-btn span {
+      font-size: var(--font-small);
+      line-height: 1.2;
+    }
+    .toast-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 10px;
+      z-index: 9999;
+      width: 90%;
+      max-width: 300px;
+      display: none;
+    }
+    body.dark-mode .toast-bar {
+      background-color: #333;
+      border-color: #555;
+      color: #eee;
+    }
+    .toast-bar::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -10px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #fff;
+    }
+    body.dark-mode .toast-bar::after {
+      border-top-color: #333;
+    }
+    .toast-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: var(--font-small);
+      text-align: center;
+      min-height: 50px;
+    }
+    .toast-close {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      color: #999;
+      cursor: pointer;
+    }
+    .toast-close:hover {
+      color: var(--color-primary);
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--color-dark-bg);
+        color: var(--color-dark-text);
+      }
+    }
+  </style>
 </head>
 <body>
-<!-- 页面结构与资源引用略，此处展示更新样式与脚本 -->
-
+<!-- 页面内容保持不变 -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const searchContainer = document.getElementById('search');
-  const searchForm = document.getElementById('super-search-fm');
-  const searchInput = document.getElementById('search-text');
-  const engineRadios = document.querySelectorAll('input[name="type"]');
+  document.addEventListener('DOMContentLoaded', function () {
+    const searchContainer = document.getElementById('search');
+    const searchForm = document.getElementById('super-search-fm');
+    const searchInput = document.getElementById('search-text');
+    const engineRadios = document.querySelectorAll('input[name="type"]');
 
-  function updateSearchEngine() {
-    const selectedRadio = document.querySelector('input[name="type"]:checked');
-    if (selectedRadio) {
-      searchForm.action = selectedRadio.value;
-      searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
-      searchInput.name = selectedRadio.getAttribute('data-name');
-      searchContainer.classList.remove('google-active', 'baidu-active');
-      searchContainer.classList.add(selectedRadio.id === 'type-google' ? 'google-active' : 'baidu-active');
+    function updateSearchEngine() {
+      const selectedRadio = document.querySelector('input[name="type"]:checked');
+      if (selectedRadio) {
+        searchForm.action = selectedRadio.value;
+        searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
+        searchInput.name = selectedRadio.getAttribute('data-name');
+        searchContainer.classList.remove('google-active', 'baidu-active');
+        searchContainer.classList.add(selectedRadio.id === 'type-google' ? 'google-active' : 'baidu-active');
+      }
     }
-  }
-  engineRadios.forEach(radio => radio.addEventListener('change', updateSearchEngine));
-  updateSearchEngine();
-  searchForm.target = '_blank';
-  searchForm.addEventListener('submit', function(e) {
-    if (searchInput.value.trim() === '') {
-      searchInput.focus();
-      e.preventDefault();
-    }
+    engineRadios.forEach(radio => radio.addEventListener('change', updateSearchEngine));
+    updateSearchEngine();
+    searchForm.target = '_blank';
+    searchForm.addEventListener('submit', function (e) {
+      if (searchInput.value.trim() === '') {
+        searchInput.focus();
+        e.preventDefault();
+      }
+    });
   });
-});
 
-function isMobileDevice() {
-  const ua = navigator.userAgent.toLowerCase();
-  return /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(ua) || window.innerWidth <= 768;
-}
-
-let toastManuallyClosed = false;
-let toastStartTime = null;
-let toastAlreadyHidden = false;
-
-function showToast() {
-  const toastBar = document.getElementById('toastBar');
-  if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
-  toastBar.style.display = 'block';
-  if (!toastStartTime) {
-    toastStartTime = Date.now();
-    checkToastTimeout();
+  function isMobileDevice() {
+    const ua = navigator.userAgent.toLowerCase();
+    return /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(ua) || window.innerWidth <= 768;
   }
-}
 
-function hideToast() {
-  const toastBar = document.getElementById('toastBar');
-  if (toastBar) {
-    toastBar.style.display = 'none';
-    toastAlreadyHidden = true;
+  let toastManuallyClosed = false;
+  let toastStartTime = null;
+  let toastAlreadyHidden = false;
+
+  function showToast() {
+    const toastBar = document.getElementById('toastBar');
+    if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
+    toastBar.style.display = 'block';
+    if (!toastStartTime) {
+      toastStartTime = Date.now();
+      checkToastTimeout();
+    }
   }
-}
 
-function checkToastTimeout() {
-  const interval = setInterval(() => {
-    if (toastManuallyClosed || toastAlreadyHidden) {
-      clearInterval(interval);
-      return;
+  function hideToast() {
+    const toastBar = document.getElementById('toastBar');
+    if (toastBar) {
+      toastBar.style.display = 'none';
+      toastAlreadyHidden = true;
     }
-    const elapsed = Date.now() - toastStartTime;
-    if (elapsed >= 20000) {
-      hideToast();
-      clearInterval(interval);
-    }
-  }, 1000);
-}
+  }
 
-['load', 'scroll', 'resize'].forEach(evt => window.addEventListener(evt, showToast));
+  function checkToastTimeout() {
+    const interval = setInterval(() => {
+      if (toastManuallyClosed || toastAlreadyHidden) {
+        clearInterval(interval);
+        return;
+      }
+      const elapsed = Date.now() - toastStartTime;
+      if (elapsed >= 20000) {
+        hideToast();
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
 
-document.getElementById('toastClose')?.addEventListener('click', () => {
-  toastManuallyClosed = true;
-  hideToast();
-});
+  ['load', 'scroll', 'resize'].forEach(evt => window.addEventListener(evt, showToast));
+
+  document.getElementById('toastClose')?.addEventListener('click', () => {
+    toastManuallyClosed = true;
+    hideToast();
+  });
+
+  // 设置暗色模式切换（可选）
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('dark-mode');
+  }
 </script>
 </body>
 </html>
