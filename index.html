@@ -66,7 +66,7 @@
             width: 100%;
             margin: 20px auto 30px;
             position: relative;
-            padding-top: 26px;
+            padding-top: 30px; /* Increased to accommodate taller labels */
         }
 
         #search-list {
@@ -97,32 +97,32 @@
             pointer-events: none;
         }
 
-        /* Style for labels (All Borders Removed, Added Rounded Top Corners) */
+        /* Style for labels (Increased padding and font size) */
         .search-group ul.search-type label {
             display: block;
-            padding: 4px 12px;
+            padding: 6px 14px; /* Increased padding for taller labels */
             cursor: pointer;
             border: none;
             background-color: #eee;
-            font-size: 13px;
+            font-size: 14px; /* Slightly larger font size */
             line-height: 1.4;
             position: relative;
             color: #555;
             transition: background-color 0.2s ease, color 0.2s ease;
             bottom: -1px;
-            border-radius: 8px 8px 0 0; /* Rounded top corners to match search box */
+            border-radius: 8px 8px 0 0;
             z-index: 2;
         }
         .search-group ul.search-type li + li label {
              margin-left: 2px;
         }
 
-        /* The main search form container */
+        /* The main search form container (Increased height) */
         #super-search-fm {
             display: flex;
             width: 100%;
             border: none;
-            border-radius: 0 8px 8px 8px; /* Increased border-radius for more rounded corners */
+            border-radius: 0 8px 8px 8px;
             overflow: hidden;
             background-color: #eee;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -131,9 +131,10 @@
             transition: background-color 0.2s ease;
             margin-top: -1px;
             align-items: stretch;
+            min-height: 48px; /* Added to ensure taller form */
         }
 
-        /* --- Styling based on active engine (No Borders) --- */
+        /* --- Styling based on active engine --- */
         .s-search.google-active #super-search-fm,
         .s-search.baidu-active #super-search-fm {
             background-color: #fff;
@@ -158,18 +159,18 @@
 
         /* Specific active form radius adjustments */
         .s-search.google-active #super-search-fm {
-            border-radius: 0 8px 8px 8px; /* Adjusted for more rounded corners */
+            border-radius: 0 8px 8px 8px;
         }
 
         .s-search.baidu-active #super-search-fm {
-             border-radius: 8px; /* Adjusted for more rounded corners */
+             border-radius: 8px;
         }
 
-        /* Search input (Larger font size) */
+        /* Search input (Increased font size and padding) */
         #search-text {
             flex-grow: 1;
-            padding: 8px 12px;
-            font-size: 16px; /* Increased font size */
+            padding: 10px 14px; /* Increased padding for taller input */
+            font-size: 18px; /* Larger font size */
             border: none;
             outline: none;
             background: transparent;
@@ -178,13 +179,13 @@
         }
         #search-text::placeholder {
             color: #999;
-            font-size: 16px; /* Match placeholder font size */
+            font-size: 18px; /* Match placeholder font size */
         }
 
-        /* Search button */
+        /* Search button (Increased padding) */
         #super-search-fm button {
-            padding: 0 15px;
-            font-size: 14px;
+            padding: 0 18px; /* Increased padding for taller button */
+            font-size: 16px; /* Slightly larger icon */
             border: none;
             background-color: #4285f4;
             color: white;
@@ -482,7 +483,7 @@
         <button class="toast-close" id="toastClose">×</button>
     </div>
     <script>
-        // --- Start: Search Box JavaScript (Unchanged) ---
+        // --- Start: Search Box JavaScript ---
         document.addEventListener('DOMContentLoaded', function() {
             const searchContainer = document.getElementById('search');
             const searchForm = document.getElementById('super-search-fm');
@@ -518,7 +519,7 @@
         });
         // --- End: Search Box JavaScript ---
 
-        // --- Start: Toast Notification JavaScript (Fixed Syntax Error) ---
+        // --- Start: Toast Notification JavaScript ---
          function isMobileDevice() {
              const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
@@ -576,12 +577,48 @@
             });
         }
         // --- End: Toast Notification JavaScript ---
-    </script>
 
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934270c30a8f674d',t:'MTc0NTI5Njc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9342bbfbfb4753cc',t:'MTc0NTI5OTg4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+        // --- Start: Cloudflare Script with Error Handling ---
+        (function() {
+            try {
+                function c() {
+                    var b = a.contentDocument || a.contentWindow.document;
+                    if (b) {
+                        var d = b.createElement('script');
+                        d.innerHTML = "window.__CF$cv$params={r:'9347b4b2a8b66de3',t:'MTc0NTM1MjAxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                        b.getElementsByTagName('head')[0].appendChild(d);
+                    }
+                }
+                if (document.body) {
+                    var a = document.createElement('iframe');
+                    a.height = 1;
+                    a.width = 1;
+                    a.style.position = 'absolute';
+                    a.style.top = 0;
+                    a.style.left = 0;
+                    a.style.border = 'none';
+                    a.style.visibility = 'hidden';
+                    document.body.appendChild(a);
+                    if ('loading' !== document.readyState) {
+                        c();
+                    } else if (window.addEventListener) {
+                        document.addEventListener('DOMContentLoaded', c);
+                    } else {
+                        var e = document.onreadystatechange || function() {};
+                        document.onreadystatechange = function(b) {
+                            e(b);
+                            if ('loading' !== document.readyState) {
+                                document.onreadystatechange = e;
+                                c();
+                            }
+                        };
+                    }
+                }
+            } catch (error) {
+                console.error('Cloudflare script error:', error);
+            }
+        })();
+        // --- End: Cloudflare Script ---
+    </script>
 </body>
 </html>
