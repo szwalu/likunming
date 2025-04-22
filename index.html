@@ -140,7 +140,118 @@
   </style>
 </head>
 <body>
-<!-- 页面内容保持不变 -->
+<div class="category">
+  <h2>新闻</h2>
+  <div class="container">
+    <a href="https://cn.nytimes.com" class="link-btn" target="_blank">
+      <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网">
+      <span>纽约时报</span>
+    </a>
+    <a href="https://www.bbc.com/zhongwen/simp" class="link-btn" target="_blank">
+      <img src="https://static.files.bbci.co.uk/ws/simorgh-assets/public/zhongwen/images/icons/icon-144x144.png" alt="BBC中文">
+      <span>BBC中文</span>
+    </a>
+    <a href="https://cn.wsj.com/zh-hans" class="link-btn" target="_blank">
+      <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报">
+      <span>华尔街日报</span>
+    </a>
+    <a href="https://www.ftchinese.com" class="link-btn" target="_blank">
+      <img src="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square?source=update-logos&width=180&height=180&format=png" alt="FT中文">
+      <span>FT中文</span>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <h2>AI 工具</h2>
+  <div class="container">
+    <a href="https://chatgpt.com/" class="link-btn" target="_blank">
+      <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
+      <span>ChatGPT</span>
+    </a>
+    <a href="https://gemini.google.com/" class="link-btn" target="_blank">
+      <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini">
+      <span>Gemini</span>
+    </a>
+    <a href="https://copilot.microsoft.com/" class="link-btn" target="_blank">
+      <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
+      <span>Copilot</span>
+    </a>
+    <a href="https://chat.deepseek.com/sign_in" class="link-btn" target="_blank">
+      <img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek">
+      <span>DeepSeek</span>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <h2>视频平台</h2>
+  <div class="container">
+    <a href="https://www.youtube.com/" class="link-btn" target="_blank">
+      <img src="https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon_144x144.png" alt="YouTube">
+      <span>YouTube</span>
+    </a>
+    <a href="https://www.bilibili.com/" class="link-btn" target="_blank">
+      <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili">
+      <span>Bilibili</span>
+    </a>
+    <a href="https://www.tiktok.com/" class="link-btn" target="_blank">
+      <img src="https://www.tiktok.com/favicon.ico" alt="TikTok">
+      <span>TikTok</span>
+    </a>
+    <a href="https://x.com/" class="link-btn" target="_blank">
+      <img src="https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png" alt="X">
+      <span>X</span>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <h2>购物</h2>
+  <div class="container">
+    <a href="https://www.amazon.com/" class="link-btn" target="_blank">
+      <img src="https://www.amazon.com/favicon.ico" alt="Amazon">
+      <span>Amazon</span>
+    </a>
+    <a href="https://www.taobao.com/" class="link-btn" target="_blank">
+      <img src="https://www.taobao.com/favicon.ico" alt="淘宝">
+      <span>淘宝</span>
+    </a>
+    <a href="https://www.temu.com/" class="link-btn" target="_blank">
+      <img src="https://www.temu.com/favicon.ico" alt="Temu">
+      <span>Temu</span>
+    </a>
+    <a href="https://www.ikea.com/" class="link-btn" target="_blank">
+      <img src="https://www.ikea.com/favicon.ico" alt="IKEA">
+      <span>IKEA</span>
+    </a>
+  </div>
+</div>
+
+<div class="category">
+  <h2>图像工具</h2>
+  <div class="container">
+    <a href="https://sfz.tools.likunming.cn" class="link-btn" target="_blank">
+      <img src="https://www.likunming.cn/image/suiyin.png" alt="水印工具">
+      <span>图片加水印</span>
+    </a>
+    <a href="https://www.remove.bg/zh" class="link-btn" target="_blank">
+      <img src="https://www.remove.bg/favicon.ico" alt="背景消除">
+      <span>背景消除</span>
+    </a>
+  </div>
+</div>
+
+<div class="toast-bar" id="toastBar">
+  <div class="toast-content">
+    <span class="toast-text">
+      <span>添加网址导航到桌面</span>
+      <span>点击下面的 <img src="https://www.likunming.cn/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
+      <span>然后选择“添加到主屏幕”</span>
+    </span>
+  </div>
+  <button class="toast-close" id="toastClose">×</button>
+</div>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const searchContainer = document.getElementById('search');
