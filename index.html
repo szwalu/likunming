@@ -3,221 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>网址导航</title>
-  <meta name="description" content="常用中文网站导航，快速访问新闻、AI、视频、购物与图像工具。">
-  <meta name="keywords" content="网址导航, 中文网站, 新闻, AI工具, 视频平台, 购物网站, 实用工具">
-  <meta name="author" content="likunming.cn">
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="网址导航 - likunming.cn">
-  <meta property="og:description" content="常用中文网站快捷入口，快速访问你喜爱的网站。">
-  <meta property="og:image" content="https://www.likunming.cn/image/logo.png">
-  <meta property="og:url" content="https://www.likunming.cn">
-  <meta property="og:type" content="website">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://www.likunming.cn/image/logo.png">
-  <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>:root {
-  --font-small: 12px;
-  --font-medium: 16px;
-  --color-primary: #333;
-  --color-bg: #f5f5f7;
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--color-bg);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  padding-bottom: 80px;
-}
-.category {
-  width: 100%;
-  max-width: 600px;
-  margin-bottom: 30px;
-}
-.category h2 {
-  font-size: 18px;
-  color: var(--color-primary);
-  margin-bottom: 10px;
-  text-align: left;
-}
-.container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-.link-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  text-decoration: none;
-  color: black;
-}
-.link-btn img {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  margin-bottom: 8px;
-}
-.link-btn span {
-  font-size: var(--font-small);
-  line-height: 1.2;
-}
-.toast-bar {
-  position: fixed;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 10px;
-  z-index: 9999;
-  width: 40%;
-  max-width: 300px;
-  display: none;
-}
-.toast-bar::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  margin-left: -10px;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #fff;
-}
-.toast-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: var(--font-small);
-  text-align: center;
-  min-height: 50px;
-}
-.toast-text {
-  color: var(--color-primary);
-  line-height: 1.4;
-}
-.inline-icon {
-  width: 12px;
-  height: 12px;
-  vertical-align: middle;
-  margin: 0 2px;
-}
-.highlight-icon {
-  color: #007bff;
-  font-weight: bold;
-}
-.toast-close {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  color: #999;
-  cursor: pointer;
-}
-.toast-close:hover {
-  color: var(--color-primary);
-}
-</style>
+    <title>网址导航</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/image/logo.png">
+    <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* --- Base styles --- */
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f5f5f7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: static;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+        .category {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        .category Icelandic h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .news-btn, .ai-btn, .video-btn, .shopping-btn, .image-btn {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             text-align: center;
+             text-decoration: none;
+             color: black;
+         }
+         .news-btn img, .ai-btn img, .video-btn img, .shopping-btn img, .image-btn img {
+             width: 48px;
+             height: 48px;
+             border-radius: 12px;
+             margin-bottom: 8px;
+         }
+         .news-btn span, .ai-btn span, .video-btn span, .shopping-btn span, .image-btn span {
+             font-size: 12px;
+             line-height: 1.2;
+         }
+
+        /* --- Start: Integrated Search Box Styles (Modified) --- */
+        .s-search {
+            max-width: 600px;
+            width: 100%;
+            margin: 20px auto 30px;
+            position: relative;
+            padding-top: 26px;
+        }
+
+        #search-list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin-bottom: 0;
+            text-align: left;
+            z-index: 2;
+        }
+
+        .search-group ul.search-type {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .search-group ul.search-type li {
+            display: block;
+            margin: 0;
+        }
+
+        #search-list input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Style for labels (All Borders Removed, Added Rounded Top Corners) */
+        .search-group ul.search-type label {
+            display: block;
+            padding: 4px 12px;
+            cursor: pointer;
+            border: none;
+            background-color: #eee;
+            font-size: 13px;
+            line-height: 1.4;
+            position: relative;
+            color: #555;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            bottom: -1px;
+            border-radius: 8px 8px 0 0; /* Rounded top corners to match search box */
+            z-index: 2;
+        }
+        .search-group ul.search-type li + li label {
+             margin-left: 2px;
+        }
+
+        /* The main search form container */
+        #super-search-fm {
+            display: flex;
+            width: 100%;
+            border: none;
+            border-radius: 0 8px 8px 8px; /* Increased border-radius for more rounded corners */
+            overflow: hidden;
+            background-color: #eee;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 1;
+            transition: background-color 0.2s ease;
+            margin-top: -1px;
+            align-items: stretch;
+        }
+
+        /* --- Styling based on active engine (No Borders) --- */
+        .s-search.google-active #super-search-fm,
+        .s-search.baidu-active #super-search-fm {
+            background-color: #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        .s-search.google-active label[for='type-google'],
+        .s-search.baidu-active label[for='type-baidu'] {
+             background-color: #fff;
+             color: #333;
+             z-index: 3;
+             border: none;
+        }
+
+        .s-search.google-active label[for='type-baidu'],
+        .s-search.baidu-active label[for='type-google'] {
+            border: none;
+            background-color: #eee;
+            color: #555;
+            z-index: 2;
+        }
+
+        /* Specific active form radius adjustments */
+        .s-search.google-active #super-search-fm {
+            border-radius: 0 8px 8px 8px; /* Adjusted for more rounded corners */
+        }
+
+        .s-search.baidu-active #super-search-fm {
+             border-radius: 8px; /* Adjusted for more rounded corners */
+        }
+
+        /* Search input (Larger font size) */
+        #search-text {
+            flex-grow: 1;
+            padding: 8px 12px;
+            font-size: 16px; /* Increased font size */
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #333;
+            line-height: normal;
+        }
+        #search-text::placeholder {
+            color: #999;
+            font-size: 16px; /* Match placeholder font size */
+        }
+
+        /* Search button */
+        #super-search-fm button {
+            padding: 0 15px;
+            font-size: 14px;
+            border: none;
+            background-color: #4285f4;
+            color: white;
+            cursor: pointer;
+            border-radius: 0;
+            margin-left: -1px;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #super-search-fm button:hover {
+            background-color: #357ae8;
+        }
+        #super-search-fm button i {
+             font-size: 1em;
+        }
+
+        /* Google/Baidu text colors */
+        .google-text { font-weight: normal; }
+        .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
+        .baidu-text { color: #2932e1; font-weight: normal; }
+        /* --- End: Integrated Search Box Styles --- */
+
+        /* --- Original Toast styles --- */
+         .toast-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            z-index: 9999;
+            width: 40%;
+            max-width: 300px;
+            display: none;
+            visibility: visible;
+        }
+        .toast-bar::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -10px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #fff;
+        }
+        .toast-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+            min-height: 50px;
+        }
+        .toast-text {
+            color: #333;
+            line-height: 1.4;
+            display: flex;
+            flex-direction: column;
+        }
+        .inline-icon {
+            width: 12px;
+            height: 12px;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+        .highlight-icon {
+            color: #007bff;
+            font-weight: bold;
+        }
+        .toast-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: #999;
+            cursor: pointer;
+            padding: 0;
+        }
+        .toast-close:hover {
+            color: #333;
+        }
+        /* --- End Original Toast styles --- */
+    </style>
 </head>
 <body>
-<!-- 页面结构与资源引用略，此处展示更新样式与脚本 -->
+    <div id="search" class="s-search">
+        <div id="search-list">
+            <div class="search-group">
+                <ul class="search-type">
+                    <li>
+                        <input checked type="radio" name="type" id="type-google" value="https://www.google.com/search" data-placeholder="Google Search..." data-name="q">
+                        <label for="type-google">
+                            <span class="google-text">
+                                <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span>
+                            </span>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" name="type" id="type-baidu" value="https://www.baidu.com/s" data-placeholder="百度一下" data-name="wd">
+                        <label for="type-baidu"><span class="baidu-text">百度</span></label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <form action="https://www.google.com/search" method="get" target="_blank" id="super-search-fm">
+            <input type="text" id="search-text" name="q" placeholder="Google Search..." autocomplete="off">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <div class="category">
+        <h2>新闻</h2>
+        <div class="container">
+            <a href="https://cn.nytimes.com" class="news-btn" target="_blank">
+                <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网">
+                <span>纽约时报中文网</span>
+            </a>
+            <a href="https://www.bbc.com/zhongwen/simp" class="news-btn" target="_blank">
+                <img src="https://static.files.bbci.co.uk/ws/simorgh-assets/public/zhongwen/images/icons/icon-144x144.png" alt="BBC中文网">
+                <span>BBC中文网</span>
+            </a>
+            <a href="https://cn.wsj.com/zh-hans" class="news-btn" target="_blank">
+                <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报中文网">
+                <span>华尔街日报中文网</span>
+            </a>
+            <a href="https://www.ftchinese.com" class="news-btn" target="_blank">
+                <img src="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square?source=update-logos&width=180&height=180&format=png" alt="FT中文网">
+                <span>FT中文网</span>
+            </a>
+            <a href="https://www.dw.com/zh" class="news-btn" target="_blank">
+                <img src="https://www.dw.com/favicon.png" alt="德国之声中文网">
+                <span>德国之声中文网</span>
+            </a>
+            <a href="https://news.stheadline.com" class="news-btn" target="_blank">
+                <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="优岛日报">
+                <span>星岛日报</span>
+            </a>
+            <a href="https://china.kyodonews.net/" class="news-btn" target="_blank">
+                <img src="https://china.kyodonews.net/favicon.ico" alt="共同网中文">
+                <span>共同网中文</span>
+            </a>
+            <a href="https://www.rfi.fr/cn/" class="news-btn" target="_blank">
+                <img src="https://www.rfi.fr/favicon.ico" alt="法国国际广播电台中文">
+                <span>法国国际广播电台中文</span>
+            </a>
+        </div>
+    </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const searchContainer = document.getElementById('search');
-  const searchForm = document.getElementById('super-search-fm');
-  const searchInput = document.getElementById('search-text');
-  const engineRadios = document.querySelectorAll('input[name="type"]');
+    <div class="category">
+        <h2>AI</h2>
+        <div class="container">
+             <a href="https://chatgpt.com/" class="ai-btn" target="_blank">
+                 <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
+                 <span>ChatGPT</span>
+             </a>
+             <a href="https://grok.com/?referrer=website" class="ai-btn" target="_blank">
+                 <img src="https://grok.com/images/favicon-light.png" alt="Grok">
+                 <span>Grok</span>
+             </a>
+             <a href="https://chat.deepseek.com/sign_in" class="ai-btn" target="_blank">
+                 <img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek">
+                 <span>DeepSeek</span>
+             </a>
+             <a href="https://gemini.google.com/" class="ai-btn" target="_blank">
+                 <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini">
+                 <span>Gemini</span>
+             </a>
+             <a href="https://yuanbao.tencent.com/" class="ai-btn" target="_blank">
+                 <img src="https://yuanbao.tencent.com/logo-v2.png" alt="腾讯元宝">
+                 <span>腾讯元宝</span>
+             </a>
+             <a href="https://copilot.microsoft.com/" class="ai-btn" target="_blank">
+                 <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
+                 <span>Copilot</span>
+             </a>
+             <a href="https://zh.1lib.sk/" class="ai-btn" target="_blank">
+                 <img src="https://zh.1lib.sk/favicon.ico" alt="Z-Library">
+                 <span>Z-Library</span>
+             </a>
+             <a href="https://m.douban.com/home_guide" class="ai-btn" target="_blank">
+                 <img src="https://www.douban.com/favicon.ico" alt="豆瓣">
+                 <span>豆瓣</span>
+             </a>
+        </div>
+    </div>
 
-  function updateSearchEngine() {
-    const selectedRadio = document.querySelector('input[name="type"]:checked');
-    if (selectedRadio) {
-      searchForm.action = selectedRadio.value;
-      searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
-      searchInput.name = selectedRadio.getAttribute('data-name');
-      searchContainer.classList.remove('google-active', 'baidu-active');
-      searchContainer.classList.add(selectedRadio.id === 'type-google' ? 'google-active' : 'baidu-active');
-    }
-  }
-  engineRadios.forEach(radio => radio.addEventListener('change', updateSearchEngine));
-  updateSearchEngine();
-  searchForm.target = '_blank';
-  searchForm.addEventListener('submit', function(e) {
-    if (searchInput.value.trim() === '') {
-      searchInput.focus();
-      e.preventDefault();
-    }
-  });
-});
+    <div class="category">
+        <h2>视频</h2>
+        <div class="container">
+            <a href="https://www.youtube.com/" class="video-btn" target="_blank">
+                <img src="https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon_144x144.png" alt="YouTube">
+                <span>YouTube</span>
+            </a>
+            <a href="https://www.bilibili.com/" class="video-btn" target="_blank">
+                <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili">
+                <span>Bilibili</span>
+            </a>
+            <a href="https://www.yfsp.tv/" class="video-btn" target="_blank">
+                <img src="https://www.likunming.cn/image/ayf.png" alt="爱壹帆">
+                <span>爱壹帆</span>
+            </a>
+            <a href="https://www.tiktok.com/" class="video-btn" target="_blank">
+                <img src="https://www.tiktok.com/favicon.ico" alt="TikTok">
+                <span>TikTok</span>
+            </a>
+            <a href="https://x.com/" class="video-btn" target="_blank">
+                <img src="https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png" alt="X">
+                <span>X</span>
+            </a>
+            <a href="https://www.xiaohongshu.com/" class="video-btn" target="_blank">
+                <img src="https://picasso-static.xiaohongshu.com/fe-platform/f43dc4a8baf03678996c62d8db6ebc01a82256ff.png" alt="小红书">
+                <span>小红书</span>
+            </a>
+            <a href="https://www.facebook.com/" class="video-btn" target="_blank">
+                <img src="https://www.likunming.cn/image/facebook.ico" alt="Facebook">
+                <span>Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/" class="video-btn" target="_blank">
+                <img src="https://static.cdninstagram.com/rsrc.php/y4/r/QaBlI0OZiks.ico" alt="Instagram">
+                <span>Instagram</span>
+            </a>
+        </div>
+    </div>
 
-function isMobileDevice() {
-  const ua = navigator.userAgent.toLowerCase();
-  return /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(ua) || window.innerWidth <= 768;
-}
+    <div class="category">
+        <h2>购物</h2>
+        <div class="container">
+             <a href="https://www.amazon.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.amazon.com/favicon.ico" alt="Amazon">
+                 <span>Amazon</span>
+             </a>
+             <a href="https://www.taobao.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.taobao.com/favicon.ico" alt="淘宝">
+                 <span>淘宝</span>
+             </a>
+             <a href="https://www.homedepot.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.homedepot.com/favicon.ico" alt="Home Depot">
+                 <span>Home Depot</span>
+             </a>
+             <a href="https://www.temu.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.temu.com/favicon.ico" alt="Temu">
+                 <span>Temu</span>
+             </a>
+             <a href="https://www.walmart.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.walmart.com/favicon.ico" alt="Walmart">
+                 <span>Walmart</span>
+             </a>
+             <a href="https://www.target.com/" class="shopping-btn" target="_blank">
+                 <img src="https://assets.targetimg1.com/static/images/apple-touch-icon-precomposed.png" alt="Target">
+                 <span>Target</span>
+             </a>
+             <a href="https://www.ikea.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.ikea.com/favicon.ico" alt="IKEA">
+                 <span>宜家家居</span>
+             </a>
+             <a href="https://www.sayweee.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.sayweee.com/favicons/apple-touch-icon.png" alt="weee">
+                 <span>Weee生鲜</span>
+             </a>
+        </div>
+    </div>
 
-let toastManuallyClosed = false;
-let toastStartTime = null;
-let toastAlreadyHidden = false;
+    <div class="category">
+        <h2>图像</h2>
+        <div class="container">
+            <a href="https://sfz.tools.likunming.cn" class="image-btn" target="_blank">
+                <img src="https://www.likunming.cn/image/suiyin.png" alt="图片加水印">
+                <span>图片加水印</span>
+            </a>
+            <a href="https://www.remove.bg/zh" class="image-btn" target="_blank">
+                <img src="https://www.remove.bg/favicon.ico" alt="背景消除">
+                <span>背景消除</span>
+            </a>
+        </div>
+    </div>
+    <div class="toast-bar" id="toastBar">
+         <div class="toast-content">
+            <span class="toast-text">
+                <span>添加网址导航到桌面</span>
+                <span>点击下面的 <img src="https://www.likunming.cn/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
+                <span>然后选择“添加到主屏幕”</span>
+            </span>
+        </div>
+        <button class="toast-close" id="toastClose">×</button>
+    </div>
+    <script>
+        // --- Start: Search Box JavaScript (Unchanged) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchContainer = document.getElementById('search');
+            const searchForm = document.getElementById('super-search-fm');
+            const searchInput = document.getElementById('search-text');
+            const engineRadios = document.querySelectorAll('input[name="type"]');
 
-function showToast() {
-  const toastBar = document.getElementById('toastBar');
-  if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
-  toastBar.style.display = 'block';
-  if (!toastStartTime) {
-    toastStartTime = Date.now();
-    checkToastTimeout();
-  }
-}
+            function updateSearchEngine() {
+                const selectedRadio = document.querySelector('input[name="type"]:checked');
+                if (selectedRadio) {
+                    searchForm.action = selectedRadio.value;
+                    searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
+                    searchInput.name = selectedRadio.getAttribute('data-name');
+                    searchContainer.classList.remove('google-active', 'baidu-active');
+                    if (selectedRadio.id === 'type-google') {
+                        searchContainer.classList.add('google-active');
+                    } else if (selectedRadio.id === 'type-baidu') {
+                        searchContainer.classList.add('baidu-active');
+                    }
+                }
+            }
+            engineRadios.forEach(radio => {
+                radio.addEventListener('change', updateSearchEngine);
+            });
+            updateSearchEngine(); // Initial setup
+            searchForm.target = '_blank'; // Always open in new tab
+            searchForm.addEventListener('submit', function(e) {
+                 if (searchInput.value.trim() === '') { // Prevent empty search
+                     searchInput.focus();
+                     e.preventDefault();
+                     return false;
+                 }
+            });
+        });
+        // --- End: Search Box JavaScript ---
 
-function hideToast() {
-  const toastBar = document.getElementById('toastBar');
-  if (toastBar) {
-    toastBar.style.display = 'none';
-    toastAlreadyHidden = true;
-  }
-}
+        // --- Start: Toast Notification JavaScript (Fixed Syntax Error) ---
+         function isMobileDevice() {
+             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+            const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
+            const isSmallScreen = window.innerWidth <= 768;
+            return isMobileUA || isSmallScreen;
+        }
+        let toastManuallyClosed = false;
+        let toastStartTime = null;
+        let toastAlreadyHidden = false;
+        function showToast() {
+             const toastBar = document.getElementById('toastBar');
+            if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
+            toastBar.style.display = 'block';
+            toastBar.style.visibility = 'visible';
+            if (!toastStartTime) {
+                toastStartTime = Date.now();
+                checkToastTimeout();
+            }
+         }
+        function hideToast() {
+             const toastBar = document.getElementById('toastBar');
+            if (toastBar) {
+                toastBar.style.display = 'none';
+                toastAlreadyHidden = true;
+            }
+         }
+        function checkToastTimeout() {
+             const interval = setInterval(() => {
+                if (toastManuallyClosed || toastAlreadyHidden) {
+                    clearInterval(interval);
+                    return;
+                }
+                const elapsed = Date.now() - toastStartTime;
+                if (elapsed >= 20000) {
+                    hideToast();
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+        window.onload = function () {
+            showToast();
+         };
+        window.addEventListener('scroll', function () {
+             showToast();
+         });
+        window.addEventListener('resize', function () {
+             showToast();
+         });
+        const toastClose = document.getElementById('toastClose');
+        if (toastClose) {
+            toastClose.addEventListener('click', function () {
+                toastManuallyClosed = true;
+                hideToast();
+            });
+        }
+        // --- End: Toast Notification JavaScript ---
+    </script>
 
-function checkToastTimeout() {
-  const interval = setInterval(() => {
-    if (toastManuallyClosed || toastAlreadyHidden) {
-      clearInterval(interval);
-      return;
-    }
-    const elapsed = Date.now() - toastStartTime;
-    if (elapsed >= 20000) {
-      hideToast();
-      clearInterval(interval);
-    }
-  }, 1000);
-}
-
-['load', 'scroll', 'resize'].forEach(evt => window.addEventListener(evt, showToast));
-
-document.getElementById('toastClose')?.addEventListener('click', () => {
-  toastManuallyClosed = true;
-  hideToast();
-});
-// 设置暗色模式切换（可选）
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.body.classList.add('dark-mode');
-  }
-</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934270c30a8f674d',t:'MTc0NTI5Njc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9342bbfbfb4753cc',t:'MTc0NTI5OTg4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
