@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="https://www.likunming.cn/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        /* --- Keep existing base styles for html, body, category, container etc. --- */
         html, body {
             margin: 0;
             padding: 0;
@@ -40,160 +41,158 @@
             gap: 20px;
         }
         .news-btn, .ai-btn, .video-btn, .shopping-btn, .image-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            text-decoration: none;
-            color: black;
-        }
-        .news-btn img, .ai-btn img, .video-btn img, .shopping-btn img, .image-btn img {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            margin-bottom: 8px;
-        }
-        .news-btn span, .ai-btn span, .video-btn span, .shopping-btn span, .image-btn span {
-            font-size: 12px;
-            line-height: 1.2;
-        }
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             text-align: center;
+             text-decoration: none;
+             color: black;
+         }
+         .news-btn img, .ai-btn img, .video-btn img, .shopping-btn img, .image-btn img {
+             width: 48px;
+             height: 48px;
+             border-radius: 12px;
+             margin-bottom: 8px;
+         }
+         .news-btn span, .ai-btn span, .video-btn span, .shopping-btn span, .image-btn span {
+             font-size: 12px;
+             line-height: 1.2;
+         }
 
-        /* --- Start: Integrated Search Box Styles --- */
+        /* --- Start: Integrated Search Box Styles (Height Adjusted) --- */
         .s-search {
             max-width: 600px;
             width: 100%;
             margin: 20px auto 30px;
-            position: relative; /* Needed for absolute positioning of labels */
-             padding-top: 32px; /* Create space for the labels above the form */
+            position: relative;
+            /* Reduced padding-top for shorter labels */
+            padding-top: 26px;
         }
 
         #search-list {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%; /* Take full width for alignment */
-            margin-bottom: 0; /* Remove space */
-            text-align: left; /* Align labels to the left */
-             z-index: 2; /* Ensure labels are clickable above the form */
+            width: 100%;
+            margin-bottom: 0;
+            text-align: left;
+            z-index: 2;
         }
 
         .search-group ul.search-type {
             list-style: none;
             padding: 0;
             margin: 0;
-            display: flex; /* Use flex for alignment */
+            display: flex;
         }
 
         .search-group ul.search-type li {
-            display: block; /* Let flex control layout */
-            margin: 0; /* Remove list item margin */
+            display: block;
+            margin: 0;
         }
 
-        /* Hide the actual radio button */
         #search-list input[type="radio"] {
             position: absolute;
             opacity: 0;
             pointer-events: none;
         }
 
-        /* Style for labels */
+        /* Style for labels (Height Adjusted) */
         .search-group ul.search-type label {
             display: block;
-            padding: 6px 15px;
+            /* Reduced vertical padding & font size */
+            padding: 4px 12px;
             cursor: pointer;
             border: 1px solid #ccc;
-            border-bottom: none; /* Remove bottom border initially */
-            border-radius: 5px 5px 0 0; /* Round top corners */
-            background-color: #eee; /* Default inactive background */
-            font-size: 14px;
-            line-height: 1.4;
-            position: relative; /* For z-index and positioning */
-            margin-right: -1px; /* Overlap adjacent borders */
-            color: #555; /* Default text color for inactive */
-             transition: background-color 0.2s ease, border-color 0.2s ease;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0; /* Slightly smaller radius */
+            background-color: #eee;
+            /* Reduced font size */
+            font-size: 13px;
+            line-height: 1.4; /* Adjust if needed */
+            position: relative;
+            margin-right: -1px;
+            color: #555;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
         }
 
         /* The main search form container */
         #super-search-fm {
             display: flex;
             width: 100%;
-            border: 1px solid #ccc; /* Default border */
-            border-radius: 0 5px 5px 5px; /* Round corners except top-left */
+            border: 1px solid #ccc;
+            /* Adjust border radius to match smaller tabs */
+            border-radius: 0 4px 4px 4px;
             overflow: hidden;
-            background-color: #eee; /* Default background matching inactive tabs */
+            background-color: #eee;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            position: relative; /* For z-index context */
-            z-index: 1; /* Below the labels */
-             transition: background-color 0.2s ease, border-color 0.2s ease;
-             margin-top: -1px; /* Pull up slightly to connect with labels */
+            position: relative;
+            z-index: 1;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+            margin-top: -1px;
+             /* Align items vertically */
+             align-items: stretch; /* Make items fill height */
         }
 
-        /* --- Styling based on active engine --- */
-
-        /* When Google is active */
-        .s-search.google-active label[for='type-google'] {
-            background-color: #fff; /* Active label is white */
-            border-color: #aaa; /* Match active form border */
-            border-bottom-color: #fff; /* Hide bottom border by matching background */
-            color: #333; /* Darker text color for active */
-            z-index: 3; /* Ensure active label is on top */
-        }
-        .s-search.google-active #super-search-fm {
-            background-color: #fff; /* Active form is white */
-            border-color: #aaa; /* Match active label border */
-            border-top-color: #aaa; /* Ensure top border is visible */
-            border-top-left-radius: 0; /* Sharp corner under active google tab */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Enhance shadow */
-        }
-        .s-search.google-active label[for='type-baidu'] {
-             border-bottom: 1px solid #ccc; /* Ensure inactive tabs show bottom border */
-         }
-
-
-        /* When Baidu is active */
-        .s-search.baidu-active label[for='type-baidu'] {
-            background-color: #fff;
-            border-color: #aaa;
-            border-bottom-color: #fff;
-            color: #333;
-            z-index: 3;
-        }
+        /* --- Styling based on active engine (Height Adjusted) --- */
+        /* Common active styles */
+        .s-search.google-active #super-search-fm,
         .s-search.baidu-active #super-search-fm {
             background-color: #fff;
             border-color: #aaa;
             border-top-color: #aaa;
-             /* Adjust radius depending on Baidu tab position */
-             /* Assuming Baidu is second, need to adjust top-left and potentially top-right */
-             border-top-left-radius: 5px; /* Keep default */
-             border-top-right-radius: 0; /* Sharp corner under active Baidu tab (if needed) */
-             /* This logic gets complex if tabs move. Let's simplify and use overlap */
-             border-top-left-radius: 5px; /* Or reset based on general form rounding */
-             border-top-right-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1); /* Slightly reduced shadow */
         }
-         .s-search.baidu-active label[for='type-google'] {
-             border-bottom: 1px solid #ccc;
-         }
+        .s-search.google-active label[for='type-google'],
+        .s-search.baidu-active label[for='type-baidu'] {
+             background-color: #fff;
+             border-color: #aaa;
+             border-bottom-color: #fff;
+             color: #333;
+             z-index: 3;
+        }
+
+        /* Specific active styles */
+        .s-search.google-active #super-search-fm {
+            border-top-left-radius: 0;
+            border-top-right-radius: 4px; /* Match smaller radius */
+        }
+        .s-search.google-active label[for='type-baidu'] {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .s-search.baidu-active #super-search-fm {
+            /* Assuming Baidu is second tab */
+            border-top-left-radius: 4px; /* Keep other corners rounded */
+             border-top-right-radius: 4px;
+        }
+        .s-search.baidu-active label[for='type-google'] {
+            border-bottom: 1px solid #ccc;
+        }
+         /* If Baidu tab were differently positioned, border-radius adjustments would change */
 
 
-        /* Re-style the search input */
+        /* Re-style the search input (Height Adjusted) */
         #search-text {
             flex-grow: 1;
-            padding: 10px 15px;
-            font-size: 16px;
+            /* Reduced vertical padding & font size */
+            padding: 8px 12px;
+            font-size: 14px;
             border: none;
             outline: none;
-            background: transparent; /* Input background must be transparent */
+            background: transparent;
             color: #333;
+            line-height: normal; /* Reset line height if needed */
         }
         #search-text::placeholder {
             color: #999;
         }
 
-        /* Re-style the search button */
+        /* Re-style the search button (Height Adjusted) */
         #super-search-fm button {
-            padding: 0 18px;
-            font-size: 16px;
+             /* Reduced horizontal padding & font size */
+            padding: 0 15px;
+            font-size: 14px;
             border: none;
             background-color: #4285f4;
             color: white;
@@ -202,14 +201,15 @@
             margin-left: -1px;
             transition: background-color 0.2s ease;
             display: flex;
-            align-items: center;
+            align-items: center; /* Keep icon vertically centered */
             justify-content: center;
         }
         #super-search-fm button:hover {
             background-color: #357ae8;
         }
         #super-search-fm button i {
-            font-size: 1em;
+            /* Icon size can remain relative or be set explicitly */
+             font-size: 1em; /* Adjust if it looks too large */
         }
 
         /* Google/Baidu text colors */
@@ -219,16 +219,16 @@
         /* --- End: Integrated Search Box Styles --- */
 
 
-        /* Original Toast styles - Keep these */
-        .toast-bar { /* ...omitted for brevity... */ }
-        .toast-bar::after { /* ...omitted for brevity... */ }
-        .toast-content { /* ...omitted for brevity... */ }
-        .toast-text { /* ...omitted for brevity... */ }
-        .inline-icon { /* ...omitted for brevity... */ }
-        .highlight-icon { /* ...omitted for brevity... */ }
-        .toast-close { /* ...omitted for brevity... */ }
-        .toast-close:hover { /* ...omitted for brevity... */ }
-         /* Keep original toast styles here */
+        /* Original Toast styles */
+        .toast-bar { /* ...styles... */ }
+        .toast-bar::after { /* ...styles... */ }
+        .toast-content { /* ...styles... */ }
+        .toast-text { /* ...styles... */ }
+        .inline-icon { /* ...styles... */ }
+        .highlight-icon { /* ...styles... */ }
+        .toast-close { /* ...styles... */ }
+        .toast-close:hover { /* ...styles... */ }
+        /* Keep original toast styles here */
          .toast-bar {
             position: fixed;
             bottom: 20px;
@@ -300,7 +300,8 @@
     </style>
 </head>
 <body>
-    <div id="search" class="s-search"> <div id="search-list">
+    <div id="search" class="s-search">
+        <div id="search-list">
             <div class="search-group">
                 <ul class="search-type">
                     <li>
@@ -488,8 +489,9 @@
             </a>
         </div>
     </div>
+
     <div class="toast-bar" id="toastBar">
-        <div class="toast-content">
+         <div class="toast-content">
             <span class="toast-text">
                 <span>添加网址导航到桌面</span>
                 <span>点击下面的 <img src="https://www.likunming.cn/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
@@ -500,123 +502,104 @@
     </div>
 
     <script>
-    // --- Start: Updated Search Box JavaScript ---
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchContainer = document.getElementById('search'); // The main container
-        const searchForm = document.getElementById('super-search-fm');
-        const searchInput = document.getElementById('search-text');
-        const engineRadios = document.querySelectorAll('input[name="type"]');
+        // --- Search Box JavaScript (Remains the same) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchContainer = document.getElementById('search'); // The main container
+            const searchForm = document.getElementById('super-search-fm');
+            const searchInput = document.getElementById('search-text');
+            const engineRadios = document.querySelectorAll('input[name="type"]');
 
-        function updateSearchEngine() {
-            const selectedRadio = document.querySelector('input[name="type"]:checked');
-            if (selectedRadio) {
-                // Update form attributes
-                searchForm.action = selectedRadio.value;
-                searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
-                searchInput.name = selectedRadio.getAttribute('data-name');
-
-                // Update container class for styling active state
-                searchContainer.classList.remove('google-active', 'baidu-active'); // Remove previous classes
-                if (selectedRadio.id === 'type-google') {
-                    searchContainer.classList.add('google-active');
-                } else if (selectedRadio.id === 'type-baidu') {
-                    searchContainer.classList.add('baidu-active');
+            function updateSearchEngine() {
+                const selectedRadio = document.querySelector('input[name="type"]:checked');
+                if (selectedRadio) {
+                    searchForm.action = selectedRadio.value;
+                    searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
+                    searchInput.name = selectedRadio.getAttribute('data-name');
+                    searchContainer.classList.remove('google-active', 'baidu-active');
+                    if (selectedRadio.id === 'type-google') {
+                        searchContainer.classList.add('google-active');
+                    } else if (selectedRadio.id === 'type-baidu') {
+                        searchContainer.classList.add('baidu-active');
+                    }
                 }
             }
-        }
-
-        // Add event listeners to radio buttons
-        engineRadios.forEach(radio => {
-            radio.addEventListener('change', updateSearchEngine);
+            engineRadios.forEach(radio => {
+                radio.addEventListener('change', updateSearchEngine);
+            });
+            updateSearchEngine();
+            searchForm.target = '_blank';
+            searchForm.addEventListener('submit', function(e) {
+                 if (searchInput.value.trim() === '') {
+                     searchInput.focus();
+                     e.preventDefault();
+                     return false;
+                 }
+            });
         });
 
-        // Initialize search engine settings and container class on page load
-        updateSearchEngine();
-
-        // Ensure form always opens in a new tab
-        searchForm.target = '_blank';
-
-        // Optional: Prevent submitting an empty search query
-        searchForm.addEventListener('submit', function(e) {
-             if (searchInput.value.trim() === '') {
-                 searchInput.focus();
-                 e.preventDefault();
-                 return false;
-             }
-        });
-    });
-    // --- End: Updated Search Box JavaScript ---
-
-
-    // --- Start: Original Toast Notification JavaScript ---
-    function isMobileDevice() { /* ...omitted for brevity... */
-         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
-        const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
-        const isSmallScreen = window.innerWidth <= 768;
-        return isMobileUA || isSmallScreen;
-    }
-    let toastManuallyClosed = false; /* ...omitted for brevity... */
-    let toastStartTime = null; /* ...omitted for brevity... */
-    let toastAlreadyHidden = false; /* ...omitted for brevity... */
-    function showToast() { /* ...omitted for brevity... */
-         const toastBar = document.getElementById('toastBar');
-        // Only show on mobile and if not closed manually or already hidden by timeout
-        if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
-
-        toastBar.style.display = 'block';
-        toastBar.style.visibility = 'visible';
-
-        // Start timer only once
-        if (!toastStartTime) {
-            toastStartTime = Date.now();
-            checkToastTimeout();
+        // --- Toast Notification JavaScript (Remains the same) ---
+         function isMobileDevice() {
+             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+            const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
+            const isSmallScreen = window.innerWidth <= 768;
+            return isMobileUA || isSmallScreen;
         }
-     }
-    function hideToast() { /* ...omitted for brevity... */
-         const toastBar = document.getElementById('toastBar');
-        if (toastBar) {
-            toastBar.style.display = 'none';
-            toastAlreadyHidden = true; // Mark as hidden to prevent reappearing on scroll/resize
-        }
-     }
-    function checkToastTimeout() { /* ...omitted for brevity... */
-         const interval = setInterval(() => {
-            // Stop if closed manually or already hidden
-            if (toastManuallyClosed || toastAlreadyHidden) {
-                clearInterval(interval);
-                return;
+        let toastManuallyClosed = false;
+        let toastStartTime = null;
+        let toastAlreadyHidden = false;
+        function showToast() {
+             const toastBar = document.getElementById('toastBar');
+            if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
+            toastBar.style.display = 'block';
+            toastBar.style.visibility = 'visible';
+            if (!toastStartTime) {
+                toastStartTime = Date.now();
+                checkToastTimeout();
             }
-
-            const elapsed = Date.now() - toastStartTime;
-            if (elapsed >= 20000) { // 20 seconds timeout
+         }
+        function hideToast() {
+             const toastBar = document.getElementById('toastBar');
+            if (toastBar) {
+                toastBar.style.display = 'none';
+                toastAlreadyHidden = true;
+            }
+         }
+        function checkToastTimeout() {
+             const interval = setInterval(() => {
+                if (toastManuallyClosed || toastAlreadyHidden) {
+                    clearInterval(interval);
+                    return;
+                }
+                const elapsed = Date.now() - toastStartTime;
+                if (elapsed >= 20000) {
+                    hideToast();
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+        window.onload = function () {
+            showToast();
+         };
+        window.addEventListener('scroll', function () {
+             showToast();
+         });
+        window.addEventListener('resize', function () {
+             showToast();
+         });
+        const toastClose = document.getElementById('toastClose');
+        if (toastClose) {
+            toastClose.addEventListener('click', function () {
+                toastManuallyClosed = true;
                 hideToast();
-                clearInterval(interval);
-            }
-        }, 1000);
-    }
-    window.onload = function () { /* ...omitted for brevity... */
-        showToast();
-     };
-    window.addEventListener('scroll', function () { /* ...omitted for brevity... */
-         showToast();
-     });
-    window.addEventListener('resize', function () { /* ...omitted for brevity... */
-         showToast();
-     });
-    const toastClose = document.getElementById('toastClose'); /* ...omitted for brevity... */
-    if (toastClose) {
-        toastClose.addEventListener('click', function () {
-            toastManuallyClosed = true; // Mark as manually closed
-            hideToast();
-        });
-    }
-    // --- End: Original Toast Notification JavaScript ---
-</script>
+            });
+        }
+    </script>
 
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
 
 </body>
 </html>
