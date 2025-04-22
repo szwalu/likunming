@@ -421,6 +421,7 @@
     }
 
     let toastManuallyClosed = false;
+    let toastAutoCloseTimeout = null;
 
     function showToast() {
         const toastBar = document.getElementById('toastBar');
@@ -439,21 +440,28 @@
         }
     }
 
-    window.onload = function () {
-        showToast();
-        setTimeout(function () {
+    function scheduleAutoClose() {
+        if (toastAutoCloseTimeout) return; // 保证只设置一次定时器
+        toastAutoCloseTimeout = setTimeout(function () {
             if (!toastManuallyClosed) {
                 hideToast();
             }
         }, 30000);
+    }
+
+    window.onload = function () {
+        showToast();
+        scheduleAutoClose();
     };
 
     window.addEventListener('scroll', function () {
         showToast();
+        scheduleAutoClose();
     });
 
     window.addEventListener('resize', function () {
         showToast();
+        scheduleAutoClose();
     });
 
     const toastClose = document.getElementById('toastClose');
