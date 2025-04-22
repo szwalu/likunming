@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网址导航</title>
+    <!-- 使用相对路径，避免证书问题 -->
     <link rel="apple-touch-icon" sizes="180x180" href="/image/logo.png">
-    <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
+    <link rel="icon" type="image/png" href="/image/logo.png">
+    <!-- 确保外部资源使用 HTTPS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* --- Base styles --- */
@@ -60,13 +62,13 @@
              line-height: 1.2;
          }
 
-        /* --- Start: Integrated Search Box Styles (Modified) --- */
+        /* --- Start: Integrated Search Box Styles --- */
         .s-search {
             max-width: 600px;
             width: 100%;
             margin: 20px auto 30px;
             position: relative;
-            padding-top: 30px; /* Increased to accommodate taller labels */
+            padding-top: 30px;
         }
 
         #search-list {
@@ -97,14 +99,13 @@
             pointer-events: none;
         }
 
-        /* Style for labels (Increased padding and font size) */
         .search-group ul.search-type label {
             display: block;
-            padding: 6px 14px; /* Increased padding for taller labels */
+            padding: 6px 14px;
             cursor: pointer;
             border: none;
             background-color: #eee;
-            font-size: 14px; /* Slightly larger font size */
+            font-size: 14px;
             line-height: 1.4;
             position: relative;
             color: #555;
@@ -117,7 +118,6 @@
              margin-left: 2px;
         }
 
-        /* The main search form container (Increased height) */
         #super-search-fm {
             display: flex;
             width: 100%;
@@ -131,10 +131,9 @@
             transition: background-color 0.2s ease;
             margin-top: -1px;
             align-items: stretch;
-            min-height: 48px; /* Added to ensure taller form */
+            min-height: 48px;
         }
 
-        /* --- Styling based on active engine --- */
         .s-search.google-active #super-search-fm,
         .s-search.baidu-active #super-search-fm {
             background-color: #fff;
@@ -157,7 +156,6 @@
             z-index: 2;
         }
 
-        /* Specific active form radius adjustments */
         .s-search.google-active #super-search-fm {
             border-radius: 0 8px 8px 8px;
         }
@@ -166,11 +164,10 @@
              border-radius: 8px;
         }
 
-        /* Search input (Increased font size and padding) */
         #search-text {
             flex-grow: 1;
-            padding: 10px 14px; /* Increased padding for taller input */
-            font-size: 18px; /* Larger font size */
+            padding: 10px 14px;
+            font-size: 18px;
             border: none;
             outline: none;
             background: transparent;
@@ -179,13 +176,12 @@
         }
         #search-text::placeholder {
             color: #999;
-            font-size: 18px; /* Match placeholder font size */
+            font-size: 18px;
         }
 
-        /* Search button (Increased padding) */
         #super-search-fm button {
-            padding: 0 18px; /* Increased padding for taller button */
-            font-size: 16px; /* Slightly larger icon */
+            padding: 0 18px;
+            font-size: 16px;
             border: none;
             background-color: #4285f4;
             color: white;
@@ -204,7 +200,6 @@
              font-size: 1em;
         }
 
-        /* Google/Baidu text colors */
         .google-text { font-weight: normal; }
         .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
         .baidu-text { color: #2932e1; font-weight: normal; }
@@ -391,11 +386,13 @@
                 <span>YouTube</span>
             </a>
             <a href="https://www.bilibili.com/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili">
+                <!-- 使用相对路径 -->
+                <img src="/image/blibili.ico" alt="Bilibili">
                 <span>Bilibili</span>
             </a>
             <a href="https://www.yfsp.tv/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/ayf.png" alt="爱壹帆">
+                <!-- 使用相对路径 -->
+                <img src="/image/ayf.png" alt="爱壹帆">
                 <span>爱壹帆</span>
             </a>
             <a href="https://www.tiktok.com/" class="video-btn" target="_blank">
@@ -411,7 +408,8 @@
                 <span>小红书</span>
             </a>
             <a href="https://www.facebook.com/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/facebook.ico" alt="Facebook">
+                <!-- 使用相对路径 -->
+                <img src="/image/facebook.ico" alt="Facebook">
                 <span>Facebook</span>
             </a>
             <a href="https://www.instagram.com/" class="video-btn" target="_blank">
@@ -463,7 +461,8 @@
         <h2>图像</h2>
         <div class="container">
             <a href="https://sfz.tools.likunming.cn" class="image-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/suiyin.png" alt="图片加水印">
+                <!-- 使用相对路径 -->
+                <img src="/image/suiyin.png" alt="图片加水印">
                 <span>图片加水印</span>
             </a>
             <a href="https://www.remove.bg/zh" class="image-btn" target="_blank">
@@ -476,7 +475,7 @@
          <div class="toast-content">
             <span class="toast-text">
                 <span>添加网址导航到桌面</span>
-                <span>点击下面的 <img src="https://www.likunming.cn/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
+                <span>点击下面的 <img src="/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
                 <span>然后选择“添加到主屏幕”</span>
             </span>
         </div>
@@ -507,10 +506,10 @@
             engineRadios.forEach(radio => {
                 radio.addEventListener('change', updateSearchEngine);
             });
-            updateSearchEngine(); // Initial setup
-            searchForm.target = '_blank'; // Always open in new tab
+            updateSearchEngine();
+            searchForm.target = '_blank';
             searchForm.addEventListener('submit', function(e) {
-                 if (searchInput.value.trim() === '') { // Prevent empty search
+                 if (searchInput.value.trim() === '') {
                      searchInput.focus();
                      e.preventDefault();
                      return false;
