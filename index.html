@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网址导航</title>
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="简洁的网址导航，提供新闻、AI、视频、购物和图像处理等分类的常用网站快速访问入口，支持Google和百度搜索切换。">
-    <meta name="keywords" content="网址导航, 网站导航, 新闻, AI, 视频, 购物, 图像处理, 搜索引擎">
-    <meta name="author" content="likunming">
-    <meta name="robots" content="index, follow">
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="https://www.likunming.cn/image/logo.png">
-    <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous">
+    <!-- 使用相对路径，避免证书问题 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/image/logo.png">
+    <link rel="icon" type="image/png" href="/image/logo.png">
+    <!-- 确保外部资源使用 HTTPS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* --- Base styles --- */
         html, body {
@@ -23,6 +18,7 @@
             background-color: #f5f5f7;
             min-height: 100vh;
             overflow-x: hidden;
+            position: static;
         }
         body {
             display: flex;
@@ -36,7 +32,7 @@
             max-width: 600px;
             margin-bottom: 30px;
         }
-        .category h2 {
+        .category Icelandic h2 {
             font-size: 18px;
             color: #333;
             margin-bottom: 10px;
@@ -48,71 +44,80 @@
             gap: 20px;
         }
         .news-btn, .ai-btn, .video-btn, .shopping-btn, .image-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            text-decoration: none;
-            color: #000;
-        }
-        .news-btn img, .ai-btn img, .video-btn img, .shopping-btn img, .image-btn img {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            margin-bottom: 8px;
-        }
-        .news-btn span, .ai-btn span, .video-btn span, .shopping-btn span, .image-btn span {
-            font-size: 12px;
-            line-height: 1.2;
-        }
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             text-align: center;
+             text-decoration: none;
+             color: black;
+         }
+         .news-btn img, .ai-btn img, .video-btn img, .shopping-btn img, .image-btn img {
+             width: 48px;
+             height: 48px;
+             border-radius: 12px;
+             margin-bottom: 8px;
+         }
+         .news-btn span, .ai-btn span, .video-btn span, .shopping-btn span, .image-btn span {
+             font-size: 12px;
+             line-height: 1.2;
+         }
 
-        /* --- Search Box Styles --- */
+        /* --- Start: Integrated Search Box Styles --- */
         .s-search {
             max-width: 600px;
             width: 100%;
             margin: 20px auto 30px;
             position: relative;
-            padding-top: 26px;
+            padding-top: 30px;
         }
+
         #search-list {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
+            margin-bottom: 0;
             text-align: left;
             z-index: 2;
         }
+
         .search-group ul.search-type {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
         }
+
         .search-group ul.search-type li {
             display: block;
             margin: 0;
         }
+
         #search-list input[type="radio"] {
             position: absolute;
             opacity: 0;
             pointer-events: none;
         }
+
         .search-group ul.search-type label {
             display: block;
-            padding: 4px 12px;
+            padding: 6px 14px;
             cursor: pointer;
             border: none;
             background-color: #eee;
-            font-size: 13px;
+            font-size: 14px;
             line-height: 1.4;
+            position: relative;
             color: #555;
             transition: background-color 0.2s ease, color 0.2s ease;
+            bottom: -1px;
             border-radius: 8px 8px 0 0;
             z-index: 2;
         }
         .search-group ul.search-type li + li label {
-            margin-left: 2px;
+             margin-left: 2px;
         }
+
         #super-search-fm {
             display: flex;
             width: 100%;
@@ -126,45 +131,57 @@
             transition: background-color 0.2s ease;
             margin-top: -1px;
             align-items: stretch;
+            min-height: 48px;
         }
+
         .s-search.google-active #super-search-fm,
         .s-search.baidu-active #super-search-fm {
             background-color: #fff;
             box-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
+
         .s-search.google-active label[for='type-google'],
         .s-search.baidu-active label[for='type-baidu'] {
-            background-color: #fff;
-            color: #333;
-            z-index: 3;
+             background-color: #fff;
+             color: #333;
+             z-index: 3;
+             border: none;
         }
+
         .s-search.google-active label[for='type-baidu'],
         .s-search.baidu-active label[for='type-google'] {
+            border: none;
             background-color: #eee;
             color: #555;
+            z-index: 2;
         }
+
         .s-search.google-active #super-search-fm {
             border-radius: 0 8px 8px 8px;
         }
+
         .s-search.baidu-active #super-search-fm {
-            border-radius: 8px;
+             border-radius: 8px;
         }
+
         #search-text {
             flex-grow: 1;
-            padding: 8px 12px;
-            font-size: 16px;
+            padding: 10px 14px;
+            font-size: 18px;
             border: none;
             outline: none;
             background: transparent;
             color: #333;
+            line-height: normal;
         }
         #search-text::placeholder {
             color: #999;
-            font-size: 16px;
+            font-size: 18px;
         }
+
         #super-search-fm button {
-            padding: 0 15px;
-            font-size: 14px;
+            padding: 0 18px;
+            font-size: 16px;
             border: none;
             background-color: #4285f4;
             color: white;
@@ -179,117 +196,85 @@
         #super-search-fm button:hover {
             background-color: #357ae8;
         }
-        .google-text { font-weight: normal; }
-        .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; }
-        .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
-        .baidu-text { color: #2932e1; font-weight: normal; }
+        #super-search-fm button i {
+             font-size: 1em;
+        }
 
-        /* --- Toast Styles --- */
-        .toast-bar {
+        .google-text { font-weight: normal; }
+        .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
+        .baidu-text { color: #2932e1; font-weight: normal; }
+        /* --- End: Integrated Search Box Styles --- */
+
+        /* --- Original Toast styles --- */
+         .toast-bar {
             position: fixed;
             bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 0;
+            right: 0;
+            margin: 0 auto;
             background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            padding: 12px 20px;
+            padding: 10px;
             z-index: 9999;
-            max-width: 320px;
-            width: 90%;
+            width: 40%;
+            max-width: 300px;
             display: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            visibility: visible;
         }
-        .toast-bar.show {
-            display: flex;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        .toast-bar.hide {
-            opacity: 0;
-            transform: translateX(-50%) translateY(20px);
+        .toast-bar::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -10px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #fff;
         }
         .toast-content {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            font-size: 14px;
-            color: #333;
-            flex-grow: 1;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+            min-height: 50px;
         }
         .toast-text {
+            color: #333;
+            line-height: 1.4;
             display: flex;
-            align-items: center;
-            gap: 5px;
+            flex-direction: column;
         }
         .inline-icon {
-            width: 16px;
-            height: 16px;
+            width: 12px;
+            height: 12px;
             vertical-align: middle;
+            margin: 0 2px;
+        }
+        .highlight-icon {
+            color: #007bff;
+            font-weight: bold;
         }
         .toast-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
             background: none;
             border: none;
             font-size: 16px;
-            color: #666;
+            color: #999;
             cursor: pointer;
-            padding: 0 5px;
+            padding: 0;
         }
         .toast-close:hover {
             color: #333;
         }
-
-        /* --- Dark Mode --- */
-        @media (prefers-color-scheme: dark) {
-            html, body {
-                background-color: #1c2526;
-            }
-            .category h2, .news-btn, .ai-btn, .video-btn, .shopping-btn, .image-btn {
-                color: #e0e0e0;
-            }
-            .search-group ul.search-type label {
-                background-color: #333;
-                color: #ccc;
-            }
-            #super-search-fm {
-                background-color: #333;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            }
-            .s-search.google-active #super-search-fm,
-            .s-search.baidu-active #super-search-fm {
-                background-color: #444;
-                box-shadow: 0 1px 4px rgba(0,0,0,0.3);
-            }
-            .s-search.google-active label[for='type-google'],
-            .s-search.baidu-active label[for='type-baidu'] {
-                background-color: #444;
-                color: #fff;
-            }
-            .s-search.google-active label[for='type-baidu'],
-            .s-search.baidu-active label[for='type-google'] {
-                background-color: #333;
-                color: #ccc;
-            }
-            #search-text {
-                color: #e0e0e0;
-            }
-            #search-text::placeholder {
-                color: #888;
-            }
-            .toast-bar {
-                background-color: #333;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            }
-            .toast-content {
-                color: #e0e0e0;
-            }
-            .toast-close {
-                color: #aaa;
-            }
-            .toast-close:hover {
-                color: #fff;
-            }
-        }
+        /* --- End Original Toast styles --- */
     </style>
 </head>
 <body>
@@ -341,7 +326,7 @@
                 <span>德国之声中文网</span>
             </a>
             <a href="https://news.stheadline.com" class="news-btn" target="_blank">
-                <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="星岛日报">
+                <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="优岛日报">
                 <span>星岛日报</span>
             </a>
             <a href="https://china.kyodonews.net/" class="news-btn" target="_blank">
@@ -354,43 +339,45 @@
             </a>
         </div>
     </div>
+
     <div class="category">
         <h2>AI</h2>
         <div class="container">
-            <a href="https://chatgpt.com/" class="ai-btn" target="_blank">
-                <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
-                <span>ChatGPT</span>
-            </a>
-            <a href="https://grok.com/?referrer=website" class="ai-btn" target="_blank">
-                <img src="https://grok.com/images/favicon-light.png" alt="Grok">
-                <span>Grok</span>
-            </a>
-            <a href="https://chat.deepseek.com/sign_in" class="ai-btn" target="_blank">
-                <img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek">
-                <span>DeepSeek</span>
-            </a>
-            <a href="https://gemini.google.com/" class="ai-btn" target="_blank">
-                <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini">
-                <span>Gemini</span>
-            </a>
-            <a href="https://yuanbao.tencent.com/" class="ai-btn" target="_blank">
-                <img src="https://yuanbao.tencent.com/logo-v2.png" alt="腾讯元宝">
-                <span>腾讯元宝</span>
-            </a>
-            <a href="https://copilot.microsoft.com/" class="ai-btn" target="_blank">
-                <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
-                <span>Copilot</span>
-            </a>
-            <a href="https://zh.1lib.sk/" class="ai-btn" target="_blank">
-                <img src="https://zh.1lib.sk/favicon.ico" alt="Z-Library">
-                <span>Z-Library</span>
-            </a>
-            <a href="https://m.douban.com/home_guide" class="ai-btn" target="_blank">
-                <img src="https://www.douban.com/favicon.ico" alt="豆瓣">
-                <span>豆瓣</span>
-            </a>
+             <a href="https://chatgpt.com/" class="ai-btn" target="_blank">
+                 <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
+                 <span>ChatGPT</span>
+             </a>
+             <a href="https://grok.com/?referrer=website" class="ai-btn" target="_blank">
+                 <img src="https://grok.com/images/favicon-light.png" alt="Grok">
+                 <span>Grok</span>
+             </a>
+             <a href="https://chat.deepseek.com/sign_in" class="ai-btn" target="_blank">
+                 <img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek">
+                 <span>DeepSeek</span>
+             </a>
+             <a href="https://gemini.google.com/" class="ai-btn" target="_blank">
+                 <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini">
+                 <span>Gemini</span>
+             </a>
+             <a href="https://yuanbao.tencent.com/" class="ai-btn" target="_blank">
+                 <img src="https://yuanbao.tencent.com/logo-v2.png" alt="腾讯元宝">
+                 <span>腾讯元宝</span>
+             </a>
+             <a href="https://copilot.microsoft.com/" class="ai-btn" target="_blank">
+                 <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
+                 <span>Copilot</span>
+             </a>
+             <a href="https://zh.1lib.sk/" class="ai-btn" target="_blank">
+                 <img src="https://zh.1lib.sk/favicon.ico" alt="Z-Library">
+                 <span>Z-Library</span>
+             </a>
+             <a href="https://m.douban.com/home_guide" class="ai-btn" target="_blank">
+                 <img src="https://www.douban.com/favicon.ico" alt="豆瓣">
+                 <span>豆瓣</span>
+             </a>
         </div>
     </div>
+
     <div class="category">
         <h2>视频</h2>
         <div class="container">
@@ -399,11 +386,13 @@
                 <span>YouTube</span>
             </a>
             <a href="https://www.bilibili.com/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili">
+                <!-- 使用相对路径 -->
+                <img src="/image/blibili.ico" alt="Bilibili">
                 <span>Bilibili</span>
             </a>
             <a href="https://www.yfsp.tv/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/ayf.png" alt="爱壹帆">
+                <!-- 使用相对路径 -->
+                <img src="/image/ayf.png" alt="爱壹帆">
                 <span>爱壹帆</span>
             </a>
             <a href="https://www.tiktok.com/" class="video-btn" target="_blank">
@@ -419,7 +408,8 @@
                 <span>小红书</span>
             </a>
             <a href="https://www.facebook.com/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/facebook.ico" alt="Facebook">
+                <!-- 使用相对路径 -->
+                <img src="/image/facebook.ico" alt="Facebook">
                 <span>Facebook</span>
             </a>
             <a href="https://www.instagram.com/" class="video-btn" target="_blank">
@@ -428,48 +418,51 @@
             </a>
         </div>
     </div>
+
     <div class="category">
         <h2>购物</h2>
         <div class="container">
-            <a href="https://www.amazon.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.amazon.com/favicon.ico" alt="Amazon">
-                <span>Amazon</span>
-            </a>
-            <a href="https://www.taobao.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.taobao.com/favicon.ico" alt="淘宝">
-                <span>淘宝</span>
-            </a>
-            <a href="https://www.homedepot.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.homedepot.com/favicon.ico" alt="Home Depot">
-                <span>Home Depot</span>
-            </a>
-            <a href="https://www.temu.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.temu.com/favicon.ico" alt="Temu">
-                <span>Temu</span>
-            </a>
-            <a href="https://www.walmart.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.walmart.com/favicon.ico" alt="Walmart">
-                <span>Walmart</span>
-            </a>
-            <a href="https://www.target.com/" class="shopping-btn" target="_blank">
-                <img src="https://assets.targetimg1.com/static/images/apple-touch-icon-precomposed.png" alt="Target">
-                <span>Target</span>
-            </a>
-            <a href="https://www.ikea.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.ikea.com/favicon.ico" alt="宜家家居">
-                <span>宜家家居</span>
-            </a>
-            <a href="https://www.sayweee.com/" class="shopping-btn" target="_blank">
-                <img src="https://www.sayweee.com/favicons/apple-touch-icon.png" alt="Weee生鲜">
-                <span>Weee生鲜</span>
-            </a>
+             <a href="https://www.amazon.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.amazon.com/favicon.ico" alt="Amazon">
+                 <span>Amazon</span>
+             </a>
+             <a href="https://www.taobao.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.taobao.com/favicon.ico" alt="淘宝">
+                 <span>淘宝</span>
+             </a>
+             <a href="https://www.homedepot.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.homedepot.com/favicon.ico" alt="Home Depot">
+                 <span>Home Depot</span>
+             </a>
+             <a href="https://www.temu.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.temu.com/favicon.ico" alt="Temu">
+                 <span>Temu</span>
+             </a>
+             <a href="https://www.walmart.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.walmart.com/favicon.ico" alt="Walmart">
+                 <span>Walmart</span>
+             </a>
+             <a href="https://www.target.com/" class="shopping-btn" target="_blank">
+                 <img src="https://assets.targetimg1.com/static/images/apple-touch-icon-precomposed.png" alt="Target">
+                 <span>Target</span>
+             </a>
+             <a href="https://www.ikea.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.ikea.com/favicon.ico" alt="IKEA">
+                 <span>宜家家居</span>
+             </a>
+             <a href="https://www.sayweee.com/" class="shopping-btn" target="_blank">
+                 <img src="https://www.sayweee.com/favicons/apple-touch-icon.png" alt="weee">
+                 <span>Weee生鲜</span>
+             </a>
         </div>
     </div>
+
     <div class="category">
         <h2>图像</h2>
         <div class="container">
             <a href="https://sfz.tools.likunming.cn" class="image-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/suiyin.png" alt="图片加水印">
+                <!-- 使用相对路径 -->
+                <img src="/image/suiyin.png" alt="图片加水印">
                 <span>图片加水印</span>
             </a>
             <a href="https://www.remove.bg/zh" class="image-btn" target="_blank">
@@ -479,99 +472,152 @@
         </div>
     </div>
     <div class="toast-bar" id="toastBar">
-        <div class="toast-content">
+         <div class="toast-content">
             <span class="toast-text">
-                添加到主屏幕：点击 <img src="https://www.likunming.cn/image/1122.jpg" alt="分享图标" class="inline-icon"> 选择“添加到主屏幕”
+                <span>添加网址导航到桌面</span>
+                <span>点击下面的 <img src="/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
+                <span>然后选择“添加到主屏幕”</span>
             </span>
-            <button class="toast-close" id="toastClose">×</button>
         </div>
+        <button class="toast-close" id="toastClose">×</button>
     </div>
     <script>
-        // Consolidated JavaScript
-        document.addEventListener('DOMContentLoaded', () => {
-            // Search Functionality
-            const search = {
-                container: document.getElementById('search'),
-                form: document.getElementById('super-search-fm'),
-                input: document.getElementById('search-text'),
-                radios: document.querySelectorAll('input[name="type"]'),
-                updateEngine() {
-                    const radio = document.querySelector('input[name="type"]:checked');
-                    if (radio) {
-                        this.form.action = radio.value;
-                        this.input.placeholder = radio.getAttribute('data-placeholder');
-                        this.input.name = radio.getAttribute('data-name');
-                        this.container.classList.remove('google-active', 'baidu-active');
-                        this.container.classList.add(radio.id === 'type-google' ? 'google-active' : 'baidu-active');
-                    }
-                },
-                init() {
-                    this.radios.forEach(radio => radio.addEventListener('change', () => this.updateEngine()));
-                    this.form.addEventListener('submit', e => {
-                        if (!this.input.value.trim()) {
-                            e.preventDefault();
-                            this.input.focus();
-                        }
-                    });
-                    this.updateEngine();
-                }
-            };
+        // --- Start: Search Box JavaScript ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchContainer = document.getElementById('search');
+            const searchForm = document.getElementById('super-search-fm');
+            const searchInput = document.getElementById('search-text');
+            const engineRadios = document.querySelectorAll('input[name="type"]');
 
-            // Toast Notification
-            const toast = {
-                bar: document.getElementById('toastBar'),
-                closeBtn: document.getElementById('toastClose'),
-                isMobile: /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()) || window.innerWidth <= 768,
-                state: {
-                    isClosed: false,
-                    isHidden: false,
-                    startTime: null
-                },
-                show() {
-                    if (!this.isMobile || this.state.isClosed || this.state.isHidden || !this.bar) return;
-                    this.bar.classList.remove('hide');
-                    this.bar.classList.add('show');
-                    if (!this.state.startTime) {
-                        this.state.startTime = Date.now();
-                        this.checkTimeout();
+            function updateSearchEngine() {
+                const selectedRadio = document.querySelector('input[name="type"]:checked');
+                if (selectedRadio) {
+                    searchForm.action = selectedRadio.value;
+                    searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
+                    searchInput.name = selectedRadio.getAttribute('data-name');
+                    searchContainer.classList.remove('google-active', 'baidu-active');
+                    if (selectedRadio.id === 'type-google') {
+                        searchContainer.classList.add('google-active');
+                    } else if (selectedRadio.id === 'type-baidu') {
+                        searchContainer.classList.add('baidu-active');
                     }
-                },
-                hide() {
-                    if (this.bar) {
-                        this.bar.classList.remove('show');
-                        this.bar.classList.add('hide');
-                        this.state.isHidden = true;
-                    }
-                },
-                checkTimeout() {
-                    const interval = setInterval(() => {
-                        if (this.state.isClosed || this.state.isHidden) {
-                            clearInterval(interval);
-                            return;
-                        }
-                        if (Date.now() - this.state.startTime >= 15000) {
-                            this.hide();
-                            clearInterval(interval);
-                        }
-                    }, 1000);
-                },
-                init() {
-                    if (this.closeBtn) {
-                        this.closeBtn.addEventListener('click', () => {
-                            this.state.isClosed = true;
-                            this.hide();
-                        });
-                    }
-                    ['load', 'scroll', 'resize'].forEach(event => 
-                        window.addEventListener(event, () => this.show())
-                    );
                 }
-            };
-
-            // Initialize
-            search.init();
-            toast.init();
+            }
+            engineRadios.forEach(radio => {
+                radio.addEventListener('change', updateSearchEngine);
+            });
+            updateSearchEngine();
+            searchForm.target = '_blank';
+            searchForm.addEventListener('submit', function(e) {
+                 if (searchInput.value.trim() === '') {
+                     searchInput.focus();
+                     e.preventDefault();
+                     return false;
+                 }
+            });
         });
+        // --- End: Search Box JavaScript ---
+
+        // --- Start: Toast Notification JavaScript ---
+         function isMobileDevice() {
+             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+            const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
+            const isSmallScreen = window.innerWidth <= 768;
+            return isMobileUA || isSmallScreen;
+        }
+        let toastManuallyClosed = false;
+        let toastStartTime = null;
+        let toastAlreadyHidden = false;
+        function showToast() {
+             const toastBar = document.getElementById('toastBar');
+            if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
+            toastBar.style.display = 'block';
+            toastBar.style.visibility = 'visible';
+            if (!toastStartTime) {
+                toastStartTime = Date.now();
+                checkToastTimeout();
+            }
+         }
+        function hideToast() {
+             const toastBar = document.getElementById('toastBar');
+            if (toastBar) {
+                toastBar.style.display = 'none';
+                toastAlreadyHidden = true;
+            }
+         }
+        function checkToastTimeout() {
+             const interval = setInterval(() => {
+                if (toastManuallyClosed || toastAlreadyHidden) {
+                    clearInterval(interval);
+                    return;
+                }
+                const elapsed = Date.now() - toastStartTime;
+                if (elapsed >= 15000) {
+                    hideToast();
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+        window.onload = function () {
+            showToast();
+         };
+        window.addEventListener('scroll', function () {
+             showToast();
+         });
+        window.addEventListener('resize', function () {
+             showToast();
+         });
+        const toastClose = document.getElementById('toastClose');
+        if (toastClose) {
+            toastClose.addEventListener('click', function () {
+                toastManuallyClosed = true;
+                hideToast();
+            });
+        }
+        // --- End: Toast Notification JavaScript ---
+
+        // --- Start: Cloudflare Script with Error Handling ---
+        (function() {
+            try {
+                function c() {
+                    var b = a.contentDocument || a.contentWindow.document;
+                    if (b) {
+                        var d = b.createElement('script');
+                        d.innerHTML = "window.__CF$cv$params={r:'9347b4b2a8b66de3',t:'MTc0NTM1MjAxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                        b.getElementsByTagName('head')[0].appendChild(d);
+                    }
+                }
+                if (document.body) {
+                    var a = document.createElement('iframe');
+                    a.height = 1;
+                    a.width = 1;
+                    a.style.position = 'absolute';
+                    a.style.top = 0;
+                    a.style.left = 0;
+                    a.style.border = 'none';
+                    a.style.visibility = 'hidden';
+                    document.body.appendChild(a);
+                    if ('loading' !== document.readyState) {
+                        c();
+                    } else if (window.addEventListener) {
+                        document.addEventListener('DOMContentLoaded', c);
+                    } else {
+                        var e = document.onreadystatechange || function() {};
+                        document.onreadystatechange = function(b) {
+                            e(b);
+                            if ('loading' !== document.readyState) {
+                                document.onreadystatechange = e;
+                                c();
+                            }
+                        };
+                    }
+                }
+            } catch (error) {
+                console.error('Cloudflare script error:', error);
+            }
+        })();
+        // --- End: Cloudflare Script ---
     </script>
 </body>
 </html>
