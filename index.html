@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="https://www.likunming.cn/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* --- Keep existing base styles for html, body, category, container etc. --- */
+        /* --- Base styles --- */
         html, body {
             margin: 0;
             padding: 0;
@@ -59,13 +59,13 @@
              line-height: 1.2;
          }
 
-        /* --- Start: Integrated Search Box Styles (Height Adjusted) --- */
+        /* --- Start: Integrated Search Box Styles (Final) --- */
         .s-search {
             max-width: 600px;
             width: 100%;
             margin: 20px auto 30px;
             position: relative;
-            /* Reduced padding-top for shorter labels */
+            /* Adjusted padding-top for shorter labels */
             padding-top: 26px;
         }
 
@@ -97,32 +97,34 @@
             pointer-events: none;
         }
 
-        /* Style for labels (Height Adjusted) */
+        /* Style for labels (Top/Side Borders Removed) */
         .search-group ul.search-type label {
             display: block;
-            /* Reduced vertical padding & font size */
-            padding: 4px 12px;
+            padding: 4px 12px; /* Shorter height */
             cursor: pointer;
-            border: 1px solid #ccc;
-            border-bottom: none;
-            border-radius: 4px 4px 0 0; /* Slightly smaller radius */
-            background-color: #eee;
-            /* Reduced font size */
-            font-size: 13px;
-            line-height: 1.4; /* Adjust if needed */
+            border: none; /* <<< Removed top/side/initial borders */
+            border-bottom: 1px solid #ccc; /* <<< Only bottom border for inactive */
+            border-radius: 0; /* <<< Removed radius */
+            background-color: #eee; /* Inactive background */
+            font-size: 13px; /* Shorter height */
+            line-height: 1.4;
             position: relative;
-            margin-right: -1px;
             color: #555;
             transition: background-color 0.2s ease, border-color 0.2s ease;
+            bottom: -1px; /* Overlap form top border */
         }
+        /* Optional: Add small gap between tabs */
+        .search-group ul.search-type li + li label {
+             margin-left: 2px;
+        }
+
 
         /* The main search form container */
         #super-search-fm {
             display: flex;
             width: 100%;
             border: 1px solid #ccc;
-            /* Adjust border radius to match smaller tabs */
-            border-radius: 0 4px 4px 4px;
+            border-radius: 0 4px 4px 4px; /* Keep rounding */
             overflow: hidden;
             background-color: #eee;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -130,67 +132,70 @@
             z-index: 1;
             transition: background-color 0.2s ease, border-color 0.2s ease;
             margin-top: -1px;
-             /* Align items vertically */
-             align-items: stretch; /* Make items fill height */
+            align-items: stretch;
         }
 
-        /* --- Styling based on active engine (Height Adjusted) --- */
-        /* Common active styles */
+        /* --- Styling based on active engine (Borders Adjusted) --- */
+
+        /* Common active form styles */
         .s-search.google-active #super-search-fm,
         .s-search.baidu-active #super-search-fm {
             background-color: #fff;
             border-color: #aaa;
-            border-top-color: #aaa;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1); /* Slightly reduced shadow */
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
+
+        /* Active Label - No borders */
         .s-search.google-active label[for='type-google'],
         .s-search.baidu-active label[for='type-baidu'] {
              background-color: #fff;
-             border-color: #aaa;
-             border-bottom-color: #fff;
              color: #333;
              z-index: 3;
+             border: none; /* <<< Ensure active label has no border */
         }
 
-        /* Specific active styles */
-        .s-search.google-active #super-search-fm {
-            border-top-left-radius: 0;
-            border-top-right-radius: 4px; /* Match smaller radius */
+        /* Inactive Label (when other is active) - Keep only bottom border */
+        .s-search.google-active label[for='type-baidu'],
+        .s-search.baidu-active label[for='type-google'] {
+            border: none; /* Remove any other potential borders */
+            border-bottom: 1px solid #ccc; /* <<< Ensure only bottom border remains */
+            background-color: #eee;
+            color: #555;
+            z-index: 2;
         }
-        .s-search.google-active label[for='type-baidu'] {
-            border-bottom: 1px solid #ccc;
+
+
+        /* Specific active form radius adjustments */
+        .s-search.google-active #super-search-fm {
+            border-top-color: #aaa;
+            border-top-left-radius: 0; /* Connect visually */
+            border-top-right-radius: 4px;
         }
 
         .s-search.baidu-active #super-search-fm {
-            /* Assuming Baidu is second tab */
-            border-top-left-radius: 4px; /* Keep other corners rounded */
-             border-top-right-radius: 4px;
+             border-top-color: #aaa;
+             border-top-left-radius: 4px;
+             border-top-right-radius: 4px; /* Keep rounded unless Baidu label needs connection */
         }
-        .s-search.baidu-active label[for='type-google'] {
-            border-bottom: 1px solid #ccc;
-        }
-         /* If Baidu tab were differently positioned, border-radius adjustments would change */
 
 
-        /* Re-style the search input (Height Adjusted) */
+        /* Search input (Shorter height) */
         #search-text {
             flex-grow: 1;
-            /* Reduced vertical padding & font size */
             padding: 8px 12px;
             font-size: 14px;
             border: none;
             outline: none;
             background: transparent;
             color: #333;
-            line-height: normal; /* Reset line height if needed */
+            line-height: normal;
         }
         #search-text::placeholder {
             color: #999;
         }
 
-        /* Re-style the search button (Height Adjusted) */
+        /* Search button (Shorter height) */
         #super-search-fm button {
-             /* Reduced horizontal padding & font size */
             padding: 0 15px;
             font-size: 14px;
             border: none;
@@ -201,15 +206,14 @@
             margin-left: -1px;
             transition: background-color 0.2s ease;
             display: flex;
-            align-items: center; /* Keep icon vertically centered */
+            align-items: center;
             justify-content: center;
         }
         #super-search-fm button:hover {
             background-color: #357ae8;
         }
         #super-search-fm button i {
-            /* Icon size can remain relative or be set explicitly */
-             font-size: 1em; /* Adjust if it looks too large */
+             font-size: 1em;
         }
 
         /* Google/Baidu text colors */
@@ -219,16 +223,7 @@
         /* --- End: Integrated Search Box Styles --- */
 
 
-        /* Original Toast styles */
-        .toast-bar { /* ...styles... */ }
-        .toast-bar::after { /* ...styles... */ }
-        .toast-content { /* ...styles... */ }
-        .toast-text { /* ...styles... */ }
-        .inline-icon { /* ...styles... */ }
-        .highlight-icon { /* ...styles... */ }
-        .toast-close { /* ...styles... */ }
-        .toast-close:hover { /* ...styles... */ }
-        /* Keep original toast styles here */
+        /* --- Original Toast styles --- */
          .toast-bar {
             position: fixed;
             bottom: 20px;
@@ -297,11 +292,12 @@
         .toast-close:hover {
             color: #333;
         }
+        /* --- End Original Toast styles --- */
+
     </style>
 </head>
 <body>
-    <div id="search" class="s-search">
-        <div id="search-list">
+    <div id="search" class="s-search"> <div id="search-list">
             <div class="search-group">
                 <ul class="search-type">
                     <li>
@@ -489,7 +485,6 @@
             </a>
         </div>
     </div>
-
     <div class="toast-bar" id="toastBar">
          <div class="toast-content">
             <span class="toast-text">
@@ -500,11 +495,10 @@
         </div>
         <button class="toast-close" id="toastClose">×</button>
     </div>
-
     <script>
-        // --- Search Box JavaScript (Remains the same) ---
+        // --- Start: Search Box JavaScript (Unchanged) ---
         document.addEventListener('DOMContentLoaded', function() {
-            const searchContainer = document.getElementById('search'); // The main container
+            const searchContainer = document.getElementById('search');
             const searchForm = document.getElementById('super-search-fm');
             const searchInput = document.getElementById('search-text');
             const engineRadios = document.querySelectorAll('input[name="type"]');
@@ -526,18 +520,19 @@
             engineRadios.forEach(radio => {
                 radio.addEventListener('change', updateSearchEngine);
             });
-            updateSearchEngine();
-            searchForm.target = '_blank';
+            updateSearchEngine(); // Initial setup
+            searchForm.target = '_blank'; // Always open in new tab
             searchForm.addEventListener('submit', function(e) {
-                 if (searchInput.value.trim() === '') {
+                 if (searchInput.value.trim() === '') { // Prevent empty search
                      searchInput.focus();
                      e.preventDefault();
                      return false;
                  }
             });
         });
+        // --- End: Search Box JavaScript ---
 
-        // --- Toast Notification JavaScript (Remains the same) ---
+        // --- Start: Toast Notification JavaScript (Unchanged) ---
          function isMobileDevice() {
              const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
@@ -594,12 +589,12 @@
                 hideToast();
             });
         }
+        // --- End: Toast Notification JavaScript ---
     </script>
 
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 
 </body>
 </html>
