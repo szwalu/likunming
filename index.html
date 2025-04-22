@@ -421,7 +421,7 @@
     }
 
     let toastManuallyClosed = false;
-    let toastAutoCloseTimeout = null;
+    let hasAutoClosed = false;
 
     function showToast() {
         const toastBar = document.getElementById('toastBar');
@@ -441,8 +441,9 @@
     }
 
     function scheduleAutoClose() {
-        if (toastAutoCloseTimeout) return; // 保证只设置一次定时器
-        toastAutoCloseTimeout = setTimeout(function () {
+        if (hasAutoClosed) return;
+        hasAutoClosed = true;
+        setTimeout(function () {
             if (!toastManuallyClosed) {
                 hideToast();
             }
@@ -456,12 +457,10 @@
 
     window.addEventListener('scroll', function () {
         showToast();
-        scheduleAutoClose();
     });
 
     window.addEventListener('resize', function () {
         showToast();
-        scheduleAutoClose();
     });
 
     const toastClose = document.getElementById('toastClose');
