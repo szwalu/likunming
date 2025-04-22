@@ -421,15 +421,19 @@
     }
 
     let toastManuallyClosed = false;
-    let hasAutoClosed = false;
+    let toastStartTime = null;
+    let toastAlreadyHidden = false;
 
     function showToast() {
         const toastBar = document.getElementById('toastBar');
-        if (toastBar && isMobileDevice() && !toastManuallyClosed) {
-            toastBar.style.display = 'block';
-            toastBar.style.visibility = 'visible';
-            toastBar.style.position = 'fixed';
-            toastBar.style.bottom = '20px';
+        if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
+
+        toastBar.style.display = 'block';
+        toastBar.style.visibility = 'visible';
+
+        if (!toastStartTime) {
+            toastStartTime = Date.now();
+            checkToastTimeout();
         }
     }
 
@@ -437,22 +441,27 @@
         const toastBar = document.getElementById('toastBar');
         if (toastBar) {
             toastBar.style.display = 'none';
+            toastAlreadyHidden = true;
         }
     }
 
-    function scheduleAutoClose() {
-        if (hasAutoClosed) return;
-        hasAutoClosed = true;
-        setTimeout(function () {
-            if (!toastManuallyClosed) {
-                hideToast();
+    function checkToastTimeout() {
+        const interval = setInterval(() => {
+            if (toastManuallyClosed || toastAlreadyHidden) {
+                clearInterval(interval);
+                return;
             }
-        }, 30000);
+
+            const elapsed = Date.now() - toastStartTime;
+            if (elapsed >= 30000) {
+                hideToast();
+                clearInterval(interval);
+            }
+        }, 1000);
     }
 
     window.onload = function () {
         showToast();
-        scheduleAutoClose();
     };
 
     window.addEventListener('scroll', function () {
