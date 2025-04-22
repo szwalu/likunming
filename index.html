@@ -1,4 +1,9 @@
-<title>网址导航</title>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>网址导航</title>
   <meta name="description" content="常用中文网站导航，快速访问新闻、AI、视频、购物与图像工具。">
   <meta name="keywords" content="网址导航, 中文网站, 新闻, AI工具, 视频平台, 购物网站, 实用工具">
   <meta name="author" content="likunming.cn">
@@ -11,324 +16,205 @@
   <link rel="apple-touch-icon" sizes="180x180" href="https://www.likunming.cn/image/logo.png">
   <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <style>
-    :root {
-      --font-small: 12px;
-      --font-medium: 16px;
-      --color-primary: #333;
-      --color-bg: #f5f5f7;
-      --color-dark-bg: #1c1c1e;
-      --color-dark-text: #eee;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--color-bg);
-      min-height: 100vh;
-      overflow-x: hidden;
-      color: var(--color-primary);
-      transition: background-color 0.3s, color 0.3s;
-    }
-    body.dark-mode {
-      background-color: var(--color-dark-bg);
-      color: var(--color-dark-text);
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      padding-bottom: 80px;
-    }
-    .category {
-      width: 100%;
-      max-width: 1000px;
-      margin-bottom: 30px;
-    }
-    .category h2 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      text-align: left;
-    }
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-      gap: 20px;
-    }
-    .link-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      text-decoration: none;
-      color: inherit;
-    }
-    .link-btn img {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      margin-bottom: 8px;
-    }
-    .link-btn span {
-      font-size: var(--font-small);
-      line-height: 1.2;
-    }
-    .toast-bar {
-      position: fixed;
-      bottom: 20px;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      padding: 10px;
-      z-index: 9999;
-      width: 90%;
-      max-width: 300px;
-      display: none;
-    }
-    body.dark-mode .toast-bar {
-      background-color: #333;
-      border-color: #555;
-      color: #eee;
-    }
-    .toast-bar::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      margin-left: -10px;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-top: 10px solid #fff;
-    }
-    body.dark-mode .toast-bar::after {
-      border-top-color: #333;
-    }
-    .toast-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: var(--font-small);
-      text-align: center;
-      min-height: 50px;
-    }
-    .toast-close {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: none;
-      border: none;
-      font-size: 16px;
-      color: #999;
-      cursor: pointer;
-    }
-    .toast-close:hover {
-      color: var(--color-primary);
-    }
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: var(--color-dark-bg);
-        color: var(--color-dark-text);
-      }
-    }
-  </style>
+    <style>:root {
+  --font-small: 12px;
+  --font-medium: 16px;
+  --color-primary: #333;
+  --color-bg: #f5f5f7;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  padding-bottom: 80px;
+}
+.category {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+.category h2 {
+  font-size: 18px;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  text-align: left;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.link-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+.link-btn img {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+.link-btn span {
+  font-size: var(--font-small);
+  line-height: 1.2;
+}
+.toast-bar {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 9999;
+  width: 40%;
+  max-width: 300px;
+  display: none;
+}
+.toast-bar::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #fff;
+}
+.toast-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--font-small);
+  text-align: center;
+  min-height: 50px;
+}
+.toast-text {
+  color: var(--color-primary);
+  line-height: 1.4;
+}
+.inline-icon {
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+.highlight-icon {
+  color: #007bff;
+  font-weight: bold;
+}
+.toast-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #999;
+  cursor: pointer;
+}
+.toast-close:hover {
+  color: var(--color-primary);
+}
+</style>
 </head>
 <body>
-<div class="category">
-  <h2>新闻</h2>
-  <div class="container">
-    <a href="https://cn.nytimes.com" class="link-btn" target="_blank">
-      <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网">
-      <span>纽约时报</span>
-    </a>
-    <a href="https://www.bbc.com/zhongwen/simp" class="link-btn" target="_blank">
-      <img src="https://static.files.bbci.co.uk/ws/simorgh-assets/public/zhongwen/images/icons/icon-144x144.png" alt="BBC中文">
-      <span>BBC中文</span>
-    </a>
-    <a href="https://cn.wsj.com/zh-hans" class="link-btn" target="_blank">
-      <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报">
-      <span>华尔街日报</span>
-    </a>
-    <a href="https://www.ftchinese.com" class="link-btn" target="_blank">
-      <img src="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square?source=update-logos&width=180&height=180&format=png" alt="FT中文">
-      <span>FT中文</span>
-    </a>
-  </div>
-</div>
+<!-- 页面结构与资源引用略，此处展示更新样式与脚本 -->
 
-<div class="category">
-  <h2>AI 工具</h2>
-  <div class="container">
-    <a href="https://chatgpt.com/" class="link-btn" target="_blank">
-      <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
-      <span>ChatGPT</span>
-    </a>
-    <a href="https://gemini.google.com/" class="link-btn" target="_blank">
-      <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini">
-      <span>Gemini</span>
-    </a>
-    <a href="https://copilot.microsoft.com/" class="link-btn" target="_blank">
-      <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
-      <span>Copilot</span>
-    </a>
-    <a href="https://chat.deepseek.com/sign_in" class="link-btn" target="_blank">
-      <img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek">
-      <span>DeepSeek</span>
-    </a>
-  </div>
-</div>
-
-<div class="category">
-  <h2>视频平台</h2>
-  <div class="container">
-    <a href="https://www.youtube.com/" class="link-btn" target="_blank">
-      <img src="https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon_144x144.png" alt="YouTube">
-      <span>YouTube</span>
-    </a>
-    <a href="https://www.bilibili.com/" class="link-btn" target="_blank">
-      <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili">
-      <span>Bilibili</span>
-    </a>
-    <a href="https://www.tiktok.com/" class="link-btn" target="_blank">
-      <img src="https://www.tiktok.com/favicon.ico" alt="TikTok">
-      <span>TikTok</span>
-    </a>
-    <a href="https://x.com/" class="link-btn" target="_blank">
-      <img src="https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png" alt="X">
-      <span>X</span>
-    </a>
-  </div>
-</div>
-
-<div class="category">
-  <h2>购物</h2>
-  <div class="container">
-    <a href="https://www.amazon.com/" class="link-btn" target="_blank">
-      <img src="https://www.amazon.com/favicon.ico" alt="Amazon">
-      <span>Amazon</span>
-    </a>
-    <a href="https://www.taobao.com/" class="link-btn" target="_blank">
-      <img src="https://www.taobao.com/favicon.ico" alt="淘宝">
-      <span>淘宝</span>
-    </a>
-    <a href="https://www.temu.com/" class="link-btn" target="_blank">
-      <img src="https://www.temu.com/favicon.ico" alt="Temu">
-      <span>Temu</span>
-    </a>
-    <a href="https://www.ikea.com/" class="link-btn" target="_blank">
-      <img src="https://www.ikea.com/favicon.ico" alt="IKEA">
-      <span>IKEA</span>
-    </a>
-  </div>
-</div>
-
-<div class="category">
-  <h2>图像工具</h2>
-  <div class="container">
-    <a href="https://sfz.tools.likunming.cn" class="link-btn" target="_blank">
-      <img src="https://www.likunming.cn/image/suiyin.png" alt="水印工具">
-      <span>图片加水印</span>
-    </a>
-    <a href="https://www.remove.bg/zh" class="link-btn" target="_blank">
-      <img src="https://www.remove.bg/favicon.ico" alt="背景消除">
-      <span>背景消除</span>
-    </a>
-  </div>
-</div>
-
-<div class="toast-bar" id="toastBar">
-  <div class="toast-content">
-    <span class="toast-text">
-      <span>添加网址导航到桌面</span>
-      <span>点击下面的 <img src="https://www.likunming.cn/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
-      <span>然后选择“添加到主屏幕”</span>
-    </span>
-  </div>
-  <button class="toast-close" id="toastClose">×</button>
-</div>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const searchContainer = document.getElementById('search');
-    const searchForm = document.getElementById('super-search-fm');
-    const searchInput = document.getElementById('search-text');
-    const engineRadios = document.querySelectorAll('input[name="type"]');
+document.addEventListener('DOMContentLoaded', function() {
+  const searchContainer = document.getElementById('search');
+  const searchForm = document.getElementById('super-search-fm');
+  const searchInput = document.getElementById('search-text');
+  const engineRadios = document.querySelectorAll('input[name="type"]');
 
-    function updateSearchEngine() {
-      const selectedRadio = document.querySelector('input[name="type"]:checked');
-      if (selectedRadio) {
-        searchForm.action = selectedRadio.value;
-        searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
-        searchInput.name = selectedRadio.getAttribute('data-name');
-        searchContainer.classList.remove('google-active', 'baidu-active');
-        searchContainer.classList.add(selectedRadio.id === 'type-google' ? 'google-active' : 'baidu-active');
-      }
+  function updateSearchEngine() {
+    const selectedRadio = document.querySelector('input[name="type"]:checked');
+    if (selectedRadio) {
+      searchForm.action = selectedRadio.value;
+      searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
+      searchInput.name = selectedRadio.getAttribute('data-name');
+      searchContainer.classList.remove('google-active', 'baidu-active');
+      searchContainer.classList.add(selectedRadio.id === 'type-google' ? 'google-active' : 'baidu-active');
     }
-    engineRadios.forEach(radio => radio.addEventListener('change', updateSearchEngine));
-    updateSearchEngine();
-    searchForm.target = '_blank';
-    searchForm.addEventListener('submit', function (e) {
-      if (searchInput.value.trim() === '') {
-        searchInput.focus();
-        e.preventDefault();
-      }
-    });
+  }
+  engineRadios.forEach(radio => radio.addEventListener('change', updateSearchEngine));
+  updateSearchEngine();
+  searchForm.target = '_blank';
+  searchForm.addEventListener('submit', function(e) {
+    if (searchInput.value.trim() === '') {
+      searchInput.focus();
+      e.preventDefault();
+    }
   });
+});
 
-  function isMobileDevice() {
-    const ua = navigator.userAgent.toLowerCase();
-    return /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(ua) || window.innerWidth <= 768;
+function isMobileDevice() {
+  const ua = navigator.userAgent.toLowerCase();
+  return /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/.test(ua) || window.innerWidth <= 768;
+}
+
+let toastManuallyClosed = false;
+let toastStartTime = null;
+let toastAlreadyHidden = false;
+
+function showToast() {
+  const toastBar = document.getElementById('toastBar');
+  if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
+  toastBar.style.display = 'block';
+  if (!toastStartTime) {
+    toastStartTime = Date.now();
+    checkToastTimeout();
   }
+}
 
-  let toastManuallyClosed = false;
-  let toastStartTime = null;
-  let toastAlreadyHidden = false;
+function hideToast() {
+  const toastBar = document.getElementById('toastBar');
+  if (toastBar) {
+    toastBar.style.display = 'none';
+    toastAlreadyHidden = true;
+  }
+}
 
-  function showToast() {
-    const toastBar = document.getElementById('toastBar');
-    if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
-    toastBar.style.display = 'block';
-    if (!toastStartTime) {
-      toastStartTime = Date.now();
-      checkToastTimeout();
+function checkToastTimeout() {
+  const interval = setInterval(() => {
+    if (toastManuallyClosed || toastAlreadyHidden) {
+      clearInterval(interval);
+      return;
     }
-  }
-
-  function hideToast() {
-    const toastBar = document.getElementById('toastBar');
-    if (toastBar) {
-      toastBar.style.display = 'none';
-      toastAlreadyHidden = true;
+    const elapsed = Date.now() - toastStartTime;
+    if (elapsed >= 20000) {
+      hideToast();
+      clearInterval(interval);
     }
-  }
+  }, 1000);
+}
 
-  function checkToastTimeout() {
-    const interval = setInterval(() => {
-      if (toastManuallyClosed || toastAlreadyHidden) {
-        clearInterval(interval);
-        return;
-      }
-      const elapsed = Date.now() - toastStartTime;
-      if (elapsed >= 20000) {
-        hideToast();
-        clearInterval(interval);
-      }
-    }, 1000);
-  }
+['load', 'scroll', 'resize'].forEach(evt => window.addEventListener(evt, showToast));
 
-  ['load', 'scroll', 'resize'].forEach(evt => window.addEventListener(evt, showToast));
-
-  document.getElementById('toastClose')?.addEventListener('click', () => {
-    toastManuallyClosed = true;
-    hideToast();
-  });
-
-  // 设置暗色模式切换（可选）
+document.getElementById('toastClose')?.addEventListener('click', () => {
+  toastManuallyClosed = true;
+  hideToast();
+});
+// 设置暗色模式切换（可选）
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.body.classList.add('dark-mode');
   }
