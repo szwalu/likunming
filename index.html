@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网址导航</title>
-    <!-- 使用相对路径，避免证书问题 -->
     <link rel="apple-touch-icon" sizes="180x180" href="/image/logo.png">
-    <link rel="icon" type="image/png" href="/image/logo.png">
-    <!-- 确保外部资源使用 HTTPS -->
+    <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* --- Base styles --- */
@@ -62,13 +60,13 @@
              line-height: 1.2;
          }
 
-        /* --- Start: Integrated Search Box Styles --- */
+        /* --- Start: Integrated Search Box Styles (Modified) --- */
         .s-search {
             max-width: 600px;
             width: 100%;
             margin: 20px auto 30px;
             position: relative;
-            padding-top: 30px;
+            padding-top: 26px;
         }
 
         #search-list {
@@ -99,30 +97,32 @@
             pointer-events: none;
         }
 
+        /* Style for labels (All Borders Removed, Added Rounded Top Corners) */
         .search-group ul.search-type label {
             display: block;
-            padding: 6px 14px;
+            padding: 4px 12px;
             cursor: pointer;
             border: none;
             background-color: #eee;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.4;
             position: relative;
             color: #555;
             transition: background-color 0.2s ease, color 0.2s ease;
             bottom: -1px;
-            border-radius: 8px 8px 0 0;
+            border-radius: 8px 8px 0 0; /* Rounded top corners to match search box */
             z-index: 2;
         }
         .search-group ul.search-type li + li label {
              margin-left: 2px;
         }
 
+        /* The main search form container */
         #super-search-fm {
             display: flex;
             width: 100%;
             border: none;
-            border-radius: 0 8px 8px 8px;
+            border-radius: 0 8px 8px 8px; /* Increased border-radius for more rounded corners */
             overflow: hidden;
             background-color: #eee;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -131,9 +131,9 @@
             transition: background-color 0.2s ease;
             margin-top: -1px;
             align-items: stretch;
-            min-height: 48px;
         }
 
+        /* --- Styling based on active engine (No Borders) --- */
         .s-search.google-active #super-search-fm,
         .s-search.baidu-active #super-search-fm {
             background-color: #fff;
@@ -156,18 +156,20 @@
             z-index: 2;
         }
 
+        /* Specific active form radius adjustments */
         .s-search.google-active #super-search-fm {
-            border-radius: 0 8px 8px 8px;
+            border-radius: 0 8px 8px 8px; /* Adjusted for more rounded corners */
         }
 
         .s-search.baidu-active #super-search-fm {
-             border-radius: 8px;
+             border-radius: 8px; /* Adjusted for more rounded corners */
         }
 
+        /* Search input (Larger font size) */
         #search-text {
             flex-grow: 1;
-            padding: 10px 14px;
-            font-size: 18px;
+            padding: 8px 12px;
+            font-size: 16px; /* Increased font size */
             border: none;
             outline: none;
             background: transparent;
@@ -176,12 +178,13 @@
         }
         #search-text::placeholder {
             color: #999;
-            font-size: 18px;
+            font-size: 16px; /* Match placeholder font size */
         }
 
+        /* Search button */
         #super-search-fm button {
-            padding: 0 18px;
-            font-size: 16px;
+            padding: 0 15px;
+            font-size: 14px;
             border: none;
             background-color: #4285f4;
             color: white;
@@ -200,6 +203,7 @@
              font-size: 1em;
         }
 
+        /* Google/Baidu text colors */
         .google-text { font-weight: normal; }
         .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
         .baidu-text { color: #2932e1; font-weight: normal; }
@@ -386,13 +390,11 @@
                 <span>YouTube</span>
             </a>
             <a href="https://www.bilibili.com/" class="video-btn" target="_blank">
-                <!-- 使用相对路径 -->
-                <img src="/image/blibili.ico" alt="Bilibili">
+                <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili">
                 <span>Bilibili</span>
             </a>
             <a href="https://www.yfsp.tv/" class="video-btn" target="_blank">
-                <!-- 使用相对路径 -->
-                <img src="/image/ayf.png" alt="爱壹帆">
+                <img src="https://www.likunming.cn/image/ayf.png" alt="爱壹帆">
                 <span>爱壹帆</span>
             </a>
             <a href="https://www.tiktok.com/" class="video-btn" target="_blank">
@@ -408,8 +410,7 @@
                 <span>小红书</span>
             </a>
             <a href="https://www.facebook.com/" class="video-btn" target="_blank">
-                <!-- 使用相对路径 -->
-                <img src="/image/facebook.ico" alt="Facebook">
+                <img src="https://www.likunming.cn/image/facebook.ico" alt="Facebook">
                 <span>Facebook</span>
             </a>
             <a href="https://www.instagram.com/" class="video-btn" target="_blank">
@@ -461,8 +462,7 @@
         <h2>图像</h2>
         <div class="container">
             <a href="https://sfz.tools.likunming.cn" class="image-btn" target="_blank">
-                <!-- 使用相对路径 -->
-                <img src="/image/suiyin.png" alt="图片加水印">
+                <img src="https://www.likunming.cn/image/suiyin.png" alt="图片加水印">
                 <span>图片加水印</span>
             </a>
             <a href="https://www.remove.bg/zh" class="image-btn" target="_blank">
@@ -475,14 +475,14 @@
          <div class="toast-content">
             <span class="toast-text">
                 <span>添加网址导航到桌面</span>
-                <span>点击下面的 <img src="/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
+                <span>点击下面的 <img src="https://www.likunming.cn/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
                 <span>然后选择“添加到主屏幕”</span>
             </span>
         </div>
         <button class="toast-close" id="toastClose">×</button>
     </div>
     <script>
-        // --- Start: Search Box JavaScript ---
+        // --- Start: Search Box JavaScript (Unchanged) ---
         document.addEventListener('DOMContentLoaded', function() {
             const searchContainer = document.getElementById('search');
             const searchForm = document.getElementById('super-search-fm');
@@ -506,10 +506,10 @@
             engineRadios.forEach(radio => {
                 radio.addEventListener('change', updateSearchEngine);
             });
-            updateSearchEngine();
-            searchForm.target = '_blank';
+            updateSearchEngine(); // Initial setup
+            searchForm.target = '_blank'; // Always open in new tab
             searchForm.addEventListener('submit', function(e) {
-                 if (searchInput.value.trim() === '') {
+                 if (searchInput.value.trim() === '') { // Prevent empty search
                      searchInput.focus();
                      e.preventDefault();
                      return false;
@@ -518,7 +518,7 @@
         });
         // --- End: Search Box JavaScript ---
 
-        // --- Start: Toast Notification JavaScript ---
+        // --- Start: Toast Notification JavaScript (Fixed Syntax Error) ---
          function isMobileDevice() {
              const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
@@ -576,48 +576,12 @@
             });
         }
         // --- End: Toast Notification JavaScript ---
-
-        // --- Start: Cloudflare Script with Error Handling ---
-        (function() {
-            try {
-                function c() {
-                    var b = a.contentDocument || a.contentWindow.document;
-                    if (b) {
-                        var d = b.createElement('script');
-                        d.innerHTML = "window.__CF$cv$params={r:'9347b4b2a8b66de3',t:'MTc0NTM1MjAxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
-                        b.getElementsByTagName('head')[0].appendChild(d);
-                    }
-                }
-                if (document.body) {
-                    var a = document.createElement('iframe');
-                    a.height = 1;
-                    a.width = 1;
-                    a.style.position = 'absolute';
-                    a.style.top = 0;
-                    a.style.left = 0;
-                    a.style.border = 'none';
-                    a.style.visibility = 'hidden';
-                    document.body.appendChild(a);
-                    if ('loading' !== document.readyState) {
-                        c();
-                    } else if (window.addEventListener) {
-                        document.addEventListener('DOMContentLoaded', c);
-                    } else {
-                        var e = document.onreadystatechange || function() {};
-                        document.onreadystatechange = function(b) {
-                            e(b);
-                            if ('loading' !== document.readyState) {
-                                document.onreadystatechange = e;
-                                c();
-                            }
-                        };
-                    }
-                }
-            } catch (error) {
-                console.error('Cloudflare script error:', error);
-            }
-        })();
-        // --- End: Cloudflare Script ---
     </script>
+
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934270c30a8f674d',t:'MTc0NTI5Njc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9342bbfbfb4753cc',t:'MTc0NTI5OTg4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
