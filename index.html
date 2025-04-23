@@ -44,6 +44,19 @@
             width: 100%;
             padding: 10px 20px;
         }
+        .header h1 {
+            display: none;
+            margin: 0;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+        .header h1 img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
         /* 导航栏样式（桌面端） */
         .sidebar {
             position: fixed;
@@ -357,6 +370,9 @@
             color: #e0e0e0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
+        html.dark-mode .header h1 {
+            color: #e0e0e0;
+        }
         html.dark-mode .sidebar {
             background: #2e3b3e;
             box-shadow: 2px 0 5px rgba(0,0,0,0.2);
@@ -471,21 +487,31 @@
                 width: 100%;
                 left: 0;
                 padding: 10px 10px;
+                justify-content: space-between;
             }
             .header.sidebar-hidden {
                 left: 0;
                 width: 100%;
                 padding: 10px 10px;
             }
+            .header h1 {
+                display: flex;
+                font-size: 1.2em;
+            }
+            .header h1 img {
+                width: 16px;
+                height: 16px;
+                margin-right: 8px;
+            }
             .sidebar {
                 position: fixed;
                 top: 40px;
-                left: auto;
-                right: 10px;
+                left: 0;
+                right: auto;
                 width: 150px;
                 height: auto;
                 background: #fff;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                box-shadow: 2px 0 5px rgba(0,0,0,0.2);
                 padding: 10px;
                 z-index: 950;
                 display: none;
@@ -494,14 +520,7 @@
                 display: block;
             }
             .sidebar h1 {
-                font-size: 1.2em;
-                padding: 0 10px;
-                margin-bottom: 10px;
-            }
-            .sidebar h1 img {
-                width: 16px;
-                height: 16px;
-                margin-right: 8px;
+                display: none;
             }
             .sidebar ul li {
                 padding: 10px;
@@ -516,14 +535,14 @@
                 margin-left: 0;
             }
             .s-search {
-                width: calc(100% - 20px);
+                width: calc(100% - 30px);
                 margin: 50px auto 5px;
-                margin-left: 0;
+                margin-left: 10px;
                 max-width: none;
             }
             .sidebar-hidden .s-search {
-                margin-left: 0;
-                width: calc(100% - 20px);
+                margin-left: 10px;
+                width: calc(100% - 30px);
             }
             .section-title {
                 margin: 5px 0 5px;
@@ -549,6 +568,10 @@
         <div class="sidebar-toggle">
             <i class="fa fa-bars"></i>
         </div>
+        <h1>
+            <img src="https://www.likunming.cn/image/logo.png" alt="Logo">
+            网址导航
+        </h1>
     </div>
 
     <div id="search" class="s-search">
