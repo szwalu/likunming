@@ -545,6 +545,41 @@
                 font-size: 1em;
             }
         }
+    
+        /* 自定义修改样式 */
+        @media (max-width: 768px) {
+            .s-search {
+                margin-bottom: 20px !important;
+            }
+        }
+        .header {
+            left: 0;
+            width: 100% !important;
+        }
+        body.sidebar-hidden .header {
+            width: 100%;
+            left: 0;
+        }
+        .s-search {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .sidebar-hidden .s-search {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        @media (max-width: 768px) {
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .row > div[class*="col-"] {
+                flex: 0 0 48%;
+                max-width: 48%;
+                box-sizing: border-box;
+            }
+        }
     </style>
 </head>
 <body>
