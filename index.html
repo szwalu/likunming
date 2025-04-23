@@ -21,53 +21,55 @@
         }
         /* 顶部样式 */
         .header {
-            background: linear-gradient(135deg, #2869e9, #79bfff);
-            color: white;
-            padding: 20px 0;
-            text-align: center;
+            background: #fff; /* 背景色改为白色 */
+            color: #333; /* 字体颜色改为深灰色 */
+            padding: 10px 15px; /* 减少内边距以降低高度 */
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* 标题和图标分居两侧 */
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* 添加轻微阴影 */
         }
         .header h1 {
             margin: 0;
-            font-size: 2.5em;
+            font-size: 1.5em; /* 缩小标题字体 */
             display: flex;
             align-items: center;
-            justify-content: center;
         }
         .header h1 i {
-            margin-right: 10px;
-            font-size: 1.2em;
+            margin-right: 8px;
+            font-size: 1em;
+            color: #f5a623; /* 图标颜色匹配截图 */
         }
         .search-bar {
-            margin: 10px auto 20px;
-            max-width: 400px; /* 缩小搜索框宽度以匹配截图 */
+            margin: 60px 15px 15px; /* 调整搜索框位置，顶部留出空间 */
             position: relative;
         }
         .search-bar input {
             width: 100%;
-            padding: 8px 40px 8px 15px; /* 调整内边距 */
-            border: none;
-            border-radius: 20px;
+            padding: 8px 40px 8px 15px;
+            border: 1px solid #ddd; /* 添加浅灰色边框 */
+            border-radius: 5px; /* 圆角调整为更方正 */
             font-size: 1em;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* 添加轻微阴影 */
+            background: #fff; /* 背景色为白色 */
         }
         .search-bar .search-icon {
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #666; /* 图标颜色更深以匹配截图 */
+            color: #333; /* 图标颜色更深 */
         }
         /* 导航栏样式（桌面端） */
         .sidebar {
             position: fixed;
-            top: 120px;
+            top: 110px;
             left: 0;
             width: 200px;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 110px);
             background: #fff;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
             padding: 20px 0;
@@ -81,7 +83,7 @@
         .sidebar ul li {
             padding: 15px 20px;
             font-size: 1.1em;
-            color: #666; /* 调整字体颜色以匹配截图 */
+            color: #666;
             cursor: pointer;
             transition: background 0.3s;
         }
@@ -93,19 +95,15 @@
         /* 移动端导航栏图标 */
         .sidebar-toggle {
             display: none;
-            position: fixed;
-            top: 20px; /* 调整位置以匹配截图 */
-            right: 10px;
-            z-index: 950;
-            background: transparent; /* 移除背景色，直接显示图标 */
-            color: white; /* 图标颜色为白色以匹配截图 */
+            background: transparent;
+            color: #333; /* 图标颜色改为深灰色 */
             padding: 8px;
-            font-size: 1.5em; /* 增大图标尺寸 */
+            font-size: 1.5em;
             cursor: pointer;
         }
         /* 主要内容区域 */
         .main-content {
-            margin-top: 120px;
+            margin-top: 110px;
             margin-left: 220px;
             padding: 20px;
         }
@@ -177,15 +175,14 @@
         /* 响应式设计：移动端调整 */
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 1.8em;
+                font-size: 1.2em; /* 移动端标题字体更小 */
             }
-            /* 移动端导航栏调整为右上角 */
             .sidebar-toggle {
                 display: block;
             }
             .sidebar {
                 position: fixed;
-                top: 110px;
+                top: 50px;
                 left: auto;
                 right: 10px;
                 width: 150px;
@@ -194,10 +191,10 @@
                 box-shadow: 0 2px 5px rgba(0,0,0,0.2);
                 padding: 10px;
                 z-index: 950;
-                display: none; /* 默认隐藏 */
+                display: none;
             }
             .sidebar.active {
-                display: block; /* 点击图标时显示 */
+                display: block;
             }
             .sidebar ul li {
                 padding: 10px;
@@ -219,27 +216,28 @@
             .tool-card p {
                 font-size: 0.8em;
             }
+            .search-bar {
+                margin-top: 50px; /* 移动端调整搜索框位置 */
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>
-            <i class="fa fa-th-large"></i> <!-- 添加图标以匹配截图 -->
+            <i class="fa fa-th-large"></i>
             在线工具箱
         </h1>
-        <div class="search-bar">
-            <input type="text" placeholder="搜索工具...">
-            <i class="fa fa-search search-icon"></i>
+        <div class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
         </div>
     </div>
 
-    <!-- 移动端导航栏图标 -->
-    <div class="sidebar-toggle">
-        <i class="fa fa-bars"></i>
+    <div class="search-bar">
+        <input type="text" placeholder="百度一下">
+        <i class="fa fa-search search-icon"></i>
     </div>
 
-    <!-- 导航栏（桌面端左侧/移动端右上角） -->
     <div class="sidebar">
         <ul>
             <li data-target="#common-tools" class="active">常用工具</li>
@@ -397,32 +395,27 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            // 平滑滚动
             function scrollToSection(target) {
                 $('html, body').animate({
                     scrollTop: $(target).offset().top - 100
                 }, 500);
             }
 
-            // 点击导航栏项目
             $('.sidebar li').click(function() {
                 $('.sidebar li').removeClass('active');
                 $(this).addClass('active');
                 var target = $(this).data('target');
                 scrollToSection(target);
-                // 移动端点击后隐藏导航栏
                 if ($(window).width() <= 768) {
                     $('.sidebar').removeClass('active');
                 }
             });
 
-            // 移动端导航栏切换
             $('.sidebar-toggle').click(function(e) {
-                e.stopPropagation(); // 阻止事件冒泡
+                e.stopPropagation();
                 $('.sidebar').toggleClass('active');
             });
 
-            // 点击页面其他区域隐藏导航栏（移动端）
             $(document).click(function(e) {
                 if ($(window).width() <= 768) {
                     if (!$(e.target).closest('.sidebar').length && !$(e.target).closest('.sidebar-toggle').length) {
@@ -431,13 +424,11 @@
                 }
             });
 
-            // 返回顶部
             $('.go-up a').click(function(e) {
                 e.preventDefault();
                 scrollToSection('body');
             });
 
-            // 搜索功能（占位）
             $('.search-bar input').on('keypress', function(e) {
                 if (e.which === 13) {
                     alert('搜索功能即将推出！');
