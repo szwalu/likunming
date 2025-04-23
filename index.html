@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Toolbox | A Collection of Useful Online Tools</title>
-    <meta name="description" content="My Toolbox provides a collection of user-friendly online tools, continuously updated. Explore now!">
-    <meta name="keywords" content="toolbox, online tools, utilities">
+    <title>在线工具箱 | 提供各种实用在线工具</title>
+    <meta name="description" content="在线工具箱提供多种实用工具，持续更新中，欢迎体验！">
+    <meta name="keywords" content="在线工具箱, 实用工具, 在线工具">
     <meta name="theme-color" content="#2C2E2F">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, 'PingFang SC', sans-serif;
             background-color: #f5f5f5;
             margin: 0;
             padding: 0;
         }
+        .container-fluid {
+            padding: 0;
+        }
+        /* 顶部样式 */
         .header {
             background: linear-gradient(135deg, #2869e9, #79bfff);
             color: white;
@@ -33,16 +37,55 @@
         .search-bar {
             margin: 20px auto;
             max-width: 600px;
+            position: relative;
         }
         .search-bar input {
             width: 100%;
-            padding: 10px;
+            padding: 10px 40px 10px 10px;
             border: none;
             border-radius: 20px;
             font-size: 1em;
         }
+        .search-bar .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+        }
+        /* 左侧引导栏样式（桌面端） */
+        .sidebar {
+            position: fixed;
+            top: 120px;
+            left: 0;
+            width: 200px;
+            height: calc(100vh - 120px);
+            background: #fff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            z-index: 900;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            padding: 15px 20px;
+            font-size: 1.1em;
+            color: #333;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .sidebar ul li:hover,
+        .sidebar ul li.active {
+            background: #e6f0ff;
+            color: #2869e9;
+        }
+        /* 主要内容区域 */
         .main-content {
             margin-top: 120px;
+            margin-left: 220px;
             padding: 20px;
         }
         .section-title {
@@ -93,8 +136,8 @@
             color: white;
             text-align: center;
             padding: 20px;
-            position: relative;
             margin-top: 40px;
+            margin-left: 200px;
         }
         .footer a {
             color: #79bfff;
@@ -110,9 +153,34 @@
             border-radius: 50%;
             cursor: pointer;
         }
+        /* 响应式设计：移动端调整 */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
+            }
+            /* 移动端导航栏调整为右上角 */
+            .sidebar {
+                position: fixed;
+                top: 80px;
+                left: auto;
+                right: 10px;
+                width: 150px;
+                height: auto;
+                background: #fff;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                padding: 10px;
+                z-index: 950;
+            }
+            .sidebar ul li {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 10px;
+            }
+            .footer {
+                margin-left: 0;
             }
             .tool-card {
                 padding: 10px;
@@ -128,21 +196,33 @@
 </head>
 <body>
     <div class="header">
-        <h1>My Toolbox</h1>
+        <h1>在线工具箱</h1>
         <div class="search-bar">
-            <input type="text" placeholder="Search for tools...">
+            <input type="text" placeholder="搜索工具...">
+            <i class="fa fa-search search-icon"></i>
         </div>
     </div>
 
+    <!-- 左侧引导栏（桌面端）/右上角导航栏（移动端） -->
+    <div class="sidebar">
+        <ul>
+            <li data-target="#common-tools" class="active">常用工具</li>
+            <li data-target="#media-tools">影音专区</li>
+            <li data-target="#image-tools">图片相关</li>
+            <li data-target="#game-tools">游戏相关</li>
+            <li data-target="#dev-tools">编程开发</li>
+        </ul>
+    </div>
+
     <div class="main-content">
-        <h4 class="section-title"><i class="fa fa-wrench"></i>Common Tools</h4>
+        <h4 class="section-title" id="common-tools"><i class="fa fa-wrench"></i>常用工具</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
                     <a href="https://example.com/chat" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?chat" alt="Chat Icon">
-                        <h3>Smart Chat</h3>
-                        <p>An intelligent assistant for text summarization, writing, grammar checking, and translation.</p>
+                        <h3>ChatGPT</h3>
+                        <p>ChatGPT是一款智能助手，为用户提供文本总结、写作、检查语法和翻译等功能。</p>
                     </a>
                 </div>
             </div>
@@ -150,8 +230,8 @@
                 <div class="tool-card">
                     <a href="https://example.com/watermark" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?video" alt="Watermark Icon">
-                        <h3>Video Watermark Remover</h3>
-                        <p>Remove watermarks from videos across multiple platforms.</p>
+                        <h3>短视频/图集去水印</h3>
+                        <p>支持抖音、快手等16个平台的视频去水印下载。</p>
                     </a>
                 </div>
             </div>
@@ -159,21 +239,30 @@
                 <div class="tool-card">
                     <a href="https://example.com/learner" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?learn" alt="Learner Icon">
-                        <h3>Word Learner</h3>
-                        <p>Software for keyboard users to practice English vocabulary and typing.</p>
+                        <h3>Qwerty Learner</h3>
+                        <p>为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件。</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://example.com/epub" target="_blank">
+                        <img src="https://source.unsplash.com/40x40/?book" alt="Epub Icon">
+                        <h3>epub阅读器</h3>
+                        <p>简单的EPUB电子书在线阅读器。</p>
                     </a>
                 </div>
             </div>
         </div>
 
-        <h4 class="section-title"><i class="fa fa-video-camera"></i>Media Tools</h4>
+        <h4 class="section-title" id="media-tools"><i class="fa fa-video-camera"></i>影音专区</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
                     <a href="https://example.com/music-unlock" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?music" alt="Music Icon">
-                        <h3>Music File Unlocker</h3>
-                        <p>Unlock encrypted music files from various platforms.</p>
+                        <h3>加密音乐文件解锁</h3>
+                        <p>解锁QQ音乐、网易云音乐等加密音频文件。</p>
                     </a>
                 </div>
             </div>
@@ -181,21 +270,21 @@
                 <div class="tool-card">
                     <a href="https://example.com/video-vip" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?vip" alt="VIP Icon">
-                        <h3>VIP Video Parser</h3>
-                        <p>Free parsing service for VIP videos without subscription fees.</p>
+                        <h3>全能VIP视频解析</h3>
+                        <p>提供VIP视频在线免费解析服务，省去订阅费用。</p>
                     </a>
                 </div>
             </div>
         </div>
 
-        <h4 class="section-title"><i class="fa fa-image"></i>Image Tools</h4>
+        <h4 class="section-title" id="image-tools"><i class="fa fa-image"></i>图片相关</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
                     <a href="https://example.com/bg-remove" target="_blank">
-                        <img src="https://source.unsplash.com/40 condense_response=1x40/?background" alt="Background Icon">
-                        <h3>Background Remover</h3>
-                        <p>Automatically remove image backgrounds in seconds.</p>
+                        <img src="https://source.unsplash.com/40x40/?background" alt="Background Icon">
+                        <h3>图片背景消除</h3>
+                        <p>无需操作，5秒内自动消除图片背景。</p>
                     </a>
                 </div>
             </div>
@@ -203,34 +292,34 @@
                 <div class="tool-card">
                     <a href="https://example.com/wallpaper" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?wallpaper" alt="Wallpaper Icon">
-                        <h3>HD Wallpaper Library</h3>
-                        <p>Download high-definition wallpapers across various categories.</p>
+                        <h3>高清壁纸库</h3>
+                        <p>提供高清电脑壁纸下载，涵盖多种类别。</p>
                     </a>
                 </div>
             </div>
         </div>
 
-        <h4 class="section-title"><i class="fa fa-gamepad"></i>Game Tools</h4>
+        <h4 class="section-title" id="game-tools"><i class="fa fa-gamepad"></i>游戏相关</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
                     <a href="https://example.com/mahjong" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?game" alt="Mahjong Icon">
-                        <h3>Online Mahjong</h3>
-                        <p>Play classic Mahjong on your computer.</p>
+                        <h3>电脑麻将</h3>
+                        <p>在线玩经典麻将游戏。</p>
                     </a>
                 </div>
             </div>
         </div>
 
-        <h4 class="section-title"><i class="fa fa-code"></i>Development Tools</h4>
+        <h4 class="section-title" id="dev-tools"><i class="fa fa-code"></i>编程开发</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
                     <a href="https://example.com/docker" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?docker" alt="Docker Icon">
-                        <h3>Docker Analyzer</h3>
-                        <p>Analyze Docker image layers to optimize builds.</p>
+                        <h3>Docker分析工具</h3>
+                        <p>分析Docker镜像层，优化构建过程。</p>
                     </a>
                 </div>
             </div>
@@ -238,8 +327,8 @@
                 <div class="tool-card">
                     <a href="https://example.com/cheatsheet" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?code" alt="Cheatsheet Icon">
-                        <h3>Developer Cheatsheet</h3>
-                        <p>Quick reference guides for developers.</p>
+                        <h3>开发者速查表</h3>
+                        <p>为开发者提供的快速参考指南。</p>
                     </a>
                 </div>
             </div>
@@ -251,36 +340,38 @@
             <a href="#" rel="go-top"><i class="fa fa-angle-up"></i></a>
         </div>
         <div>
-            Copyright © 2025 My Toolbox. Design inspired by <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">Webstack</a>.
+            版权 © 2025 在线工具箱。设计灵感来源于 <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">Webstack</a>。
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Smooth scrolling for anchor links
-            $('a[href*="#"]').click(function(e) {
-                e.preventDefault();
-                var target = $(this.hash);
-                if (target.length) {
-                    $('html, body').animate({
-                        scrollTop: target.offset().top - 100
-                    }, 500);
-                }
+            // 平滑滚动
+            function scrollToSection(target) {
+                $('html, body').animate({
+                    scrollTop: $(target).offset().top - 100
+                }, 500);
+            }
+
+            // 点击导航栏项目
+            $('.sidebar li').click(function() {
+                $('.sidebar li').removeClass('active');
+                $(this).addClass('active');
+                var target = $(this).data('target');
+                scrollToSection(target);
             });
 
-            // Go to top button
+            // 返回顶部
             $('.go-up a').click(function(e) {
                 e.preventDefault();
-                $('html, body').animate({
-                    scrollTop: 0
-                }, 500);
+                scrollToSection('body');
             });
 
-            // Basic search functionality (placeholder)
+            // 搜索功能（占位）
             $('.search-bar input').on('keypress', function(e) {
                 if (e.which === 13) {
-                    alert('Search functionality coming soon!');
+                    alert('搜索功能即将推出！');
                 }
             });
         });
