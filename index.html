@@ -580,6 +580,48 @@
                 box-sizing: border-box;
             }
         }
+    
+        /* 新增样式继续优化： */
+        @media (max-width: 768px) {
+            .s-search {
+                margin-bottom: 10px !important;
+            }
+            .search-group ul.search-type {
+                flex-wrap: wrap;
+                margin-bottom: 8px;
+            }
+            .search-group ul.search-type label {
+                font-size: 12px;
+                padding: 2px 8px;
+                margin-bottom: 4px;
+                white-space: nowrap;
+            }
+            #super-search-fm {
+                margin-top: 0;
+                border-radius: 8px !important;
+                flex-direction: row;
+            }
+            #search-text {
+                min-height: 36px;
+                padding: 6px 10px;
+                font-size: 15px;
+            }
+        }
+        @media (min-width: 769px) {
+            .row > div[class*="col-"] {
+                display: flex;
+                align-items: stretch;
+                margin-bottom: 20px;
+            }
+        }
+        .row:has(.tool-card:only-child) {
+            justify-content: flex-start !important;
+        }
+        .tool-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
