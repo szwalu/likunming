@@ -1,74 +1,174 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网址导航</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/image/logo.png">
     <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网址导航 | 提供各种实用在线工具</title>
+    <meta name="description" content="在线工具箱提供多种实用工具，持续更新中，欢迎体验！">
+    <meta name="keywords" content="在线工具箱, 实用工具, 在线工具">
+    <meta name="theme-color" content="#2C2E2F">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
-        /* --- Base styles --- */
-        html, body {
+        body {
+            font-family: 'Helvetica Neue', Arial, 'PingFang SC', sans-serif;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #f5f5f7;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: static;
         }
-        body {
+        .container-fluid {
+            padding: 0;
+        }
+        /* 顶部样式 */
+        .header {
+            background: #fff;
+            color: #333;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            height: 50px;
+            box-sizing: border-box;
+            transition: width 0.3s, left 0.3s;
+        }
+        .header.sidebar-hidden {
+            width: 100%;
+            left: 0;
+        }
+        .header h1 {
+            display: none;
+            margin: 0;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+        .header h1 img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+        /* 导航栏样式（桌面端） */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            padding: 0;
+            z-index: 900;
+            transition: left 0.3s;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            padding: 15px 20px;
+            font-size: 1.1em;
+            color: #666;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .sidebar ul li:hover,
+        .sidebar ul li.active {
+            background: #e6f0ff;
+            color: #2869e9;
+        }
+        .sidebar-hidden .sidebar {
+            left: -200px;
+        }
+        /* 移动端导航栏图标 */
+        .sidebar-toggle {
+            background: transparent;
+            color: #333;
+            padding: 8px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        /* 主要内容区域 */
+        .main-content {
+            margin-top: 60px;
+            margin-left: 220px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+        .sidebar-hidden .main-content {
+            margin-left: 0;
+        }
+        .section-title {
+            color: #555;
+            font-size: 1.8em;
+            margin: 20px 0 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 15px;
+            color: #2869e9;
+        }
+        .tool-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px;
+            transition: transform 0.2s;
+            width: 100%;
+            min-height: 80px;
             display: flex;
             flex-direction: column;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .tool-card a {
+            display: flex;
             align-items: center;
-            padding: 20px;
-            padding-bottom: 80px;
+            text-decoration: none;
+            color: inherit;
+            flex-grow: 1;
         }
-        .category {
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 30px;
+        .tool-card img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 15px;
+            flex-shrink: 0;
         }
-        .category Icelandic h2 {
-            font-size: 18px;
+        .tool-card h3 {
+            margin: 0;
+            font-size: 1.2em;
             color: #333;
-            margin-bottom: 10px;
-            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex-grow: 1;
         }
-        .container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-        .news-btn, .ai-btn, .video-btn, .shopping-btn, .image-btn {
-             display: flex;
-             flex-direction: column;
-             align-items: center;
-             text-align: center;
-             text-decoration: none;
-             color: black;
-         }
-         .news-btn img, .ai-btn img, .video-btn img, .shopping-btn img, .image-btn img {
-             width: 48px;
-             height: 48px;
-             border-radius: 12px;
-             margin-bottom: 8px;
-         }
-         .news-btn span, .ai-btn span, .video-btn span, .shopping-btn span, .image-btn span {
-             font-size: 12px;
-             line-height: 1.2;
-         }
-
-        /* --- Start: Integrated Search Box Styles (Modified) --- */
+        /* 搜索框样式 */
         .s-search {
+            width: 90%;
             max-width: 600px;
-            width: 100%;
-            margin: 20px auto 30px;
+            margin: 60px auto 5px;
             position: relative;
             padding-top: 26px;
+            transition: width 0.3s, margin 0.3s;
         }
-
+        .sidebar-hidden .s-search {
+            width: calc(100% - 40px);
+            margin: 60px auto 5px;
+        }
         #search-list {
             position: absolute;
             top: 0;
@@ -78,26 +178,21 @@
             text-align: left;
             z-index: 2;
         }
-
         .search-group ul.search-type {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
         }
-
         .search-group ul.search-type li {
             display: block;
             margin: 0;
         }
-
         #search-list input[type="radio"] {
             position: absolute;
             opacity: 0;
             pointer-events: none;
         }
-
-        /* Style for labels (All Borders Removed, Added Rounded Top Corners) */
         .search-group ul.search-type label {
             display: block;
             padding: 4px 12px;
@@ -110,19 +205,17 @@
             color: #555;
             transition: background-color 0.2s ease, color 0.2s ease;
             bottom: -1px;
-            border-radius: 8px 8px 0 0; /* Rounded top corners to match search box */
+            border-radius: 8px 8px 0 0;
             z-index: 2;
         }
         .search-group ul.search-type li + li label {
-             margin-left: 2px;
+            margin-left: 2px;
         }
-
-        /* The main search form container */
         #super-search-fm {
             display: flex;
             width: 100%;
             border: none;
-            border-radius: 0 8px 8px 8px; /* Increased border-radius for more rounded corners */
+            border-radius: 0 8px 8px 8px;
             overflow: hidden;
             background-color: #eee;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -132,43 +225,34 @@
             margin-top: -1px;
             align-items: stretch;
         }
-
-        /* --- Styling based on active engine (No Borders) --- */
         .s-search.google-active #super-search-fm,
         .s-search.baidu-active #super-search-fm {
             background-color: #fff;
             box-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
-
         .s-search.google-active label[for='type-google'],
         .s-search.baidu-active label[for='type-baidu'] {
-             background-color: #fff;
-             color: #333;
-             z-index: 3;
-             border: none;
+            background-color: #fff;
+            color: #333;
+            z-index: 3;
+            border: none;
         }
-
         .s-search.google-active label[for='type-baidu'],
         .s-search.baidu-active label[for='type-google'] {
             border: none;
             background-color: #eee;
             color: #555;
         }
-
-        /* Specific active form radius adjustments */
         .s-search.google-active #super-search-fm {
-            border-radius: 0 8px 8px 8px; /* Adjusted for more rounded corners */
+            border-radius: 0 8px 8px 8px;
         }
-
         .s-search.baidu-active #super-search-fm {
-             border-radius: 8px; /* Adjusted for more rounded corners */
+            border-radius: 8px;
         }
-
-        /* Search input (Larger font size) */
         #search-text {
             flex-grow: 1;
             padding: 8px 12px;
-            font-size: 16px; /* Increased font size */
+            font-size: 16px;
             border: none;
             outline: none;
             background: transparent;
@@ -177,10 +261,8 @@
         }
         #search-text::placeholder {
             color: #999;
-            font-size: 16px; /* Match placeholder font size */
+            font-size: 16px;
         }
-
-        /* Search button */
         #super-search-fm button {
             padding: 0 15px;
             font-size: 14px;
@@ -199,17 +281,13 @@
             background-color: #357ae8;
         }
         #super-search-fm button i {
-             font-size: 1em;
+            font-size: 1em;
         }
-
-        /* Google/Baidu text colors */
         .google-text { font-weight: normal; }
         .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
         .baidu-text { color: #2932e1; font-weight: normal; }
-        /* --- End: Integrated Search Box Styles --- */
-
-        /* --- Original Toast styles --- */
-         .toast-bar {
+        /* Toast 样式 */
+        .toast-bar {
             position: fixed;
             bottom: 20px;
             left: 0;
@@ -277,26 +355,49 @@
         .toast-close:hover {
             color: #333;
         }
-        /* --- End Original Toast styles --- */
-
-        /* --- Dark Mode Styles --- */
+        /* 黑暗模式样式 */
         html.dark-mode, html.dark-mode body {
             background-color: #1c2526;
         }
         html.dark-mode body {
             color: #e0e0e0;
         }
-        html.dark-mode .category Icelandic h2 {
+        html.dark-mode .header {
+            background: #2e3b3e;
+            color: #e0e0e0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        html.dark-mode .header h1 {
             color: #e0e0e0;
         }
-        html.dark-mode .news-btn,
-        html.dark-mode .ai-btn,
-        html.dark-mode .video-btn,
-        html.dark-mode .shopping-btn,
-        html.dark-mode .image-btn {
+        html.dark-mode .sidebar {
+            background: #2e3b3e;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
+        html.dark-mode .sidebar ul li {
+            color: #b0b0b0;
+        }
+        html.dark-mode .sidebar ul li:hover,
+        html.dark-mode .sidebar ul li.active {
+            background: #3a4b4e;
+            color: #79bfff;
+        }
+        html.dark-mode .main-content {
             color: #e0e0e0;
         }
-        /* Search box */
+        html.dark-mode .section-title {
+            color: #e0e0e0;
+        }
+        html.dark-mode .section-title i {
+            color: #79bfff;
+        }
+        html.dark-mode .tool-card {
+            background: #2e3b3e;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        html.dark-mode .tool-card h3 {
+            color: #e0e0e0;
+        }
         html.dark-mode .search-group ul.search-type label {
             background-color: #2e3b3e;
             color: #b0b0b0;
@@ -326,7 +427,6 @@
         html.dark-mode #search-text::placeholder {
             color: #888;
         }
-        /* Toast notification */
         html.dark-mode .toast-bar {
             background-color: #2e3b3e;
             border: 1px solid #444;
@@ -344,10 +444,219 @@
         html.dark-mode .toast-close:hover {
             color: #e0e0e0;
         }
-        /* --- End Dark Mode Styles --- */
+        html.dark-mode .footer {
+            background: #1c2526;
+        }
+        /* 底部样式 */
+        .footer {
+            background: #2C2E2F;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            margin-left: 200px;
+            transition: margin-left 0.3s;
+        }
+        .sidebar-hidden .footer {
+            margin-left: 0;
+        }
+        .footer a {
+            color: #79bfff;
+            text-decoration: none;
+        }
+        .go-up {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2869e9;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        /* 响应式设计：移动端调整 */
+        @media (max-width: 768px) {
+            .header {
+                height: 40px;
+                width: 100%;
+                left: 0;
+                padding: 10px 10px;
+                justify-content: flex-start;
+            }
+            .header.sidebar-hidden {
+                width: 100%;
+                left: 0;
+                padding: 10px 10px;
+            }
+            .header h1 {
+                display: flex;
+                font-size: 1.2em;
+                margin-left: 10px;
+            }
+            .header h1 img {
+                width: 16px;
+                height: 16px;
+                margin-right: 8px;
+            }
+            .sidebar {
+                position: fixed;
+                top: 40px;
+                left: 0;
+                right: auto;
+                width: 150px;
+                height: auto;
+                background: #fff;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+                padding: 10px;
+                z-index: 950;
+                display: none;
+            }
+            .sidebar.active {
+                display: block;
+            }
+            .sidebar ul li {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 10px;
+                margin-top: 60px;
+            }
+            .sidebar-hidden .main-content {
+                margin-left: 0;
+            }
+            .s-search {
+                width: 90%;
+                max-width: 600px;
+                margin: 50px auto 5px;
+                padding-top: 10px;
+            }
+            .sidebar-hidden .s-search {
+                margin: 50px auto 5px;
+            }
+            #super-search-fm {
+                padding: 4px 0;
+            }
+            .section-title {
+                margin: 5px 0 5px;
+                font-size: 1.5em;
+            }
+            .footer {
+                margin-left: 0;
+            }
+            .sidebar-hidden .footer {
+                margin-left: 0;
+            }
+            .tool-card {
+                padding: 10px;
+                min-height: 70px;
+            }
+            .tool-card h3 {
+                font-size: 1em;
+            }
+        }
+    
+        /* 自定义修改样式 */
+        @media (max-width: 768px) {
+            .s-search {
+                margin-bottom: 20px !important;
+            }
+        }
+        .header {
+            left: 0;
+            width: 100% !important;
+        }
+        body.sidebar-hidden .header {
+            width: 100%;
+            left: 0;
+        }
+        .s-search {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .sidebar-hidden .s-search {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+        @media (max-width: 768px) {
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                margin-bottom: 0;
+            }
+            .row > div[class*="col-"] {
+                flex: 0 0 48%;
+                max-width: 48%;
+                box-sizing: border-box;
+                padding: 5px;
+                margin-bottom: 10px;
+            }
+            .tool-card {
+                margin-bottom: 0;
+            }
+        }
+    
+        @media (min-width: 769px) {
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                margin-bottom: 0;
+            }
+            .row > div[class*="col-"] {
+                display: flex;
+                align-items: stretch;
+                flex: 0 0 22%;
+                max-width: 22%;
+                margin: 0 1.5%;
+                padding: 0;
+            }
+            .tool-card {
+                margin-bottom: 20px;
+            }
+        }
+    
+        /* 新增样式继续优化： */
+        @media (max-width: 768px) {
+            .s-search {
+                margin-bottom: 10px !important;
+            }
+            .search-group ul.search-type {
+                flex-wrap: wrap;
+                margin-bottom: 8px;
+            }
+            .search-group ul.search-type label {
+                font-size: 12px;
+                padding: 2px 8px;
+                margin-bottom: 4px;
+                white-space: nowrap;
+            }
+            #super-search-fm {
+                margin-top: 0;
+                border-radius: 8px !important;
+                flex-direction: row;
+            }
+            #search-text {
+                min-height: 36px;
+                padding: 6px 10px;
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <div class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
+        </div>
+        <h1>
+            <img src="https://www.likunming.cn/image/logo.png" alt="Logo">
+            网址导航
+        </h1>
+    </div>
+
     <div id="search" class="s-search">
         <div id="search-list">
             <div class="search-group">
@@ -372,173 +681,151 @@
             <button type="submit"><i class="fas fa-search"></i></button>
         </form>
     </div>
-    <div class="category">
-        <h2>新闻</h2>
-        <div class="container">
-            <a href="https://cn.nytimes.com" class="news-btn" target="_blank">
-                <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网">
-                <span>纽约时报中文网</span>
-            </a>
-            <a href="https://www.bbc.com/zhongwen/simp" class="news-btn" target="_blank">
-                <img src="https://static.files.bbci.co.uk/ws/simorgh-assets/public/zhongwen/images/icons/icon-144x144.png" alt="BBC中文网">
-                <span>BBC中文网</span>
-            </a>
-            <a href="https://cn.wsj.com/zh-hans" class="news-btn" target="_blank">
-                <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报中文网">
-                <span>华尔街日报中文网</span>
-            </a>
-            <a href="https://www.ftchinese.com" class="news-btn" target="_blank">
-                <img src="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square?source=update-logos&width=180&height=180&format=png" alt="FT中文网">
-                <span>FT中文网</span>
-            </a>
-            <a href="https://www.dw.com/zh" class="news-btn" target="_blank">
-                <img src="https://www.dw.com/favicon.png" alt="德国之声中文网">
-                <span>德国之声中文网</span>
-            </a>
-            <a href="https://news.stheadline.com" class="news-btn" target="_blank">
-                <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="优岛日报">
-                <span>星岛日报</span>
-            </a>
-            <a href="https://china.kyodonews.net/" class="news-btn" target="_blank">
-                <img src="https://china.kyodonews.net/favicon.ico" alt="共同网中文">
-                <span>共同网中文</span>
-            </a>
-            <a href="https://www.rfi.fr/cn/" class="news-btn" target="_blank">
-                <img src="https://www.rfi.fr/favicon.ico" alt="法国国际广播电台中文">
-                <span>法国国际广播电台中文</span>
-            </a>
+
+    <div class="sidebar">
+        <ul>
+            <li data-target="#common-tools" class="active">常用工具</li>
+            <li data-target="#media-tools">影音专区</li>
+            <li data-target="#image-tools">图片相关</li>
+            <li data-target="#game-tools">游戏相关</li>
+            <li data-target="#other-tools">其他工具</li>
+            <li data-target="#dev-tools">编程开发</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h4 class="section-title" id="common-tools"><i class="fa fa-wrench"></i>常用工具</h4>
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://cn.nytimes.com" target="_blank">
+                        <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网 Icon">
+                        <h3>纽约时报中文网</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://www.bbc.com/zhongwen/simp" target="_blank">
+                        <img src="https://static.files.bbci.co.uk/ws/simorgh-assets/public/zhongwen/images/icons/icon-144x144.png" alt="BBC中文网 Icon">
+                        <h3>BBC中文网</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://cn.wsj.com/zh-hans" target="_blank">
+                        <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报中文网 Icon">
+                        <h3>华尔街日报中文网</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://www.ftchinese.com" target="_blank">
+                        <img src="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square?source=update-logos&width=180&height=180&format=png" alt="FT中文网 Icon">
+                        <h3>FT中文网</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="section-title" id="media-tools"><i class="fa fa-video-camera"></i>影音专区</h4>
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://chatgpt.com/" target="_blank">
+                        <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT Icon">
+                        <h3>ChatGPT</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://grok.com/?referrer=website" target="_blank">
+                        <img src="https://grok.com/images/favicon-light.png" alt="Grok Icon">
+                        <h3>Grok</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="section-title" id="image-tools"><i class="fa fa-image"></i>图片相关</h4>
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <img src="https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon_144x144.png" alt="YouTube Icon">
+                        <h3>YouTube</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://www.bilibili.com/" target="_blank">
+                        <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili Icon">
+                        <h3>Bilibili</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="section-title" id="game-tools"><i class="fa fa-gamepad"></i>游戏相关</h4>
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://www.amazon.com/" target="_blank">
+                        <img src="https://www.amazon.com/favicon.ico" alt="Amazon Icon">
+                        <h3>Amazon</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="section-title" id="other-tools"><i class="fa fa-tools"></i>其他工具</h4>
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://sfz.tools.likunming.cn" target="_blank">
+                        <img src="https://www.likunming.cn/image/suiyin.png" alt="图片加水印 Icon">
+                        <h3>图片加水印</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="section-title" id="dev-tools"><i class="fa fa-code"></i>编程开发</h4>
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://example.com/docker" target="_blank">
+                        <img src="https://source.unsplash.com/40x40/?docker" alt="Docker Icon">
+                        <h3>Docker分析工具</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="tool-card">
+                    <a href="https://example.com/cheatsheet" target="_blank">
+                        <img src="https://source.unsplash.com/40x40/?code" alt="Cheatsheet Icon">
+                        <h3>开发者速查表</h3>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="category">
-        <h2>AI</h2>
-        <div class="container">
-             <a href="https://chatgpt.com/" class="ai-btn" target="_blank">
-                 <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
-                 <span>ChatGPT</span>
-             </a>
-             <a href="https://grok.com/?referrer=website" class="ai-btn" target="_blank">
-                 <img src="https://grok.com/images/favicon-light.png" alt="Grok">
-                 <span>Grok</span>
-             </a>
-             <a href="https://chat.deepseek.com/sign_in" class="ai-btn" target="_blank">
-                 <img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek">
-                 <span>DeepSeek</span>
-             </a>
-             <a href="https://gemini.google.com/" class="ai-btn" target="_blank">
-                 <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini">
-                 <span>Gemini</span>
-             </a>
-             <a href="https://yuanbao.tencent.com/" class="ai-btn" target="_blank">
-                 <img src="https://yuanbao.tencent.com/logo-v2.png" alt="腾讯元宝">
-                 <span>腾讯元宝</span>
-             </a>
-             <a href="https://copilot.microsoft.com/" class="ai-btn" target="_blank">
-                 <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
-                 <span>Copilot</span>
-             </a>
-             <a href="https://zh.1lib.sk/" class="ai-btn" target="_blank">
-                 <img src="https://zh.1lib.sk/favicon.ico" alt="Z-Library">
-                 <span>Z-Library</span>
-             </a>
-             <a href="https://m.douban.com/home_guide" class="ai-btn" target="_blank">
-                 <img src="https://www.douban.com/favicon.ico" alt="豆瓣">
-                 <span>豆瓣</span>
-             </a>
+    <footer class="footer">
+        <div class="go-up">
+            <a href="#" rel="go-top"><i class="fa fa-angle-up"></i></a>
         </div>
-    </div>
+        <div>
+            版权 © 2025 在线工具箱。设计灵感来源于 <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">Webstack</a>。
+        </div>
+    </footer>
 
-    <div class="category">
-        <h2>视频</h2>
-        <div class="container">
-            <a href="https://www.youtube.com/" class="video-btn" target="_blank">
-                <img src="https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon_144x144.png" alt="YouTube">
-                <span>YouTube</span>
-            </a>
-            <a href="https://www.bilibili.com/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili">
-                <span>Bilibili</span>
-            </a>
-            <a href="https://www.yfsp.tv/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/ayf.png" alt="爱壹帆">
-                <span>爱壹帆</span>
-            </a>
-            <a href="https://www.tiktok.com/" class="video-btn" target="_blank">
-                <img src="https://www.tiktok.com/favicon.ico" alt="TikTok">
-                <span>TikTok</span>
-            </a>
-            <a href="https://x.com/" class="video-btn" target="_blank">
-                <img src="https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png" alt="X">
-                <span>X</span>
-            </a>
-            <a href="https://www.xiaohongshu.com/" class="video-btn" target="_blank">
-                <img src="https://picasso-static.xiaohongshu.com/fe-platform/f43dc4a8baf03678996c62d8db6ebc01a82256ff.png" alt="小红书">
-                <span>小红书</span>
-            </a>
-            <a href="https://www.facebook.com/" class="video-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/facebook.ico" alt="Facebook">
-                <span>Facebook</span>
-            </a>
-            <a href="https://www.instagram.com/" class="video-btn" target="_blank">
-                <img src="https://static.cdninstagram.com/rsrc.php/y4/r/QaBlI0OZiks.ico" alt="Instagram">
-                <span>Instagram</span>
-            </a>
-        </div>
-    </div>
-
-    <div class="category">
-        <h2>购物</h2>
-        <div class="container">
-             <a href="https://www.amazon.com/" class="shopping-btn" target="_blank">
-                 <img src="https://www.amazon.com/favicon.ico" alt="Amazon">
-                 <span>Amazon</span>
-             </a>
-             <a href="https://www.taobao.com/" class="shopping-btn" target="_blank">
-                 <img src="https://www.taobao.com/favicon.ico" alt="淘宝">
-                 <span>淘宝</span>
-             </a>
-             <a href="https://www.homedepot.com/" class="shopping-btn" target="_blank">
-                 <img src="https://www.homedepot.com/favicon.ico" alt="Home Depot">
-                 <span>Home Depot</span>
-             </a>
-             <a href="https://www.temu.com/" class="shopping-btn" target="_blank">
-                 <img src="https://www.temu.com/favicon.ico" alt="Temu">
-                 <span>Temu</span>
-             </a>
-             <a href="https://www.walmart.com/" class="shopping-btn" target="_blank">
-                 <img src="https://www.walmart.com/favicon.ico" alt="Walmart">
-                 <span>Walmart</span>
-             </a>
-             <a href="https://www.target.com/" class="shopping-btn" target="_blank">
-                 <img src="https://assets.targetimg1.com/static/images/apple-touch-icon-precomposed.png" alt="Target">
-                 <span>Target</span>
-             </a>
-             <a href="https://www.ikea.com/" class="shopping-btn" target="_blank">
-                 <img src="https://www.ikea.com/favicon.ico" alt="IKEA">
-                 <span>宜家家居</span>
-             </a>
-             <a href="https://www.sayweee.com/" class="shopping-btn" target="_blank">
-                 <img src="https://www.sayweee.com/favicons/apple-touch-icon.png" alt="weee">
-                 <span>Weee生鲜</span>
-             </a>
-        </div>
-    </div>
-
-    <div class="category">
-        <h2>图像</h2>
-        <div class="container">
-            <a href="https://sfz.tools.likunming.cn" class="image-btn" target="_blank">
-                <img src="https://www.likunming.cn/image/suiyin.png" alt="图片加水印">
-                <span>图片加水印</span>
-            </a>
-            <a href="https://www.remove.bg/zh" class="image-btn" target="_blank">
-                <img src="https://www.remove.bg/favicon.ico" alt="背景消除">
-                <span>背景消除</span>
-            </a>
-        </div>
-    </div>
     <div class="toast-bar" id="toastBar">
-         <div class="toast-content">
+        <div class="toast-content">
             <span class="toast-text">
                 <span>添加网址导航到桌面</span>
                 <span>点击下面的 <img src="https://www.likunming.cn/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
@@ -547,38 +834,50 @@
         </div>
         <button class="toast-close" id="toastClose">×</button>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <script>
-        // --- Start: Dark Mode JavaScript ---
-        function updateTheme() {
-            const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-            const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            // In Chrome, default to light mode unless system explicitly indicates dark mode
-            if (isChrome) {
-                // Additional check: only apply dark mode if system is explicitly dark
-                if (isDarkMode && window.matchMedia('(prefers-color-scheme: dark)').media !== 'not all') {
-                    document.documentElement.classList.add('dark-mode');
-                } else {
-                    document.documentElement.classList.remove('dark-mode');
-                }
-            } else {
-                // For non-Chrome browsers (e.g., Safari), follow system theme
-                if (isDarkMode) {
-                    document.documentElement.classList.add('dark-mode');
-                } else {
-                    document.documentElement.classList.remove('dark-mode');
-                }
+        $(document).ready(function() {
+            function scrollToSection(target) {
+                $('html, body').animate({
+                    scrollTop: $(target).offset().top - 100
+                }, 500);
             }
-        }
 
-        // Initial theme check
-        updateTheme();
+            $('.sidebar li').click(function() {
+                $('.sidebar li').removeClass('active');
+                $(this).addClass('active');
+                var target = $(this).data('target');
+                scrollToSection(target);
+                if ($(window).width() <= 768) {
+                    $('.sidebar').removeClass('active');
+                }
+            });
 
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
-        // --- End: Dark Mode JavaScript ---
+            $('.sidebar-toggle').click(function(e) {
+                e.stopPropagation();
+                if ($(window).width() <= 768) {
+                    $('.sidebar').toggleClass('active');
+                } else {
+                    $('body').toggleClass('sidebar-hidden');
+                }
+            });
 
-        // --- Start: Search Box JavaScript (Unchanged) ---
+            $(document).click(function(e) {
+                if ($(window).width() <= 768) {
+                    if (!$(e.target).closest('.sidebar').length && !$(e.target).closest('.sidebar-toggle').length) {
+                        $('.sidebar').removeClass('active');
+                    }
+                }
+            });
+
+            $('.go-up a').click(function(e) {
+                e.preventDefault();
+                scrollToSection('body');
+            });
+        });
+
+        // 搜索框 JavaScript
         document.addEventListener('DOMContentLoaded', function() {
             const searchContainer = document.getElementById('search');
             const searchForm = document.getElementById('super-search-fm');
@@ -602,21 +901,42 @@
             engineRadios.forEach(radio => {
                 radio.addEventListener('change', updateSearchEngine);
             });
-            updateSearchEngine(); // Initial setup
-            searchForm.target = '_blank'; // Always open in new tab
+            updateSearchEngine();
+            searchForm.target = '_blank';
             searchForm.addEventListener('submit', function(e) {
-                 if (searchInput.value.trim() === '') { // Prevent empty search
-                     searchInput.focus();
-                     e.preventDefault();
-                     return false;
-                 }
+                if (searchInput.value.trim() === '') {
+                    searchInput.focus();
+                    e.preventDefault();
+                    return false;
+                }
             });
         });
-        // --- End: Search Box JavaScript ---
 
-        // --- Start: Toast Notification JavaScript (Unchanged) ---
-         function isMobileDevice() {
-             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        // 黑暗模式 JavaScript
+        function updateTheme() {
+            const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (isChrome) {
+                if (isDarkMode && window.matchMedia('(prefers-color-scheme: dark)').media !== 'not all') {
+                    document.documentElement.classList.add('dark-mode');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                }
+            } else {
+                if (isDarkMode) {
+                    document.documentElement.classList.add('dark-mode');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                }
+            }
+        }
+        updateTheme();
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
+
+        // Toast JavaScript
+        function isMobileDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
             const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
             const isSmallScreen = window.innerWidth <= 768;
@@ -626,7 +946,7 @@
         let toastStartTime = null;
         let toastAlreadyHidden = false;
         function showToast() {
-             const toastBar = document.getElementById('toastBar');
+            const toastBar = document.getElementById('toastBar');
             if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
             toastBar.style.display = 'block';
             toastBar.style.visibility = 'visible';
@@ -634,16 +954,16 @@
                 toastStartTime = Date.now();
                 checkToastTimeout();
             }
-         }
+        }
         function hideToast() {
-             const toastBar = document.getElementById('toastBar');
+            const toastBar = document.getElementById('toastBar');
             if (toastBar) {
                 toastBar.style.display = 'none';
                 toastAlreadyHidden = true;
             }
-         }
+        }
         function checkToastTimeout() {
-             const interval = setInterval(() => {
+            const interval = setInterval(() => {
                 if (toastManuallyClosed || toastAlreadyHidden) {
                     clearInterval(interval);
                     return;
@@ -657,13 +977,13 @@
         }
         window.onload = function () {
             showToast();
-         };
+        };
         window.addEventListener('scroll', function () {
-             showToast();
-         });
+            showToast();
+        });
         window.addEventListener('resize', function () {
-             showToast();
-         });
+            showToast();
+        });
         const toastClose = document.getElementById('toastClose');
         if (toastClose) {
             toastClose.addEventListener('click', function () {
@@ -671,13 +991,7 @@
                 hideToast();
             });
         }
-        // --- End: Toast Notification JavaScript ---
     </script>
-
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9335d377db2abd0f',t:'MTc0NTE2NDUyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933a3893a82cbd46',t:'MTc0NTIxMDYxMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9340414188b1ae89',t:'MTc0NTI3Mzg4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'934270c30a8f674d',t:'MTc0NTI5Njc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9342bbfbfb4753cc',t:'MTc0NTI5OTg4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9348959288abe58e',t:'MTc0NTM2MTIyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93506b106e7ac25a',t:'MTc0NTQ0MzM2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
 </html>
