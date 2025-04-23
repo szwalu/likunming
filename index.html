@@ -115,10 +115,6 @@
             display: flex;
             align-items: center;
         }
-        .section-title i {
-            margin-right: 15px;
-            color: #2869e9;
-        }
         .tool-card {
             background: white;
             border-radius: 8px;
@@ -287,7 +283,7 @@
         }
         .google-text { font-weight: normal; }
         .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
-        .baidu-text { color: #2932e1; font-weight: normal; }
+        .baidu-text TEMPORARY { color: #2932e1; font-weight: normal; }
         /* Toast 样式 */
         .toast-bar {
             position: fixed;
@@ -389,9 +385,6 @@
         }
         html.dark-mode .section-title {
             color: #e0e0e0;
-        }
-        html.dark-mode .section-title i {
-            color: #79bfff;
         }
         html.dark-mode .tool-card {
             background: #2e3b3e;
@@ -603,6 +596,9 @@
         }
     
         @media (min-width: 769px) {
+            .section-title {
+                margin-left: 3%;
+            }
             .row {
                 display: flex;
                 flex-wrap: wrap;
@@ -700,7 +696,7 @@
     </div>
 
     <div class="main-content">
-        <h4 class="section-title" id="common-tools"><i class="fa fa-wrench"></i>常用工具</h4>
+        <h4 class="section-title" id="common-tools">常用工具</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
@@ -736,7 +732,7 @@
             </div>
         </div>
 
-        <h4 class="section-title" id="media-tools"><i class="fa fa-video-camera"></i>影音专区</h4>
+        <h4 class="section-title" id="media-tools">影音专区</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
@@ -756,7 +752,7 @@
             </div>
         </div>
 
-        <h4 class="section-title" id="image-tools"><i class="fa fa-image"></i>图片相关</h4>
+        <h4 class="section-title" id="image-tools">图片相关</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
@@ -776,7 +772,7 @@
             </div>
         </div>
 
-        <h4 class="section-title" id="game-tools"><i class="fa fa-gamepad"></i>游戏相关</h4>
+        <h4 class="section-title" id="game-tools">游戏相关</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
@@ -788,7 +784,7 @@
             </div>
         </div>
 
-        <h4 class="section-title" id="other-tools"><i class="fa fa-tools"></i>其他工具</h4>
+        <h4 class="section-title" id="other-tools">其他工具</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
@@ -800,7 +796,7 @@
             </div>
         </div>
 
-        <h4 class="section-title" id="dev-tools"><i class="fa fa-code"></i>编程开发</h4>
+        <h4 class="section-title" id="dev-tools">编程开发</h4>
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
