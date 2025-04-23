@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <link rel="apple-touch-icon" sizes="180x180" href="/image/logo.png">
+    <link rel="icon" type="image/png" href="https://www.likunming.cn/image/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>在线工具箱 | 提供各种实用在线工具</title>
@@ -10,11 +13,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <style>
-        body {
-            font-family: 'Helvetica Neue', Arial, 'PingFang SC', sans-serif;
-            background-color: #f5f5f5;
+        /* --- Base styles --- */
+        html, body {
             margin: 0;
             padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f5f5f7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: static;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 80px;
         }
         .container-fluid {
             padding: 0;
@@ -28,9 +42,9 @@
             align-items: center;
             justify-content: space-between;
             position: fixed;
-            width: calc(100% - 200px); /* 与左侧导航栏宽度一致 */
+            width: calc(100% - 200px);
             top: 0;
-            left: 200px; /* 与左侧导航栏连接 */
+            left: 200px;
             z-index: 1000;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             height: 50px;
@@ -46,37 +60,13 @@
             font-size: 1em;
             color: #f5a623;
         }
-        .search-bar {
-            margin: 60px auto 10px; /* 居中显示 */
-            position: relative;
-            z-index: 900;
-            width: 50%; /* 缩短长度为50% */
-            max-width: 400px; /* 限制最大宽度 */
-            left: 50%;
-            transform: translateX(-50%); /* 居中对齐 */
-        }
-        .search-bar input {
-            width: 100%;
-            padding: 8px 40px 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
-            background: #fff;
-        }
-        .search-bar .search-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #333;
-        }
         /* 导航栏样式（桌面端） */
         .sidebar {
             position: fixed;
-            top: 0; /* 与顶部对齐 */
+            top: 0;
             left: 0;
             width: 200px;
-            height: 100vh; /* 占据整个高度 */
+            height: 100vh;
             background: #fff;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
             padding: 20px 0;
@@ -108,55 +98,300 @@
             font-size: 1.5em;
             cursor: pointer;
         }
-        /* 主要内容区域 */
-        .main-content {
-            margin-top: 100px;
-            margin-left: 220px;
-            padding: 20px;
+        /* 正文内容样式（从 wo.html 迁移） */
+        .category {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 30px;
+            margin-left: 200px; /* 适配左侧导航栏 */
         }
-        .section-title {
+        .category h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .news-btn, .ai-btn, .video-btn, .shopping-btn, .image-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+        }
+        .news-btn img, .ai-btn img, .video-btn img, .shopping-btn img, .image-btn img {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+        .news-btn span, .ai-btn span, .video-btn span, .shopping-btn span, .image-btn span {
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        /* 搜索框样式 */
+        .s-search {
+            max-width: 400px;
+            width: 100%;
+            margin: 60px auto 10px;
+            position: relative;
+            padding-top: 26px;
+        }
+        #search-list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin-bottom: 0;
+            text-align: left;
+            z-index: 2;
+        }
+        .search-group ul.search-type {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        .search-group ul.search-type li {
+            display: block;
+            margin: 0;
+        }
+        #search-list input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .search-group ul.search-type label {
+            display: block;
+            padding: 4px 12px;
+            cursor: pointer;
+            border: none;
+            background-color: #eee;
+            font-size: 13px;
+            line-height: 1.4;
+            position: relative;
             color: #555;
-            font-size: 1.8em;
-            margin: 20px 0 15px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            bottom: -1px;
+            border-radius: 8px 8px 0 0;
+            z-index: 2;
+        }
+        .search-group ul.search-type li + li label {
+            margin-left: 2px;
+        }
+        #super-search-fm {
+            display: flex;
+            width: 100%;
+            border: none;
+            border-radius: 0 8px 8px 8px;
+            overflow: hidden;
+            background-color: #eee;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 1;
+            transition: background-color 0.2s ease;
+            margin-top: -1px;
+            align-items: stretch;
+        }
+        .s-search.google-active #super-search-fm,
+        .s-search.baidu-active #super-search-fm {
+            background-color: #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+        .s-search.google-active label[for='type-google'],
+        .s-search.baidu-active label[for='type-baidu'] {
+            background-color: #fff;
+            color: #333;
+            z-index: 3;
+            border: none;
+        }
+        .s-search.google-active label[for='type-baidu'],
+        .s-search.baidu-active label[for='type-google'] {
+            border: none;
+            background-color: #eee;
+            color: #555;
+        }
+        .s-search.google-active #super-search-fm {
+            border-radius: 0 8px 8px 8px;
+        }
+        .s-search.baidu-active #super-search-fm {
+            border-radius: 8px;
+        }
+        #search-text {
+            flex-grow: 1;
+            padding: 8px 12px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #333;
+            line-height: normal;
+        }
+        #search-text::placeholder {
+            color: #999;
+            font-size: 16px;
+        }
+        #super-search-fm button {
+            padding: 0 15px;
+            font-size: 14px;
+            border: none;
+            background-color: #4285f4;
+            color: white;
+            cursor: pointer;
+            border-radius: 0;
+            margin-left: -1px;
+            transition: background-color 0.2s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
         }
-        .section-title i {
-            margin-right: 15px;
-            color: #2869e9;
+        #super-search-fm button:hover {
+            background-color: #357ae8;
         }
-        .tool-card {
-            background: white;
+        #super-search-fm button i {
+            font-size: 1em;
+        }
+        .google-text { font-weight: normal; }
+        .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
+        .baidu-text { color: #2932e1; font-weight: normal; }
+        /* Toast 样式（从 wo.html 迁移） */
+        .toast-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            padding: 15px;
-            transition: transform 0.2s;
+            padding: 10px;
+            z-index: 9999;
+            width: 40%;
+            max-width: 300px;
+            display: none;
+            visibility: visible;
         }
-        .tool-card:hover {
-            transform: translateY(-5px);
+        .toast-bar::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -10px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #fff;
         }
-        .tool-card img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 15px;
+        .toast-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+            min-height: 50px;
         }
-        .tool-card h3 {
-            margin: 0 0 10px;
-            font-size: 1.2em;
+        .toast-text {
+            color: #333;
+            line-height: 1.4;
+            display: flex;
+            flex-direction: column;
+        }
+        .inline-icon {
+            width: 12px;
+            height: 12px;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+        .highlight-icon {
+            color: #007bff;
+            font-weight: bold;
+        }
+        .toast-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: #999;
+            cursor: pointer;
+            padding: 0;
+        }
+        .toast-close:hover {
             color: #333;
         }
-        .tool-card p {
-            margin: 0;
-            color: #666;
-            font-size: 0.9em;
+        /* 黑暗模式样式（从 wo.html 迁移） */
+        html.dark-mode, html.dark-mode body {
+            background-color: #1c2526;
         }
-        .tool-card a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
+        html.dark-mode body {
+            color: #e0e0e0;
         }
+        html.dark-mode .category h2 {
+            color: #e0e0e0;
+        }
+        html.dark-mode .news-btn,
+        html.dark-mode .ai-btn,
+        html.dark-mode .video-btn,
+        html.dark-mode .shopping-btn,
+        html.dark-mode .image-btn {
+            color: #e0e0e0;
+        }
+        html.dark-mode .search-group ul.search-type label {
+            background-color: #2e3b3e;
+            color: #b0b0b0;
+        }
+        html.dark-mode #super-search-fm {
+            background-color: #2e3b3e;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        html.dark-mode .s-search.google-active #super-search-fm,
+        html.dark-mode .s-search.baidu-active #super-search-fm {
+            background-color: #3a4b4e;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+        html.dark-mode .s-search.google-active label[for='type-google'],
+        html.dark-mode .s-search.baidu-active label[for='type-baidu'] {
+            background-color: #3a4b4e;
+            color: #e0e0e0;
+        }
+        html.dark-mode .s-search.google-active label[for='type-baidu'],
+        html.dark-mode .s-search.baidu-active label[for='type-google'] {
+            background-color: #2e3b3e;
+            color: #b0b0b0;
+        }
+        html.dark-mode #search-text {
+            color: #e0e0e0;
+        }
+        html.dark-mode #search-text::placeholder {
+            color: #888;
+        }
+        html.dark-mode .toast-bar {
+            background-color: #2e3b3e;
+            border: 1px solid #444;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        html.dark-mode .toast-bar::after {
+            border-top: 10px solid #2e3b3e;
+        }
+        html.dark-mode .toast-text {
+            color: #e0e0e0;
+        }
+        html.dark-mode .toast-close {
+            color: #b0b0b0;
+        }
+        html.dark-mode .toast-close:hover {
+            color: #e0e0e0;
+        }
+        /* 底部样式 */
         .footer {
             background: #2C2E2F;
             color: white;
@@ -164,6 +399,7 @@
             padding: 20px;
             margin-top: 40px;
             margin-left: 200px;
+            width: calc(100% - 200px);
         }
         .footer a {
             color: #79bfff;
@@ -183,8 +419,8 @@
         @media (max-width: 768px) {
             .header {
                 height: 40px;
-                width: 100%; /* 移动端恢复全宽 */
-                left: 0; /* 移动端不需要偏移 */
+                width: 100%;
+                left: 0;
             }
             .header h1 {
                 font-size: 1.2em;
@@ -212,33 +448,19 @@
                 padding: 10px;
                 font-size: 0.9em;
             }
-            .main-content {
-                margin-left: 0;
-                padding: 10px;
-                margin-top: 70px; /* 进一步减少顶部间距 */
+            .category {
+                margin-left: 0; /* 移动端取消左侧偏移 */
             }
-            .search-bar {
-                margin: 50px 15px 2px; /* 进一步减少底部间距 */
-                width: 100%; /* 移动端恢复全宽 */
-                max-width: 200px; /* 移动端限制宽度 */
-                left: 0;
-                transform: none; /* 取消居中偏移 */
-            }
-            .section-title {
-                margin: 5px 0 5px; /* 移动端进一步减少间距 */
-                font-size: 1.5em;
+            .s-search {
+                margin: 50px auto 2px;
+                max-width: 200px;
             }
             .footer {
                 margin-left: 0;
+                width: 100%;
             }
-            .tool-card {
-                padding: 10px;
-            }
-            .tool-card h3 {
-                font-size: 1em;
-            }
-            .tool-card p {
-                font-size: 0.8em;
+            .container {
+                grid-template-columns: repeat(3, 1fr); /* 移动端调整为3列 */
             }
         }
     </style>
@@ -254,153 +476,204 @@
         </div>
     </div>
 
-    <div class="search-bar">
-        <input type="text" placeholder="百度一下">
-        <i class="fa fa-search search-icon"></i>
+    <div id="search" class="s-search">
+        <div id="search-list">
+            <div class="search-group">
+                <ul class="search-type">
+                    <li>
+                        <input checked type="radio" name="type" id="type-google" value="https://www.google.com/search" data-placeholder="Google Search..." data-name="q">
+                        <label for="type-google">
+                            <span class="google-text">
+                                <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g4">g</span><span class="g5">l</span><span class="g6">e</span>
+                            </span>
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" name="type" id="type-baidu" value="https://www.baidu.com/s" data-placeholder="百度一下" data-name="wd">
+                        <label for="type-baidu"><span class="baidu-text">百度</span></label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <form action="https://www.google.com/search" method="get" target="_blank" id="super-search-fm">
+            <input type="text" id="search-text" name="q" placeholder="Google Search..." autocomplete="off">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
     </div>
 
     <div class="sidebar">
         <ul>
-            <li data-target="#common-tools" class="active">常用工具</li>
-            <li data-target="#media-tools">影音专区</li>
-            <li data-target="#image-tools">图片相关</li>
-            <li data-target="#game-tools">游戏相关</li>
-            <li data-target="#other-tools">其他工具</li>
-            <li data-target="#dev-tools">编程开发</li>
+            <li data-target="#news">新闻</li>
+            <li data-target="#ai">AI</li>
+            <li data-target="#video">视频</li>
+            <li data-target="#shopping">购物</li>
+            <li data-target="#image">图像</li>
         </ul>
     </div>
 
-    <div class="main-content">
-        <h4 class="section-title" id="common-tools"><i class="fa fa-wrench"></i>常用工具</h4>
-        <div class="row">
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/chat" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?chat" alt="Chat Icon">
-                        <h3>ChatGPT</h3>
-                        <p>ChatGPT是一款智能助手，为用户提供文本总结、写作、检查语法和翻译等功能。</p>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/watermark" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?video" alt="Watermark Icon">
-                        <h3>短视频/图集去水印</h3>
-                        <p>支持抖音、快手等16个平台的视频去水印下载。</p>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/learner" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?learn" alt="Learner Icon">
-                        <h3>Qwerty Learner</h3>
-                        <p>为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件。</p>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/epub" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?book" alt="Epub Icon">
-                        <h3>epub阅读器</h3>
-                        <p>简单的EPUB电子书在线阅读器。</p>
-                    </a>
-                </div>
-            </div>
+    <div class="category" id="news">
+        <h2>新闻</h2>
+        <div class="container">
+            <a href="https://cn.nytimes.com" class="news-btn" target="_blank">
+                <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网">
+                <span>纽约时报中文网</span>
+            </a>
+            <a href="https://www.bbc.com/zhongwen/simp" class="news-btn" target="_blank">
+                <img src="https://static.files.bbci.co.uk/ws/simorgh-assets/public/zhongwen/images/icons/icon-144x144.png" alt="BBC中文网">
+                <span>BBC中文网</span>
+            </a>
+            <a href="https://cn.wsj.com/zh-hans" class="news-btn" target="_blank">
+                <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报中文网">
+                <span>华尔街日报中文网</span>
+            </a>
+            <a href="https://www.ftchinese.com" class="news-btn" target="_blank">
+                <img src="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square?source=update-logos&width=180&height=180&format=png" alt="FT中文网">
+                <span>FT中文网</span>
+            </a>
+            <a href="https://www.dw.com/zh" class="news-btn" target="_blank">
+                <img src="https://www.dw.com/favicon.png" alt="德国之声中文网">
+                <span>德国之声中文网</span>
+            </a>
+            <a href="https://news.stheadline.com" class="news-btn" target="_blank">
+                <img src="https://www.sthlstatic.com/sthl/assets/favicon/ms-icon-144x144.png" alt="优岛日报">
+                <span>星岛日报</span>
+            </a>
+            <a href="https://china.kyodonews.net/" class="news-btn" target="_blank">
+                <img src="https://china.kyodonews.net/favicon.ico" alt="共同网中文">
+                <span>共同网中文</span>
+            </a>
+            <a href="https://www.rfi.fr/cn/" class="news-btn" target="_blank">
+                <img src="https://www.rfi.fr/favicon.ico" alt="法国国际广播电台中文">
+                <span>法国国际广播电台中文</span>
+            </a>
         </div>
+    </div>
 
-        <h4 class="section-title" id="media-tools"><i class="fa fa-video-camera"></i>影音专区</h4>
-        <div class="row">
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/music-unlock" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?music" alt="Music Icon">
-                        <h3>加密音乐文件解锁</h3>
-                        <p>解锁QQ音乐、网易云音乐等加密音频文件。</p>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/video-vip" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?vip" alt="VIP Icon">
-                        <h3>全能VIP视频解析</h3>
-                        <p>提供VIP视频在线免费解析服务，省去订阅费用。</p>
-                    </a>
-                </webpage>
-            </div>
+    <div class="category" id="ai">
+        <h2>AI</h2>
+        <div class="container">
+            <a href="https://chatgpt.com/" class="ai-btn" target="_blank">
+                <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT">
+                <span>ChatGPT</span>
+            </a>
+            <a href="https://grok.com/?referrer=website" class="ai-btn" target="_blank">
+                <img src="https://grok.com/images/favicon-light.png" alt="Grok">
+                <span>Grok</span>
+            </a>
+            <a href="https://chat.deepseek.com/sign_in" class="ai-btn" target="_blank">
+                <img src="https://cdn.deepseek.com/chat/icon.png" alt="DeepSeek">
+                <span>DeepSeek</span>
+            </a>
+            <a href="https://gemini.google.com/" class="ai-btn" target="_blank">
+                <img src="https://www.gstatic.com/lamda/images/gemini_favicon_f069958c85030456e93de685481c559f160ea06b.png" alt="Gemini">
+                <span>Gemini</span>
+            </a>
+            <a href="https://yuanbao.tencent.com/" class="ai-btn" target="_blank">
+                <img src="https://yuanbao.tencent.com/logo-v2.png" alt="腾讯元宝">
+                <span>腾讯元宝</span>
+            </a>
+            <a href="https://copilot.microsoft.com/" class="ai-btn" target="_blank">
+                <img src="https://copilot.microsoft.com/favicon.ico" alt="Copilot">
+                <span>Copilot</span>
+            </a>
+            <a href="https://zh.1lib.sk/" class="ai-btn" target="_blank">
+                <img src="https://zh.1lib.sk/favicon.ico" alt="Z-Library">
+                <span>Z-Library</span>
+            </a>
+            <a href="https://m.douban.com/home_guide" class="ai-btn" target="_blank">
+                <img src="https://www.douban.com/favicon.ico" alt="豆瓣">
+                <span>豆瓣</span>
+            </a>
         </div>
+    </div>
 
-        <h4 class="section-title" id="image-tools"><i class="fa fa-image"></i>图片相关</h4>
-        <div class="row">
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/bg-remove" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?background" alt="Background Icon">
-                        <h3>图片背景消除</h3>
-                        <p>无需操作，5秒内自动消除图片背景。</p>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/wallpaper" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?wallpaper" alt="Wallpaper Icon">
-                        <h3>高清壁纸库</h3>
-                        <p>提供高清电脑壁纸下载，涵盖多种类别。</p>
-                    </a>
-                </div>
-            </div>
+    <div class="category" id="video">
+        <h2>视频</h2>
+        <div class="container">
+            <a href="https://www.youtube.com/" class="video-btn" target="_blank">
+                <img src="https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon_144x144.png" alt="YouTube">
+                <span>YouTube</span>
+            </a>
+            <a href="https://www.bilibili.com/" class="video-btn" target="_blank">
+                <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili">
+                <span>Bilibili</span>
+            </a>
+            <a href="https://www.yfsp.tv/" class="video-btn" target="_blank">
+                <img src="https://www.likunming.cn/image/ayf.png" alt="爱壹帆">
+                <span>爱壹帆</span>
+            </a>
+            <a href="https://www.tiktok.com/" class="video-btn" target="_blank">
+                <img src="https://www.tiktok.com/favicon.ico" alt="TikTok">
+                <span>TikTok</span>
+            </a>
+            <a href="https://x.com/" class="video-btn" target="_blank">
+                <img src="https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png" alt="X">
+                <span>X</span>
+            </a>
+            <a href="https://www.xiaohongshu.com/" class="video-btn" target="_blank">
+                <img src="https://picasso-static.xiaohongshu.com/fe-platform/f43dc4a8baf03678996c62d8db6ebc01a82256ff.png" alt="小红书">
+                <span>小红书</span>
+            </a>
+            <a href="https://www.facebook.com/" class="video-btn" target="_blank">
+                <img src="https://www.likunming.cn/image/facebook.ico" alt="Facebook">
+                <span>Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/" class="video-btn" target="_blank">
+                <img src="https://static.cdninstagram.com/rsrc.php/y4/r/QaBlI0OZiks.ico" alt="Instagram">
+                <span>Instagram</span>
+            </a>
         </div>
+    </div>
 
-        <h4 class="section-title" id="game-tools"><i class="fa fa-gamepad"></i>游戏相关</h4>
-        <div class="row">
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/mahjong" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?game" alt="Mahjong Icon">
-                        <h3>电脑麻将</h3>
-                        <p>在线玩经典麻将游戏。</p>
-                    </a>
-                </div>
-            </div>
+    <div class="category" id="shopping">
+        <h2>购物</h2>
+        <div class="container">
+            <a href="https://www.amazon.com/" class="shopping-btn" target="_blank">
+                <img src="https://www.amazon.com/favicon.ico" alt="Amazon">
+                <span>Amazon</span>
+            </a>
+            <a href="https://www.taobao.com/" class="shopping-btn" target="_blank">
+                <img src="https://www.taobao.com/favicon.ico" alt="淘宝">
+                <span>淘宝</span>
+            </a>
+            <a href="https://www.homedepot.com/" class="shopping-btn" target="_blank">
+                <img src="https://www.homedepot.com/favicon.ico" alt="Home Depot">
+                <span>Home Depot</span>
+            </a>
+            <a href="https://www.temu.com/" class="shopping-btn" target="_blank">
+                <img src="https://www.temu.com/favicon.ico" alt="Temu">
+                <span>Temu</span>
+            </a>
+            <a href="https://www.walmart.com/" class="shopping-btn" target="_blank">
+                <img src="https://www.walmart.com/favicon.ico" alt="Walmart">
+                <span>Walmart</span>
+            </a>
+            <a href="https://www.target.com/" class="shopping-btn" target="_blank">
+                <img src="https://assets.targetimg1.com/static/images/apple-touch-icon-precomposed.png" alt="Target">
+                <span>Target</span>
+            </a>
+            <a href="https://www.ikea.com/" class="shopping-btn" target="_blank">
+                <img src="https://www.ikea.com/favicon.ico" alt="IKEA">
+                <span>宜家家居</span>
+            </a>
+            <a href="https://www.sayweee.com/" class="shopping-btn" target="_blank">
+                <img src="https://www.sayweee.com/favicons/apple-touch-icon.png" alt="weee">
+                <span>Weee生鲜</span>
+            </a>
         </div>
+    </div>
 
-        <h4 class="section-title" id="other-tools"><i class="fa fa-tools"></i>其他工具</h4>
-        <div class="row">
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/password" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?password" alt="Password Icon">
-                        <h3>随机密码生成器</h3>
-                        <p>可根据选择生成不同字符不同长度的随机密码。</p>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <h4 class="section-title" id="dev-tools"><i class="fa fa-code"></i>编程开发</h4>
-        <div class="row">
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/docker" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?docker" alt="Docker Icon">
-                        <h3>Docker分析工具</h3>
-                        <p>分析Docker镜像层，优化构建过程。</p>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
-                    <a href="https://example.com/cheatsheet" target="_blank">
-                        <img src="https://source.unsplash.com/40x40/?code" alt="Cheatsheet Icon">
-                        <h3>开发者速查表</h3>
-                        <p>为开发者提供的快速参考指南。</p>
-                    </a>
-                </div>
-            </div>
+    <div class="category" id="image">
+        <h2>图像</h2>
+        <div class="container">
+            <a href="https://sfz.tools.likunming.cn" class="image-btn" target="_blank">
+                <img src="https://www.likunming.cn/image/suiyin.png" alt="图片加水印">
+                <span>图片加水印</span>
+            </a>
+            <a href="https://www.remove.bg/zh" class="image-btn" target="_blank">
+                <img src="https://www.remove.bg/favicon.ico" alt="背景消除">
+                <span>背景消除</span>
+            </a>
         </div>
     </div>
 
@@ -412,6 +685,17 @@
             版权 © 2025 在线工具箱。设计灵感来源于 <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">Webstack</a>。
         </div>
     </footer>
+
+    <div class="toast-bar" id="toastBar">
+        <div class="toast-content">
+            <span class="toast-text">
+                <span>添加网址导航到桌面</span>
+                <span>点击下面的 <img src="https://www.likunming.cn/image/1122.jpg" alt="分享图标" class="inline-icon highlight-icon"></span>
+                <span>然后选择“添加到主屏幕”</span>
+            </span>
+        </div>
+        <button class="toast-close" id="toastClose">×</button>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <script>
@@ -449,13 +733,122 @@
                 e.preventDefault();
                 scrollToSection('body');
             });
+        });
 
-            $('.search-bar input').on('keypress', function(e) {
-                if (e.which === 13) {
-                    alert('搜索功能即将推出！');
+        // 搜索框 JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchContainer = document.getElementById('search');
+            const searchForm = document.getElementById('super-search-fm');
+            const searchInput = document.getElementById('search-text');
+            const engineRadios = document.querySelectorAll('input[name="type"]');
+
+            function updateSearchEngine() {
+                const selectedRadio = document.querySelector('input[name="type"]:checked');
+                if (selectedRadio) {
+                    searchForm.action = selectedRadio.value;
+                    searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
+                    searchInput.name = selectedRadio.getAttribute('data-name');
+                    searchContainer.classList.remove('google-active', 'baidu-active');
+                    if (selectedRadio.id === 'type-google') {
+                        searchContainer.classList.add('google-active');
+                    } else if (selectedRadio.id === 'type-baidu') {
+                        searchContainer.classList.add('baidu-active');
+                    }
+                }
+            }
+            engineRadios.forEach(radio => {
+                radio.addEventListener('change', updateSearchEngine);
+            });
+            updateSearchEngine();
+            searchForm.target = '_blank';
+            searchForm.addEventListener('submit', function(e) {
+                if (searchInput.value.trim() === '') {
+                    searchInput.focus();
+                    e.preventDefault();
+                    return false;
                 }
             });
         });
+
+        // 黑暗模式 JavaScript（从 wo.html 迁移）
+        function updateTheme() {
+            const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (isChrome) {
+                if (isDarkMode && window.matchMedia('(prefers-color-scheme: dark)').media !== 'not all') {
+                    document.documentElement.classList.add('dark-mode');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                }
+            } else {
+                if (isDarkMode) {
+                    document.documentElement.classList.add('dark-mode');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                }
+            }
+        }
+        updateTheme();
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
+
+        // Toast JavaScript（从 wo.html 迁移）
+        function isMobileDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
+            const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
+            const isSmallScreen = window.innerWidth <= 768;
+            return isMobileUA || isSmallScreen;
+        }
+        let toastManuallyClosed = false;
+        let toastStartTime = null;
+        let toastAlreadyHidden = false;
+        function showToast() {
+            const toastBar = document.getElementById('toastBar');
+            if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
+            toastBar.style.display = 'block';
+            toastBar.style.visibility = 'visible';
+            if (!toastStartTime) {
+                toastStartTime = Date.now();
+                checkToastTimeout();
+            }
+        }
+        function hideToast() {
+            const toastBar = document.getElementById('toastBar');
+            if (toastBar) {
+                toastBar.style.display = 'none';
+                toastAlreadyHidden = true;
+            }
+        }
+        function checkToastTimeout() {
+            const interval = setInterval(() => {
+                if (toastManuallyClosed || toastAlreadyHidden) {
+                    clearInterval(interval);
+                    return;
+                }
+                const elapsed = Date.now() - toastStartTime;
+                if (elapsed >= 20000) {
+                    hideToast();
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+        window.onload = function () {
+            showToast();
+        };
+        window.addEventListener('scroll', function () {
+            showToast();
+        });
+        window.addEventListener('resize', function () {
+            showToast();
+        });
+        const toastClose = document.getElementById('toastClose');
+        if (toastClose) {
+            toastClose.addEventListener('click', function () {
+                toastManuallyClosed = true;
+                hideToast();
+            });
+        }
     </script>
 </body>
 </html>
