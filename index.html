@@ -100,7 +100,7 @@
         }
         /* 主要内容区域 */
         .main-content {
-            margin-top: 60px;
+            margin-top: 0;
             margin-left: 220px;
             padding: 20px;
             transition: margin-left 0.3s;
@@ -111,7 +111,7 @@
         .section-title {
             color: #555;
             font-size: 1.8em;
-            margin: 20px 0 15px;
+            margin: 0 0 15px;
             display: flex;
             align-items: center;
         }
@@ -126,7 +126,7 @@
             padding: 10px;
             transition: transform 0.2s;
             width: 100%;
-            min-height: 80px;
+            min-height: 100px;
             display: flex;
             flex-direction: column;
         }
@@ -151,23 +151,25 @@
             margin: 0;
             font-size: 1.2em;
             color: #333;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             flex-grow: 1;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            word-break: break-word;
         }
         /* 搜索框样式 */
         .s-search {
             width: 90%;
             max-width: 600px;
-            margin: 60px auto 5px;
+            margin: 60px auto 10px;
             position: relative;
             padding-top: 26px;
             transition: width 0.3s, margin 0.3s;
         }
         .sidebar-hidden .s-search {
             width: calc(100% - 40px);
-            margin: 60px auto 5px;
+            margin: 60px auto 10px;
         }
         #search-list {
             position: absolute;
@@ -521,7 +523,7 @@
             .main-content {
                 margin-left: 0;
                 padding: 10px;
-                margin-top: 60px;
+                margin-top: 0;
             }
             .sidebar-hidden .main-content {
                 margin-left: 0;
@@ -539,7 +541,7 @@
                 padding: 4px 0;
             }
             .section-title {
-                margin: 5px 0 5px;
+                margin: 0 0 5px;
                 font-size: 1.5em;
             }
             .footer {
@@ -550,7 +552,7 @@
             }
             .tool-card {
                 padding: 10px;
-                min-height: 70px;
+                min-height: 90px;
             }
             .tool-card h3 {
                 font-size: 1em;
@@ -560,7 +562,7 @@
         /* 自定义修改样式 */
         @media (max-width: 768px) {
             .s-search {
-                margin-bottom: 20px !important;
+                margin-bottom: 5px !important;
             }
         }
         .header {
@@ -585,6 +587,8 @@
                 flex-wrap: wrap;
                 justify-content: flex-start;
                 margin-bottom: 0;
+                padding-left: 5px;
+                padding-right: 5px;
             }
             .row > div[class*="col-"] {
                 flex: 0 0 48%;
@@ -604,6 +608,8 @@
                 flex-wrap: wrap;
                 justify-content: flex-start;
                 margin-bottom: 0;
+                margin-left: 1.5%;
+                margin-right: 1.5%;
             }
             .row > div[class*="col-"] {
                 display: flex;
@@ -621,7 +627,7 @@
         /* 新增样式继续优化： */
         @media (max-width: 768px) {
             .s-search {
-                margin-bottom: 10px !important;
+                margin-bottom: 5px !important;
             }
             .search-group ul.search-type {
                 flex-wrap: wrap;
