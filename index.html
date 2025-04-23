@@ -26,23 +26,21 @@
         .header {
             background: #fff;
             color: #333;
-            padding: 10px 15px;
+            padding: 10px 20px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             position: fixed;
-            width: calc(100% - 200px);
+            width: 100%;
             top: 0;
-            left: 200px;
             z-index: 1000;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             height: 50px;
-            transition: left 0.3s, width 0.3s, padding 0.3s;
+            box-sizing: border-box;
+            transition: none;
         }
         .header.sidebar-hidden {
-            left: 0;
             width: 100%;
-            padding: 10px 20px;
         }
         .header h1 {
             display: none;
@@ -66,22 +64,9 @@
             height: 100vh;
             background: #fff;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-            padding: 20px 0;
+            padding: 10px 0;
             z-index: 900;
             transition: left 0.3s;
-        }
-        .sidebar h1 {
-            margin: 0 0 20px;
-            font-size: 1.5em;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            color: #333;
-        }
-        .sidebar h1 img {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
         }
         .sidebar ul {
             list-style: none;
@@ -161,16 +146,14 @@
         }
         /* 搜索框样式 */
         .s-search {
-            width: calc(100% - 220px - 40px);
+            width: 90%;
+            max-width: 600px;
             margin: 60px auto 5px;
-            margin-left: 220px;
             position: relative;
             padding-top: 26px;
-            transition: margin-left 0.3s, width 0.3s;
         }
         .sidebar-hidden .s-search {
-            margin-left: 0;
-            width: calc(100% - 40px);
+            margin: 60px auto 5px;
         }
         #search-list {
             position: absolute;
@@ -377,9 +360,6 @@
             background: #2e3b3e;
             box-shadow: 2px 0 5px rgba(0,0,0,0.2);
         }
-        html.dark-mode .sidebar h1 {
-            color: #e0e0e0;
-        }
         html.dark-mode .sidebar ul li {
             color: #b0b0b0;
         }
@@ -485,18 +465,17 @@
             .header {
                 height: 40px;
                 width: 100%;
-                left: 0;
                 padding: 10px 10px;
-                justify-content: space-between;
+                justify-content: flex-start;
             }
             .header.sidebar-hidden {
-                left: 0;
                 width: 100%;
                 padding: 10px 10px;
             }
             .header h1 {
                 display: flex;
                 font-size: 1.2em;
+                margin-left: 10px;
             }
             .header h1 img {
                 width: 16px;
@@ -519,9 +498,6 @@
             .sidebar.active {
                 display: block;
             }
-            .sidebar h1 {
-                display: none;
-            }
             .sidebar ul li {
                 padding: 10px;
                 font-size: 0.9em;
@@ -529,20 +505,22 @@
             .main-content {
                 margin-left: 0;
                 padding: 10px;
-                margin-top: 60px;
+                margin-top: 50px;
             }
             .sidebar-hidden .main-content {
                 margin-left: 0;
             }
             .s-search {
-                width: calc(100% - 30px);
-                margin: 50px auto 5px;
-                margin-left: 10px;
-                max-width: none;
+                width: 90%;
+                max-width: 600px;
+                margin: 30px auto 5px;
+                padding-top: 10px;
             }
             .sidebar-hidden .s-search {
-                margin-left: 10px;
-                width: calc(100% - 30px);
+                margin: 30px auto 5px;
+            }
+            #super-search-fm {
+                padding: 4px 0;
             }
             .section-title {
                 margin: 5px 0 5px;
@@ -600,10 +578,6 @@
     </div>
 
     <div class="sidebar">
-        <h1>
-            <img src="https://www.likunming.cn/image/logo.png" alt="Logo">
-            网址导航
-        </h1>
         <ul>
             <li data-target="#common-tools" class="active">常用工具</li>
             <li data-target="#media-tools">影音专区</li>
