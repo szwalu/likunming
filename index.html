@@ -21,47 +21,49 @@
         }
         /* 顶部样式 */
         .header {
-            background: #fff; /* 背景色改为白色 */
-            color: #333; /* 字体颜色改为深灰色 */
-            padding: 10px 15px; /* 减少内边距以降低高度 */
+            background: #fff;
+            color: #333;
+            padding: 10px 15px;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* 标题和图标分居两侧 */
+            justify-content: space-between;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* 添加轻微阴影 */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            height: 50px; /* 明确设置高度 */
         }
         .header h1 {
             margin: 0;
-            font-size: 1.5em; /* 缩小标题字体 */
+            font-size: 1.5em;
             display: flex;
             align-items: center;
         }
         .header h1 i {
             margin-right: 8px;
             font-size: 1em;
-            color: #f5a623; /* 图标颜色匹配截图 */
+            color: #f5a623;
         }
         .search-bar {
-            margin: 60px 15px 15px; /* 调整搜索框位置，顶部留出空间 */
+            margin: 60px 15px 10px; /* 减少底部间距 */
             position: relative;
+            z-index: 900; /* 确保搜索框不会被遮挡 */
         }
         .search-bar input {
             width: 100%;
             padding: 8px 40px 8px 15px;
-            border: 1px solid #ddd; /* 添加浅灰色边框 */
-            border-radius: 5px; /* 圆角调整为更方正 */
+            border: 1px solid #ddd;
+            border-radius: 5px;
             font-size: 1em;
-            background: #fff; /* 背景色为白色 */
+            background: #fff;
         }
         .search-bar .search-icon {
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #333; /* 图标颜色更深 */
+            color: #333;
         }
         /* 导航栏样式（桌面端） */
         .sidebar {
@@ -96,21 +98,21 @@
         .sidebar-toggle {
             display: none;
             background: transparent;
-            color: #333; /* 图标颜色改为深灰色 */
+            color: #333;
             padding: 8px;
             font-size: 1.5em;
             cursor: pointer;
         }
         /* 主要内容区域 */
         .main-content {
-            margin-top: 110px;
+            margin-top: 100px; /* 调整顶部间距 */
             margin-left: 220px;
             padding: 20px;
         }
         .section-title {
             color: #555;
             font-size: 1.8em;
-            margin: 40px 0 20px;
+            margin: 20px 0 15px; /* 减少顶部间距 */
             display: flex;
             align-items: center;
         }
@@ -174,8 +176,11 @@
         }
         /* 响应式设计：移动端调整 */
         @media (max-width: 768px) {
+            .header {
+                height: 50px;
+            }
             .header h1 {
-                font-size: 1.2em; /* 移动端标题字体更小 */
+                font-size: 1.2em;
             }
             .sidebar-toggle {
                 display: block;
@@ -203,6 +208,7 @@
             .main-content {
                 margin-left: 0;
                 padding: 10px;
+                margin-top: 90px; /* 移动端调整顶部间距 */
             }
             .footer {
                 margin-left: 0;
@@ -217,7 +223,7 @@
                 font-size: 0.8em;
             }
             .search-bar {
-                margin-top: 50px; /* 移动端调整搜索框位置 */
+                margin: 60px 15px 5px; /* 移动端进一步减少底部间距 */
             }
         }
     </style>
