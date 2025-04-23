@@ -53,7 +53,7 @@
             transform: translateY(-50%);
             color: #333;
         }
-        /* 左侧引导栏样式（桌面端） */
+        /* 导航栏样式（桌面端固定在左侧） */
         .sidebar {
             position: fixed;
             top: 120px;
@@ -81,6 +81,19 @@
         .sidebar ul li.active {
             background: #e6f0ff;
             color: #2869e9;
+        }
+        /* 移动端导航栏图标 */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 10px;
+            background: #2869e9;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+            z-index: 950;
+            cursor: pointer;
         }
         /* 主要内容区域 */
         .main-content {
@@ -158,10 +171,10 @@
             .header h1 {
                 font-size: 1.8em;
             }
-            /* 移动端导航栏调整为右上角 */
+            /* 移动端导航栏调整为右上角，默认隐藏 */
             .sidebar {
                 position: fixed;
-                top: 80px;
+                top: 110px;
                 left: auto;
                 right: 10px;
                 width: 150px;
@@ -169,11 +182,18 @@
                 background: #fff;
                 box-shadow: 0 2px 5px rgba(0,0,0,0.2);
                 padding: 10px;
-                z-index: 950;
+                z-index: 900;
+                display: none; /* 默认隐藏 */
+            }
+            .sidebar.active {
+                display: block; /* 点击图标后显示 */
             }
             .sidebar ul li {
                 padding: 10px;
                 font-size: 0.9em;
+            }
+            .sidebar-toggle {
+                display: block; /* 显示导航栏切换图标 */
             }
             .main-content {
                 margin-left: 0;
@@ -203,7 +223,12 @@
         </div>
     </div>
 
-    <!-- 左侧引导栏（桌面端）/右上角导航栏（移动端） -->
+    <!-- 移动端导航栏切换图标 -->
+    <div class="sidebar-toggle">
+        <i class="fa fa-bars"></i>
+    </div>
+
+    <!-- 导航栏（桌面端固定在左侧，移动端右上角展开） -->
     <div class="sidebar">
         <ul>
             <li data-target="#common-tools" class="active">常用工具</li>
@@ -360,6 +385,15 @@
                 $(this).addClass('active');
                 var target = $(this).data('target');
                 scrollToSection(target);
+                // 移动端点击后隐藏导航栏
+                if ($(window).width() <= 768) {
+                    $('.sidebar').removeClass('active');
+                }
+            });
+
+            // 移动端导航栏切换
+            $('.sidebar-toggle').click(function() {
+                $('.sidebar').toggleClass('active');
             });
 
             // 返回顶部
@@ -372,6 +406,13 @@
             $('.search-bar input').on('keypress', function(e) {
                 if (e.which === 13) {
                     alert('搜索功能即将推出！');
+                }
+            });
+
+            // 窗口调整时关闭移动端导航栏
+            $(window).resize(function() {
+                if ($(window).width() > 768) {
+                    $('.sidebar').removeClass('active');
                 }
             });
         });
