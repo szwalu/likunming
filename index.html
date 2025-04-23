@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>在线工具箱 | 提供各种实用在线工具</title>
+    <title>网址导航 | 提供各种实用在线工具</title>
     <meta name="description" content="在线工具箱提供多种实用工具，持续更新中，欢迎体验！">
     <meta name="keywords" content="在线工具箱, 实用工具, 在线工具">
     <meta name="theme-color" content="#2C2E2F">
@@ -29,7 +29,7 @@
             padding: 10px 15px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             position: fixed;
             width: calc(100% - 200px);
             top: 0;
@@ -37,17 +37,12 @@
             z-index: 1000;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             height: 50px;
+            transition: left 0.3s, width 0.3s, padding 0.3s;
         }
-        .header h1 {
-            margin: 0;
-            font-size: 1.5em;
-            display: flex;
-            align-items: center;
-        }
-        .header h1 i {
-            margin-right: 8px;
-            font-size: 1em;
-            color: #f5a623;
+        .header.sidebar-hidden {
+            left: 0;
+            width: 100%;
+            padding: 10px 20px;
         }
         /* 导航栏样式（桌面端） */
         .sidebar {
@@ -60,6 +55,20 @@
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
             padding: 20px 0;
             z-index: 900;
+            transition: left 0.3s;
+        }
+        .sidebar h1 {
+            margin: 0 0 20px;
+            font-size: 1.5em;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+        .sidebar h1 img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
         }
         .sidebar ul {
             list-style: none;
@@ -78,9 +87,11 @@
             background: #e6f0ff;
             color: #2869e9;
         }
+        .sidebar-hidden .sidebar {
+            left: -200px;
+        }
         /* 移动端导航栏图标 */
         .sidebar-toggle {
-            display: none;
             background: transparent;
             color: #333;
             padding: 8px;
@@ -89,9 +100,13 @@
         }
         /* 主要内容区域 */
         .main-content {
-            margin-top: 100px;
+            margin-top: 60px;
             margin-left: 220px;
             padding: 20px;
+            transition: margin-left 0.3s;
+        }
+        .sidebar-hidden .main-content {
+            margin-left: 0;
         }
         .section-title {
             color: #555;
@@ -109,27 +124,22 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             margin-bottom: 20px;
-            padding: 15px;
+            padding: 10px;
             transition: transform 0.2s;
         }
         .tool-card:hover {
             transform: translateY(-5px);
         }
         .tool-card img {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             margin-right: 15px;
         }
         .tool-card h3 {
-            margin: 0 0 10px;
+            margin: 0 0 5px;
             font-size: 1.2em;
             color: #333;
-        }
-        .tool-card p {
-            margin: 0;
-            color: #666;
-            font-size: 0.9em;
         }
         .tool-card a {
             text-decoration: none;
@@ -138,11 +148,16 @@
         }
         /* 搜索框样式 */
         .s-search {
-            max-width: 400px;
-            width: 100%;
-            margin: 60px auto 10px;
+            width: calc(100% - 220px - 40px);
+            margin: 60px auto 5px;
+            margin-left: 220px;
             position: relative;
             padding-top: 26px;
+            transition: margin-left 0.3s, width 0.3s;
+        }
+        .sidebar-hidden .s-search {
+            margin-left: 0;
+            width: calc(100% - 40px);
         }
         #search-list {
             position: absolute;
@@ -346,6 +361,9 @@
             background: #2e3b3e;
             box-shadow: 2px 0 5px rgba(0,0,0,0.2);
         }
+        html.dark-mode .sidebar h1 {
+            color: #e0e0e0;
+        }
         html.dark-mode .sidebar ul li {
             color: #b0b0b0;
         }
@@ -369,9 +387,6 @@
         }
         html.dark-mode .tool-card h3 {
             color: #e0e0e0;
-        }
-        html.dark-mode .tool-card p {
-            color: #b0b0b0;
         }
         html.dark-mode .search-group ul.search-type label {
             background-color: #2e3b3e;
@@ -430,6 +445,10 @@
             padding: 20px;
             margin-top: 40px;
             margin-left: 200px;
+            transition: margin-left 0.3s;
+        }
+        .sidebar-hidden .footer {
+            margin-left: 0;
         }
         .footer a {
             color: #79bfff;
@@ -451,12 +470,12 @@
                 height: 40px;
                 width: 100%;
                 left: 0;
+                padding: 10px 10px;
             }
-            .header h1 {
-                font-size: 1.2em;
-            }
-            .sidebar-toggle {
-                display: block;
+            .header.sidebar-hidden {
+                left: 0;
+                width: 100%;
+                padding: 10px 10px;
             }
             .sidebar {
                 position: fixed;
@@ -474,6 +493,16 @@
             .sidebar.active {
                 display: block;
             }
+            .sidebar h1 {
+                font-size: 1.2em;
+                padding: 0 10px;
+                margin-bottom: 10px;
+            }
+            .sidebar h1 img {
+                width: 16px;
+                height: 16px;
+                margin-right: 8px;
+            }
             .sidebar ul li {
                 padding: 10px;
                 font-size: 0.9em;
@@ -481,11 +510,20 @@
             .main-content {
                 margin-left: 0;
                 padding: 10px;
-                margin-top: 70px;
+                margin-top: 60px;
+            }
+            .sidebar-hidden .main-content {
+                margin-left: 0;
             }
             .s-search {
-                margin: 50px auto 2px;
-                max-width: 200px;
+                width: calc(100% - 20px);
+                margin: 50px auto 5px;
+                margin-left: 0;
+                max-width: none;
+            }
+            .sidebar-hidden .s-search {
+                margin-left: 0;
+                width: calc(100% - 20px);
             }
             .section-title {
                 margin: 5px 0 5px;
@@ -494,24 +532,20 @@
             .footer {
                 margin-left: 0;
             }
+            .sidebar-hidden .footer {
+                margin-left: 0;
+            }
             .tool-card {
                 padding: 10px;
             }
             .tool-card h3 {
                 font-size: 1em;
             }
-            .tool-card p {
-                font-size: 0.8em;
-            }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>
-            <i class="fa fa-th-large"></i>
-            在线工具箱
-        </h1>
         <div class="sidebar-toggle">
             <i class="fa fa-bars"></i>
         </div>
@@ -543,6 +577,10 @@
     </div>
 
     <div class="sidebar">
+        <h1>
+            <img src="https://www.likunming.cn/image/logo.png" alt="Logo">
+            网址导航
+        </h1>
         <ul>
             <li data-target="#common-tools" class="active">常用工具</li>
             <li data-target="#media-tools">影音专区</li>
@@ -561,7 +599,6 @@
                     <a href="https://cn.nytimes.com" target="_blank">
                         <img src="https://www.nytimes.com/vi-assets/static-assets/ios-ipad-144x144-28865b72953380a40aa43318108876cb.png" alt="纽约时报中文网 Icon">
                         <h3>纽约时报中文网</h3>
-                        <p>ChatGPT是一款智能助手，为用户提供文本总结、写作、检查语法和翻译等功能。</p>
                     </a>
                 </div>
             </div>
@@ -570,7 +607,6 @@
                     <a href="https://www.bbc.com/zhongwen/simp" target="_blank">
                         <img src="https://static.files.bbci.co.uk/ws/simorgh-assets/public/zhongwen/images/icons/icon-144x144.png" alt="BBC中文网 Icon">
                         <h3>BBC中文网</h3>
-                        <p>支持抖音、快手等16个平台的视频去水印下载。</p>
                     </a>
                 </div>
             </div>
@@ -579,7 +615,6 @@
                     <a href="https://cn.wsj.com/zh-hans" target="_blank">
                         <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报中文网 Icon">
                         <h3>华尔街日报中文网</h3>
-                        <p>为键盘工作者设计的单词记忆与英语肌肉记忆锻炼软件。</p>
                     </a>
                 </div>
             </div>
@@ -588,7 +623,6 @@
                     <a href="https://www.ftchinese.com" target="_blank">
                         <img src="https://www.ft.com/__origami/service/image/v2/images/raw/ftlogo-v1%3Abrand-ft-logo-square?source=update-logos&width=180&height=180&format=png" alt="FT中文网 Icon">
                         <h3>FT中文网</h3>
-                        <p>简单的EPUB电子书在线阅读器。</p>
                     </a>
                 </div>
             </div>
@@ -601,7 +635,6 @@
                     <a href="https://chatgpt.com/" target="_blank">
                         <img src="https://chatgpt.com/favicon.ico" alt="ChatGPT Icon">
                         <h3>ChatGPT</h3>
-                        <p>解锁QQ音乐、网易云音乐等加密音频文件。</p>
                     </a>
                 </div>
             </div>
@@ -610,7 +643,6 @@
                     <a href="https://grok.com/?referrer=website" target="_blank">
                         <img src="https://grok.com/images/favicon-light.png" alt="Grok Icon">
                         <h3>Grok</h3>
-                        <p>提供VIP视频在线免费解析服务，省去订阅费用。</p>
                     </a>
                 </div>
             </div>
@@ -623,7 +655,6 @@
                     <a href="https://www.youtube.com/" target="_blank">
                         <img src="https://www.youtube.com/s/desktop/c722ba88/img/logos/favicon_144x144.png" alt="YouTube Icon">
                         <h3>YouTube</h3>
-                        <p>无需操作，5秒内自动消除图片背景。</p>
                     </a>
                 </div>
             </div>
@@ -632,7 +663,6 @@
                     <a href="https://www.bilibili.com/" target="_blank">
                         <img src="https://www.likunming.cn/image/blibili.ico" alt="Bilibili Icon">
                         <h3>Bilibili</h3>
-                        <p>提供高清电脑壁纸下载，涵盖多种类别。</p>
                     </a>
                 </div>
             </div>
@@ -645,7 +675,6 @@
                     <a href="https://www.amazon.com/" target="_blank">
                         <img src="https://www.amazon.com/favicon.ico" alt="Amazon Icon">
                         <h3>Amazon</h3>
-                        <p>在线玩经典麻将游戏。</p>
                     </a>
                 </div>
             </div>
@@ -658,7 +687,6 @@
                     <a href="https://sfz.tools.likunming.cn" target="_blank">
                         <img src="https://www.likunming.cn/image/suiyin.png" alt="图片加水印 Icon">
                         <h3>图片加水印</h3>
-                        <p>可根据选择生成不同字符不同长度的随机密码。</p>
                     </a>
                 </div>
             </div>
@@ -671,7 +699,6 @@
                     <a href="https://example.com/docker" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?docker" alt="Docker Icon">
                         <h3>Docker分析工具</h3>
-                        <p>分析Docker镜像层，优化构建过程。</p>
                     </a>
                 </div>
             </div>
@@ -680,7 +707,6 @@
                     <a href="https://example.com/cheatsheet" target="_blank">
                         <img src="https://source.unsplash.com/40x40/?code" alt="Cheatsheet Icon">
                         <h3>开发者速查表</h3>
-                        <p>为开发者提供的快速参考指南。</p>
                     </a>
                 </div>
             </div>
@@ -728,7 +754,11 @@
 
             $('.sidebar-toggle').click(function(e) {
                 e.stopPropagation();
-                $('.sidebar').toggleClass('active');
+                if ($(window).width() <= 768) {
+                    $('.sidebar').toggleClass('active');
+                } else {
+                    $('body').toggleClass('sidebar-hidden');
+                }
             });
 
             $(document).click(function(e) {
