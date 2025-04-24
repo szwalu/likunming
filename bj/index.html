@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>我的云笔记</title>
+  <style>
+    body { font-family: sans-serif; max-width: 960px; margin: auto; padding: 20px; background: #fdfdfd; }
+    textarea, input { width: 100%; margin: 10px 0; padding: 10px; font-size: 16px; }
+    #preview { border: 1px solid #ddd; padding: 10px; background: #fff; margin-top: 10px; }
+    #notes-list { margin-top: 30px; }
+    .note-item { padding: 5px 0; border-bottom: 1px dashed #ccc; cursor: pointer; }
+    button { padding: 10px 15px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h2>加密云笔记（私有 GitHub 仓库）</h2>
+  <p><button onclick="logout()">退出（清除 Token）</button></p>
+  <input type="text" id="noteTitle" placeholder="请输入笔记标题" />
+  <textarea id="noteContent" rows="10" placeholder="在这里写下笔记（支持 Markdown）"></textarea>
+  <input type="password" id="notePassword" placeholder="请输入加密密码" />
+  <button onclick="saveNote()">保存笔记</button>
+  <div id="preview"></div>
+  <div id="notes-list"><h3>笔记列表</h3><div id="list"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+const username = 'szwalu.github.io';
+const repo = 'myblog';
+let token = localStorage.getItem('github_token');
+if (!token) {
+  token = prompt("请输入 GitHub Token（本地保存）:");
+  if (token) {
+    localStorage.setItem('github_token', token);
+  } else {
+    alert("未提供 Token，无法继续使用！");
+  }
+}
+
+function logout() {
+  localStorage.removeItem('github_token');
+  alert("Token 已清除，请刷新页面重新输入");
+  location.reload();
+}
+
+function encrypt(text, password) {
+  return btoa(unescape(encodeURIComponent(text + "::" + password)));
+}
+function decrypt(text, password) {
+  try {
+    const raw = decodeURIComponent(escape(atob(text)));
+    const [content, pass] = raw.split("::");
+    if (pass !== password) return "密码错误";
+    return content;
+  } catch {
+    return "解密失败";
+  }
+}
+
+async function saveNote() {
+  const title = document.getElementById("noteTitle").value.trim();
+  const content = document.getElementById("noteContent").value;
+  const password = document.getElementById("notePassword").value;
+  if (!title || !content || !password) return alert("请填写标题、内容和密码");
+
+  const filename = new Date().toISOString().slice(0,10) + "-" + title + ".encrypted.txt";
+  const encrypted = encrypt(content, password);
+  const url = `https://api.github.com/repos/${username}/${repo}/contents/${filename}`;
+
+  let sha = "";
+  try {
+    const res = await fetch(url, {
+      headers: { Authorization: `token ${token}` }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      sha = data.sha;
+    }
+  } catch {}
+
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      Authorization: `token ${token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: "保存笔记 " + filename,
+      content: btoa(encrypted),
+      sha
+    })
+  });
+
+  if (response.ok) {
+    alert("保存成功！");
+    listNotes();
+  } else {
+    alert("保存失败");
+  }
+}
+
+async function listNotes() {
+  const url = `https://api.github.com/repos/${username}/${repo}/contents`;
+  const res = await fetch(url, {
+    headers: { Authorization: `token ${token}` }
+  });
+  const data = await res.json();
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  data.filter(file => file.name.endsWith(".encrypted.txt"))
+      .forEach(file => {
+        const div = document.createElement("div");
+        div.className = "note-item";
+        div.textContent = file.name;
+        div.onclick = () => viewNote(file.name);
+        list.appendChild(div);
+      });
+}
+
+async function viewNote(filename) {
+  const password = prompt("请输入查看密码");
+  if (!password) return;
+  const url = `https://api.github.com/repos/${username}/${repo}/contents/${filename}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `token ${token}` }
+  });
+  const data = await res.json();
+  const content = atob(data.content);
+  const decrypted = decrypt(content, password);
+  document.getElementById("preview").innerHTML = marked.parse(decrypted);
+}
+
+listNotes();
+</script>
+</body>
+</html>
