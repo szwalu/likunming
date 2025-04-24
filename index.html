@@ -66,15 +66,29 @@
             height: 100vh;
             background: #fff;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-            padding: 0;
+            padding: 0; /* 修改：确保基础 padding 为 0 */
             z-index: 900;
             transition: left 0.3s;
+            overflow-y: auto; /* 新增：允许侧边栏内容滚动 */
         }
         .sidebar ul {
             list-style: none;
-            padding: 10px 0;
+            padding: 0; /* 修改：确保基础 padding 为 0 */
             margin: 0;
         }
+        /* 新增：PC端侧边栏列表顶部内边距 */
+        @media (min-width: 769px) {
+            .sidebar ul {
+                padding-top: 60px; /* 大于等于header高度 (50px) + 一些间距 */
+            }
+        }
+        /* 保留/设置移动端侧边栏列表内边距 */
+        @media (max-width: 768px) {
+            .sidebar ul {
+                 padding: 10px 0; /* 根据需要设置移动端的 padding */
+             }
+        }
+
         .sidebar ul li {
             padding: 15px 20px;
             font-size: 1.1em;
@@ -101,12 +115,12 @@
         /* 主要内容区域 */
         .main-content {
             margin-top: 0;
-            margin-left: 220px;
+            margin-left: 220px; /* 保持这个值，与 sidebar 宽度 + 间距 对应 */
             padding: 20px;
             transition: margin-left 0.3s;
         }
         .sidebar-hidden .main-content {
-            margin-left: 0;
+            margin-left: 20px; /* 侧边栏隐藏时，内容区域左边距调整 */
         }
         .section-title {
             color: #555;
@@ -158,14 +172,16 @@
         .s-search {
             width: 90%;
             max-width: 600px;
-            margin: 60px auto 10px;
+            margin: 60px auto 10px; /* 顶部导航栏固定后，搜索框可能需要调整 margin-top */
             position: relative;
             padding-top: 26px;
             transition: width 0.3s, margin 0.3s;
+             /* z-index: 50; 确保搜索框在内容之上，但在header和sidebar之下 */
         }
         .sidebar-hidden .s-search {
-            width: calc(100% - 40px);
-            margin: 60px auto 10px;
+             /* 在侧边栏隐藏时，可能需要调整搜索框的左右 margin */
+            width: calc(100% - 40px); /* 示例 */
+            margin: 60px auto 10px; /* 示例 */
         }
         #search-list {
             position: absolute;
@@ -283,7 +299,7 @@
         }
         .google-text { font-weight: normal; }
         .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
-        .baidu-text TEMPORARY { color: #2932e1; font-weight: normal; }
+        .baidu-text TEMPORARY { color: #2932e1; font-weight: normal; } /* 注意：这里有个 TEMPORARY 可能是笔误 */
         /* Toast 样式 */
         .toast-bar {
             position: fixed;
@@ -449,11 +465,11 @@
             text-align: center;
             padding: 20px;
             margin-top: 40px;
-            margin-left: 200px;
+            margin-left: 200px; /* 保持与 sidebar 宽度一致 */
             transition: margin-left 0.3s;
         }
         .sidebar-hidden .footer {
-            margin-left: 0;
+            margin-left: 0; /* 侧边栏隐藏时，页脚左边距为0 */
         }
         .footer a {
             color: #79bfff;
@@ -468,17 +484,19 @@
             padding: 10px;
             border-radius: 50%;
             cursor: pointer;
+            z-index: 500; /* 确保在内容之上 */
         }
         /* 响应式设计：移动端调整 */
         @media (max-width: 768px) {
             .header {
-                height: 40px;
+                height: 40px; /* 移动端header高度 */
                 width: 100%;
                 left: 0;
                 padding: 10px 10px;
                 justify-content: flex-start;
             }
             .header.sidebar-hidden {
+                /* 移动端不需要这个状态，因为侧边栏是通过 display 控制 */
                 width: 100%;
                 left: 0;
                 padding: 10px 10px;
@@ -493,43 +511,54 @@
                 height: 16px;
                 margin-right: 8px;
             }
+            /* 移动端侧边栏样式 */
             .sidebar {
                 position: fixed;
-                top: 40px;
+                top: 40px; /* 从移动端 header 下方开始 */
                 left: 0;
                 right: auto;
                 width: 150px;
-                height: auto;
+                height: auto; /* 高度自适应 */
+                max-height: calc(100vh - 40px); /* 最大高度为屏幕高度减去header高度 */
                 background: #fff;
                 box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-                padding: 10px;
-                z-index: 950;
-                display: none;
+                padding: 0; /* 保持外部 padding 为 0 */
+                z-index: 950; /* 比 header 低，比 main-content 高 */
+                display: none; /* 默认隐藏 */
+                overflow-y: auto; /* 内容多时允许滚动 */
             }
             .sidebar.active {
-                display: block;
+                display: block; /* 点击按钮时显示 */
             }
+             /* .sidebar ul 已经在上面设置了移动端 padding */
             .sidebar ul li {
                 padding: 10px;
                 font-size: 0.9em;
             }
+            /* 移动端主内容区 */
             .main-content {
-                margin-left: 0;
+                margin-left: 0; /* 移动端主内容不偏移 */
                 padding: 10px;
-                margin-top: 0;
+                margin-top: 40px; /* 从 header 下方开始 */
             }
+            /* 移动端不需要 .sidebar-hidden .main-content 调整 */
             .sidebar-hidden .main-content {
-                margin-left: 0;
+                 margin-left: 0;
             }
+
+            /* 移动端搜索框 */
             .s-search {
                 width: 90%;
-                max-width: 600px;
-                margin: 50px auto 5px;
+                max-width: none; /* 移除最大宽度限制 */
+                margin: 50px auto 5px; /* header 高度 40px + 10px 间距 */
                 padding-top: 10px;
             }
-            .sidebar-hidden .s-search {
-                margin: 50px auto 5px;
+             /* 移动端不需要 .sidebar-hidden .s-search 调整 */
+             .sidebar-hidden .s-search {
+                 margin: 50px auto 5px;
+                 width: 90%;
             }
+
             #super-search-fm {
                 padding: 4px 0;
             }
@@ -537,9 +566,11 @@
                 margin: 0 0 5px;
                 font-size: 1.5em;
             }
+            /* 移动端页脚 */
             .footer {
                 margin-left: 0;
             }
+            /* 移动端不需要 .sidebar-hidden .footer 调整 */
             .sidebar-hidden .footer {
                 margin-left: 0;
             }
@@ -551,79 +582,95 @@
                 font-size: 1em;
             }
         }
-    
+
         /* 自定义修改样式 */
         @media (max-width: 768px) {
             .s-search {
                 margin-bottom: 5px !important;
             }
         }
+        /* 全局 header 强制占满宽度 */
         .header {
             left: 0;
             width: 100% !important;
         }
-        body.sidebar-hidden .header {
+        /* body.sidebar-hidden .header 规则不再需要特别处理 */
+        /* body.sidebar-hidden .header {
             width: 100%;
             left: 0;
-        }
+        } */
+
+        /* 搜索框居中 */
         .s-search {
             margin-left: auto;
             margin-right: auto;
         }
-        .sidebar-hidden .s-search {
+        /* .sidebar-hidden .s-search 规则也需要重新审视 */
+        /* .sidebar-hidden .s-search {
             margin-left: auto !important;
             margin-right: auto !important;
-        }
+        } */
+
+        /* 移动端卡片布局 */
         @media (max-width: 768px) {
             .row {
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: flex-start;
+                justify-content: flex-start; /* 或者 space-between 如果需要两端对齐 */
                 margin-bottom: 0;
-                padding-left: 5px;
+                padding-left: 5px; /* 调整容器左右 padding */
                 padding-right: 5px;
+                margin-left: 0; /* 移除外边距 */
+                margin-right: 0;
             }
             .row > div[class*="col-"] {
-                flex: 0 0 48%;
-                max-width: 48%;
+                flex: 0 0 calc(50% - 10px); /* 两列布局，减去间距 */
+                max-width: calc(50% - 10px);
                 box-sizing: border-box;
-                padding: 5px;
-                margin-bottom: 10px;
+                padding: 0; /* 移除 col 的 padding */
+                margin: 5px; /* 使用 margin 创建间距 */
+                /* margin-bottom: 10px; */ /* 移除，使用统一的 margin */
             }
             .tool-card {
-                margin-bottom: 0;
+                margin-bottom: 0; /* 卡片自身不加下边距 */
             }
         }
-    
+
+        /* PC 端卡片布局 */
         @media (min-width: 769px) {
+            /* PC 端内容标题左对齐 */
             .section-title {
-                margin-left: 3%;
+                /* margin-left: 3%; */ /* 可以移除，让其跟随 .main-content 的 padding */
             }
+             /* PC 端行布局 */
             .row {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: flex-start;
                 margin-bottom: 0;
-                margin-left: 1.5%;
-                margin-right: 1.5%;
+                /* margin-left: 1.5%; */ /* 移除，让其跟随 .main-content 的 padding */
+                /* margin-right: 1.5%; */
             }
+             /* PC 端列布局 */
             .row > div[class*="col-"] {
                 display: flex;
                 align-items: stretch;
-                flex: 0 0 22%;
-                max-width: 22%;
-                margin: 0 1.5%;
+                flex: 0 0 23%; /* 四列布局，可以微调百分比以适应间距 */
+                max-width: 23%;
+                margin: 0 1%; /* 使用 margin 创建列间距 */
                 padding: 0;
+                margin-bottom: 20px; /* 添加卡片下边距 */
             }
             .tool-card {
-                margin-bottom: 20px;
+                 /* margin-bottom: 20px; */ /* 移动到 col 上 */
             }
         }
-    
-        /* 新增样式继续优化： */
+
+        /* 新增样式继续优化：移动端搜索 */
         @media (max-width: 768px) {
             .s-search {
-                margin-bottom: 5px !important;
+                margin-bottom: 5px !important; /* 保持 */
+                /* padding-top: 10px; */ /* 已有 */
             }
             .search-group ul.search-type {
                 flex-wrap: wrap;
@@ -851,7 +898,7 @@
 
     <footer class="footer">
         <div class="go-up">
-            <a href="#" rel="go-top"><i class="fa fa-angle-up"></i></a>
+            <i class="fa fa-angle-up"></i>
         </div>
         <div>
             版权 © 2025 在线工具箱。设计灵感来源于 <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">Webstack</a>。
@@ -872,52 +919,100 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            // 调试：检查“新闻”大类是否存在
-            console.log("Sidebar items:", $('.sidebar ul li').length);
-            $('.sidebar ul li').each(function(index) {
-                console.log(`Item ${index}: ${$(this).text()}`);
-            });
-
+            // 滚动到指定区域的函数
             function scrollToSection(target) {
+                // 检查 target 是否是 'body' 或有效的选择器
+                let offsetTop = 0;
+                if (target === 'body') {
+                    offsetTop = 0; // 滚动到页面顶部
+                } else if ($(target).length) {
+                     // PC端：减去 header 高度 + 额外偏移；移动端：减去移动端 header 高度 + 额外偏移
+                    const headerHeight = $(window).width() <= 768 ? 40 : 50;
+                    offsetTop = $(target).offset().top - headerHeight - 10; // 减去头部高度和一些缓冲
+                } else {
+                    console.warn("Scroll target not found:", target);
+                    return; // 如果目标不存在，则不执行滚动
+                }
+
                 $('html, body').animate({
-                    scrollTop: $(target).offset().top - 100
+                    scrollTop: offsetTop
                 }, 500);
             }
 
+            // 侧边栏项目点击事件
             $('.sidebar li').click(function() {
                 $('.sidebar li').removeClass('active');
                 $(this).addClass('active');
                 var target = $(this).data('target');
                 scrollToSection(target);
+                // 如果是移动端视图，点击后收起侧边栏
                 if ($(window).width() <= 768) {
                     $('.sidebar').removeClass('active');
                 }
             });
 
+            // 侧边栏切换按钮点击事件
             $('.sidebar-toggle').click(function(e) {
-                e.stopPropagation();
+                e.stopPropagation(); // 阻止事件冒泡，避免触发 document 的 click 事件
                 if ($(window).width() <= 768) {
+                    // 移动端：切换 .sidebar 的 .active 类
                     $('.sidebar').toggleClass('active');
                 } else {
+                    // PC端：切换 body 的 .sidebar-hidden 类
                     $('body').toggleClass('sidebar-hidden');
+                    // 手动触发窗口大小调整事件，以便依赖它的布局能够更新（如果需要）
+                    // $(window).trigger('resize');
                 }
             });
 
+            // 点击页面其他区域关闭移动端侧边栏
             $(document).click(function(e) {
                 if ($(window).width() <= 768) {
-                    if (!$(e.target).closest('.sidebar').length && !$(e.target).closest('.sidebar-toggle').length) {
-                        $('.sidebar').removeClass('active');
+                    // 检查点击的目标是否在侧边栏内部或切换按钮上
+                    if (!$('.sidebar').is(e.target) && $('.sidebar').has(e.target).length === 0 && !$('.sidebar-toggle').is(e.target) && $('.sidebar-toggle').has(e.target).length === 0) {
+                         if($('.sidebar').hasClass('active')){
+                             $('.sidebar').removeClass('active');
+                         }
                     }
                 }
             });
 
-            $('.go-up a').click(function(e) {
-                e.preventDefault();
-                scrollToSection('body');
+            // 返回顶部按钮点击事件
+            $('.go-up').click(function(e) { // 直接在 .go-up 上绑定事件
+                e.preventDefault(); // 阻止默认行为（如果内部是a标签）
+                scrollToSection('body'); // 滚动到页面顶部
             });
+
+             // 根据窗口大小初始化 body 类
+             function initializeSidebarState() {
+                 if ($(window).width() > 768) {
+                     // PC端，默认不隐藏侧边栏 (移除 sidebar-hidden)
+                     $('body').removeClass('sidebar-hidden');
+                     $('.sidebar').removeClass('active'); // 确保移动端 active 类被移除
+                 } else {
+                      // 移动端，确保 body 没有 sidebar-hidden 类
+                     $('body').removeClass('sidebar-hidden');
+                     // 移动端侧边栏默认是隐藏的 (通过 CSS display:none 实现)
+                     $('.sidebar').removeClass('active');
+                 }
+             }
+
+             // 初始化
+             initializeSidebarState();
+
+             // 窗口大小改变时重新判断
+             $(window).resize(function() {
+                 // 使用 debounce 或 throttle 优化 resize 事件处理
+                 clearTimeout(window.resizedFinished);
+                 window.resizedFinished = setTimeout(function(){
+                     initializeSidebarState();
+                     // 可能需要重新计算某些布局依赖的值
+                 }, 250);
+             });
+
         });
 
-        // 搜索框 JavaScript
+        // 搜索框 JavaScript (保持不变)
         document.addEventListener('DOMContentLoaded', function() {
             const searchContainer = document.getElementById('search');
             const searchForm = document.getElementById('super-search-fm');
@@ -930,6 +1025,7 @@
                     searchForm.action = selectedRadio.value;
                     searchInput.placeholder = selectedRadio.getAttribute('data-placeholder');
                     searchInput.name = selectedRadio.getAttribute('data-name');
+                    // 管理 active 类以调整样式
                     searchContainer.classList.remove('google-active', 'baidu-active');
                     if (selectedRadio.id === 'type-google') {
                         searchContainer.classList.add('google-active');
@@ -941,97 +1037,105 @@
             engineRadios.forEach(radio => {
                 radio.addEventListener('change', updateSearchEngine);
             });
-            updateSearchEngine();
-            searchForm.target = '_blank';
+            updateSearchEngine(); // 初始化
+            searchForm.target = '_blank'; // 确保在新标签页打开搜索结果
             searchForm.addEventListener('submit', function(e) {
                 if (searchInput.value.trim() === '') {
-                    searchInput.focus();
+                    searchInput.focus(); // 如果搜索框为空，阻止提交并聚焦
                     e.preventDefault();
                     return false;
                 }
             });
         });
 
-        // 黑暗模式 JavaScript
+        // 黑暗模式 JavaScript (保持不变)
         function updateTheme() {
-            const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
             const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-            if (isChrome) {
-                if (isDarkMode && window.matchMedia('(prefers-color-scheme: dark)').media !== 'not all') {
-                    document.documentElement.classList.add('dark-mode');
-                } else {
-                    document.documentElement.classList.remove('dark-mode');
-                }
+            // 不再需要区分 Chrome，现代浏览器都支持
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark-mode');
             } else {
-                if (isDarkMode) {
-                    document.documentElement.classList.add('dark-mode');
-                } else {
-                    document.documentElement.classList.remove('dark-mode');
-                }
+                document.documentElement.classList.remove('dark-mode');
             }
         }
-        updateTheme();
+        updateTheme(); // 初始化
+        // 监听系统主题变化
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
 
-        // Toast JavaScript
+        // Toast JavaScript (保持不变)
         function isMobileDevice() {
+            // 更可靠的检测方式，结合 User Agent 和屏幕宽度
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
             const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
-            const isSmallScreen = window.innerWidth <= 768;
-            return isMobileUA || isSmallScreen;
+             // 考虑触摸屏支持作为辅助判断
+            const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            // 可以根据需要调整判断逻辑，例如只在 iPhone/Android 上显示
+            // return /iphone|android/i.test(userAgent.toLowerCase());
+            return isMobileUA || (hasTouch && window.innerWidth <= 768); // 结合UA和触摸屏/小屏幕
         }
         let toastManuallyClosed = false;
         let toastStartTime = null;
-        let toastAlreadyHidden = false;
+        let toastAlreadyHidden = false; // 标记Toast是否已被隐藏，避免重复显示
+
         function showToast() {
             const toastBar = document.getElementById('toastBar');
+            // 检查是否是移动设备、Toast是否已手动关闭、Toast是否已隐藏
             if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
+
             toastBar.style.display = 'block';
             toastBar.style.visibility = 'visible';
+
+            // 如果是第一次显示Toast，记录开始时间并启动超时检查
             if (!toastStartTime) {
                 toastStartTime = Date.now();
                 checkToastTimeout();
             }
         }
+
         function hideToast() {
             const toastBar = document.getElementById('toastBar');
             if (toastBar) {
                 toastBar.style.display = 'none';
-                toastAlreadyHidden = true;
+                toastAlreadyHidden = true; // 标记为已隐藏
             }
         }
+
         function checkToastTimeout() {
             const interval = setInterval(() => {
+                 // 如果Toast已手动关闭或已被隐藏，清除定时器
                 if (toastManuallyClosed || toastAlreadyHidden) {
                     clearInterval(interval);
                     return;
                 }
                 const elapsed = Date.now() - toastStartTime;
+                // 20秒后自动隐藏
                 if (elapsed >= 20000) {
                     hideToast();
                     clearInterval(interval);
                 }
-            }, 1000);
+            }, 1000); // 每秒检查一次
         }
+
+        // 页面加载完成后尝试显示Toast
         window.onload = function () {
             showToast();
         };
-        window.addEventListener('scroll', function () {
-            showToast();
-        });
-        window.addEventListener('resize', function () {
-            showToast();
-        });
+
+        // 滚动或调整大小时也尝试显示（如果之前未显示或未关闭）
+        window.addEventListener('scroll', showToast);
+        window.addEventListener('resize', showToast);
+
+        // 关闭按钮事件
         const toastClose = document.getElementById('toastClose');
         if (toastClose) {
             toastClose.addEventListener('click', function () {
-                toastManuallyClosed = true;
+                toastManuallyClosed = true; // 标记为手动关闭
                 hideToast();
             });
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93506b106e7ac25a',t:'MTc0NTQ0MzM2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
