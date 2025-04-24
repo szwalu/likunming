@@ -26,11 +26,10 @@
         .header {
             background: #fff;
             color: #333;
-            padding: 0 20px; /* Adjust padding */
+            padding: 10px 20px;
             display: flex;
             align-items: center;
-            /* justify-content: flex-start; */ /* Changed */
-            justify-content: space-between; /* Changed */
+            justify-content: flex-start;
             position: fixed;
             width: 100%;
             top: 0;
@@ -41,39 +40,23 @@
             box-sizing: border-box;
             transition: width 0.3s, left 0.3s;
         }
-        /* Group toggle and logo */
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
         .header.sidebar-hidden {
             width: 100%;
             left: 0;
         }
         .header h1 {
-             /* display: none; */ /* Keep display flex */
+            display: none;
             margin: 0;
-            /* font-size: 1.5em; */ /* No longer needed for text */
+            font-size: 1.5em;
             display: flex;
             align-items: center;
             color: #333;
-            margin-left: 10px; /* Add space between toggle and logo */
         }
         .header h1 img {
-            /* width: 20px; */ /* Remove fixed width */
-            /* height: 20px; */ /* Remove fixed height */
-            height: 38px; /* Adjust height to almost fill header (50px - padding) */
-            width: auto; /* Maintain aspect ratio */
-            margin-right: 0; /* Remove margin if text is gone */
-            object-fit: contain; /* Prevent distortion */
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
         }
-        /* Date time style */
-        #current-datetime {
-            font-size: 0.9em;
-            color: #666;
-            white-space: nowrap; /* Prevent wrapping */
-        }
-
         /* 导航栏样式（桌面端） */
         .sidebar {
             position: fixed;
@@ -125,24 +108,23 @@
         .sidebar-toggle {
             background: transparent;
             color: #333;
-            padding: 8px; /* Keep padding for click area */
+            padding: 8px;
             font-size: 1.5em;
             cursor: pointer;
-            display: block; /* Ensure it's always visible */
         }
         /* 主要内容区域 */
         .main-content {
-             margin-top: 50px; /* Add margin-top to account for fixed header */
+            margin-top: 0;
             margin-left: 220px; /* 保持这个值，与 sidebar 宽度 + 间距 对应 */
             padding: 20px;
-            transition: margin-left 0.3s, margin-top 0.3s;
+            transition: margin-left 0.3s;
         }
         .sidebar-hidden .main-content {
             margin-left: 20px; /* 侧边栏隐藏时，内容区域左边距调整 */
         }
         .section-title {
             color: #555;
-            font-size: 1.8em; /* Reverted based on user feedback */
+            font-size: 1.8em;
             margin: 0 0 15px;
             display: flex;
             align-items: center;
@@ -190,7 +172,7 @@
         .s-search {
             width: 90%;
             max-width: 600px;
-            margin: 20px auto 10px; /* Reduced top margin because main-content has margin now */
+            margin: 60px auto 10px; /* 顶部导航栏固定后，搜索框可能需要调整 margin-top */
             position: relative;
             padding-top: 26px;
             transition: width 0.3s, margin 0.3s;
@@ -199,7 +181,7 @@
         .sidebar-hidden .s-search {
              /* 在侧边栏隐藏时，可能需要调整搜索框的左右 margin */
             width: calc(100% - 40px); /* 示例 */
-            margin: 20px auto 10px; /* 示例 */
+            margin: 60px auto 10px; /* 示例 */
         }
         #search-list {
             position: absolute;
@@ -317,7 +299,7 @@
         }
         .google-text { font-weight: normal; }
         .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
-        .baidu-text { color: #2932e1; font-weight: normal; }
+        .baidu-text { color: #2932e1; font-weight: normal; } /* TEMPORARY in wo.html was likely a mistake */
         /* Toast 样式 */
         .toast-bar {
             position: fixed;
@@ -399,11 +381,8 @@
             color: #e0e0e0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
-        html.dark-mode .header h1 { /* Style H1, not specific image */
-            color: #e0e0e0; /* If there were text */
-        }
-        html.dark-mode #current-datetime { /* Style datetime */
-            color: #b0b0b0;
+        html.dark-mode .header h1 {
+            color: #e0e0e0;
         }
         html.dark-mode .sidebar {
             background: #2e3b3e;
@@ -511,32 +490,27 @@
         @media (max-width: 768px) {
             .header {
                 height: 40px; /* 移动端header高度 */
-                padding: 0 10px; /* Adjust padding */
                 width: 100%;
                 left: 0;
-                /* justify-content: flex-start; */ /* Keep space-between */
+                padding: 10px 10px;
+                justify-content: flex-start;
             }
             .header.sidebar-hidden {
-                /* 移动端不需要这个状态 */
+                /* 移动端不需要这个状态，因为侧边栏是通过 display 控制 */
                 width: 100%;
                 left: 0;
-                padding: 0 10px;
+                padding: 10px 10px;
             }
             .header h1 {
-                /* display: flex; */ /* H1 is now part of .header-left */
-                /* font-size: 1.2em; */
-                margin-left: 5px; /* Smaller margin on mobile */
+                display: flex;
+                font-size: 1.2em;
+                margin-left: 10px;
             }
             .header h1 img {
-                height: 30px; /* Adjust logo height for mobile header (40px - padding) */
-                 /* width: 16px; */
-                 /* height: 16px; */
-                 /* margin-right: 8px; */
+                width: 16px;
+                height: 16px;
+                margin-right: 8px;
             }
-            #current-datetime {
-                 font-size: 0.75em; /* Smaller font for mobile */
-             }
-
             /* 移动端侧边栏样式 */
             .sidebar {
                 position: fixed;
@@ -576,12 +550,12 @@
             .s-search {
                 width: 90%;
                 max-width: none; /* 移除最大宽度限制 */
-                margin: 15px auto 5px; /* Adjust top margin */
+                margin: 50px auto 5px; /* header 高度 40px + 10px 间距 */
                 padding-top: 10px;
             }
              /* 移动端不需要 .sidebar-hidden .s-search 调整 */
              .sidebar-hidden .s-search {
-                 margin: 15px auto 5px;
+                 margin: 50px auto 5px;
                  width: 90%;
             }
 
@@ -721,15 +695,16 @@
         }
     </style>
 </head>
-<body class="sidebar-hidden"> <div class="header">
-        <div class="header-left"> <div class="sidebar-toggle">
-                <i class="fa fa-bars"></i>
-            </div>
-            <h1>
-                <img src="https://www.likunming.cn/image/logo.png" alt="Logo">
-                </h1>
+<body>
+    <div class="header">
+        <div class="sidebar-toggle">
+            <i class="fa fa-bars"></i>
         </div>
-        <div id="current-datetime"></div> </div>
+        <h1>
+            <img src="https://www.likunming.cn/image/logo.png" alt="Logo">
+            网址导航
+        </h1>
+    </div>
 
     <div id="search" class="s-search">
         <div id="search-list">
@@ -1171,8 +1146,8 @@
              // 根据窗口大小初始化 body 类
              function initializeSidebarState() {
                  if ($(window).width() > 768) {
-                     // PC端，默认隐藏侧边栏
-                     $('body').addClass('sidebar-hidden'); // Keep sidebar hidden by default on PC
+                     // PC端，默认不隐藏侧边栏 (移除 sidebar-hidden)
+                     $('body').removeClass('sidebar-hidden');
                      $('.sidebar').removeClass('active'); // 确保移动端 active 类被移除
                  } else {
                       // 移动端，确保 body 没有 sidebar-hidden 类
@@ -1307,8 +1282,6 @@
         // 页面加载完成后尝试显示Toast
         window.onload = function () {
             showToast();
-            updateDateTime(); // Initial call to display date/time
-            setInterval(updateDateTime, 1000); // Update time every second
         };
 
         // 滚动或调整大小时也尝试显示（如果之前未显示或未关闭）
@@ -1323,24 +1296,6 @@
                 hideToast();
             });
         }
-
-        // --- Added: Date/Time Update Function ---
-        function updateDateTime() {
-            const dateTimeElement = document.getElementById('current-datetime');
-            if (!dateTimeElement) return;
-
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-indexed
-            const day = now.getDate().toString().padStart(2, '0');
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-
-            // Format: YYYY-MM-DD HH:MM:SS
-            dateTimeElement.textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-        }
-
     </script>
 </body>
 </html>
