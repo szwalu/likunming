@@ -676,7 +676,7 @@
                         <label for="type-baidu"><span class="baidu-text">百度</span></label>
                     </li>
                 </ul>
-            </div>
+        </div>
         </div>
         <form action="https://www.google.com/search" method="get" target="_blank" id="super-search-fm">
             <input type="text" id="search-text" name="q" placeholder="Google Search..." autocomplete="off">
@@ -872,6 +872,12 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
+            // 调试：检查“新闻”大类是否存在
+            console.log("Sidebar items:", $('.sidebar ul li').length);
+            $('.sidebar ul li').each(function(index) {
+                console.log(`Item ${index}: ${$(this).text()}`);
+            });
+
             function scrollToSection(target) {
                 $('html, body').animate({
                     scrollTop: $(target).offset().top - 100
