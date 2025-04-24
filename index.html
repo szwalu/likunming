@@ -29,56 +29,37 @@
             padding: 10px 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Modified */
+            justify-content: space-between;
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
             z-index: 1000;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            height: 50px; /* Adjusted height if needed */
+            height: 50px;
             box-sizing: border-box;
             transition: width 0.3s, left 0.3s;
         }
-        .header .left-section { /* Added section for logo and new image */
-            display: flex;
-            align-items: center;
-        }
-        .header h1 {
-            display: flex; /* Changed to flex */
-            align-items: center;
-            margin: 0;
-            font-size: 1.5em; /* Adjust if needed */
-            color: #333;
-        }
-        .header h1 img,
-        .header .left-section .new-logo { /* Style for both logos */
-            width: 40px; /* Adjusted size */
-            height: 40px; /* Adjusted size */
-            margin-right: 8px;
-        }
-        .header h1 .site-title { /* Optional: Style for text next to logo if kept */
-             font-size: 0px; /* Hides text as per original */
-             /* Or adjust font-size if text is desired */
-        }
-        .header .sidebar-toggle { /* Ensure toggle is on the right */
-            background: transparent;
-            color: #333;
-            padding: 8px;
-            font-size: 1.5em;
-            cursor: pointer;
-            /* Removed margin-left, handled by justify-content */
-        }
-
-        /* Hide original h1 title text, keep only images */
-        .header h1 span {
-             font-size: 0px;
-             display: none; /* Alternative way to hide */
-        }
-        /* --- Other styles remain the same --- */
         .header.sidebar-hidden {
             width: 100%;
             left: 0;
+        }
+        .header h1 {
+            display: none;
+            margin: 0;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            color: #333;
+        }
+        .header h1 img {
+            width: 50px;
+            height: 50px;
+            margin-right: 8px;
+        }
+        .header .date {
+            font-size: 1em;
+            color: #333;
         }
         /* 导航栏样式（桌面端） */
         .sidebar {
@@ -101,7 +82,7 @@
         }
         @media (min-width: 769px) {
             .sidebar ul {
-                padding-top: 60px; /* Adjust if header height changes */
+                padding-top: 60px;
             }
         }
         @media (max-width: 768px) {
@@ -124,9 +105,17 @@
         .sidebar-hidden .sidebar {
             left: -200px;
         }
+        /* 移动端导航栏图标 */
+        .sidebar-toggle {
+            background: transparent;
+            color: #333;
+            padding: 8px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
         /* 主要内容区域 */
         .main-content {
-            margin-top: 60px; /* Adjust if header height changes */
+            margin-top: 0;
             margin-left: 220px;
             padding: 20px;
             transition: margin-left 0.3s;
@@ -184,14 +173,14 @@
         .s-search {
             width: 90%;
             max-width: 600px;
-            margin: 70px auto 10px; /* Adjusted top margin */
+            margin: 60px auto 10px;
             position: relative;
             padding-top: 26px;
             transition: width 0.3s, margin 0.3s;
         }
         .sidebar-hidden .s-search {
             width: calc(100% - 40px);
-            margin: 70px auto 10px; /* Adjusted top margin */
+            margin: 60px auto 10px;
         }
         #search-list {
             position: absolute;
@@ -391,8 +380,10 @@
             color: #e0e0e0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
-        html.dark-mode .header .left-section h1, /* Dark mode adjustments */
-        html.dark-mode .header .sidebar-toggle {
+        html.dark-mode .header h1 {
+            color: #e0e0e0;
+        }
+        html.dark-mode .header .date {
             color: #e0e0e0;
         }
         html.dark-mode .sidebar {
@@ -500,69 +491,185 @@
         /* 响应式设计：移动端调整 */
         @media (max-width: 768px) {
             .header {
-                height: 40px; /* Keep mobile header height */
-                padding: 5px 10px; /* Adjust padding */
+                height: 40px;
+                width: 100%;
+                left: 0;
+                padding: 10px 10px;
                 justify-content: space-between;
             }
             .header.sidebar-hidden {
-                 padding: 5px 10px;
+                width: 100%;
+                left: 0;
+                padding: 10px 10px;
             }
-            .header .left-section { /* Ensure vertical alignment on mobile */
-                height: 100%;
+            .header h1 {
+                display: flex;
+                font-size: 1.2em;
+                margin-left: 10px;
             }
-            .header h1 img,
-            .header .left-section .new-logo {
-                width: 30px; /* Smaller logo on mobile */
-                height: 30px; /* Smaller logo on mobile */
-                margin-right: 5px;
+            .header h1 img {
+                width: 40px;
+                height: 40px;
+                margin-right: 8px;
             }
-             .header h1 .site-title {
-                 display: none; /* Ensure text is hidden */
-            }
-            .header .sidebar-toggle {
-                font-size: 1.2em; /* Adjust icon size */
-                padding: 6px;
+            .header .date {
+                font-size: 0.9em;
             }
             .sidebar {
-                top: 40px; /* Position below header */
+                position: fixed;
+                top: 40px;
+                left: 0;
+                right: auto;
+                width: 150px;
+                height: auto;
                 max-height: calc(100vh - 40px);
+                background: #fff;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+                padding: 0;
+                z-index: 950;
+                display: none;
+                overflow-y: auto;
+            }
+            .sidebar.active {
+                display: block;
+            }
+            .sidebar ul li {
+                padding: 10px;
+                font-size: 0.9em;
             }
             .main-content {
-                margin-top: 50px; /* Space below header */
+                margin-left: 0;
+                padding: 10px;
+                margin-top: 40px;
+            }
+            .sidebar-hidden .main-content {
+                 margin-left: 0;
             }
             .s-search {
-                 margin: 60px auto 5px; /* Adjust top margin */
-                 padding-top: 10px;
+                width: 90%;
+                max-width: none;
+                margin: 50px auto 5px;
+                padding-top: 10px;
             }
             .sidebar-hidden .s-search {
-                 margin: 60px auto 5px;
+                 margin: 50px auto 5px;
+                 width: 90%;
+            }
+            #super-search-fm {
+                padding: 4px 0;
+            }
+            .section-title {
+                margin: 0 0 5px;
+                font-size: 1.5em;
+            }
+            .footer {
+                margin-left: 0;
+                padding: 10px;
+            }
+            .sidebar-hidden .footer {
+                margin-left: 0;
+            }
+            .tool-card {
+                padding: 10px;
+                min-height: 70px;
+            }
+            .tool-card h3 {
+                font-size: 1em;
             }
         }
-        /* --- Keep other responsive styles as they were --- */
-
         /* 自定义修改样式 */
-        /* --- Keep custom styles unless conflicting --- */
-        /* Adjust header position for consistency */
+        @media (max-width: 768px) {
+            .s-search {
+                margin-bottom: 5px !important;
+            }
+        }
         .header {
             left: 0;
             width: 100% !important;
         }
-         /* --- Keep other custom styles --- */
-
+        .s-search {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (max-width: 768px) {
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                margin-bottom: 0;
+                padding-left: 5px;
+                padding-right: 5px;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .row > div[class*="col-"] {
+                flex: 0 0 calc(50% - 10px);
+                max-width: calc(50% - 10px);
+                box-sizing: border-box;
+                padding: 0;
+                margin: 5px;
+            }
+            .tool-card {
+                margin-bottom: 0;
+            }
+        }
+        @media (min-width: 769px) {
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                margin-bottom: 0;
+            }
+            .row > div[class*="col-"] {
+                display: flex;
+                align-items: stretch;
+                flex: 0 0 23%;
+                max-width: 23%;
+                margin: 0 1%;
+                padding: 0;
+                margin-bottom: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .s-search {
+                margin-bottom: 5px !important;
+            }
+            .search-group ul.search-type {
+                flex-wrap: wrap;
+                margin-bottom: 8px;
+            }
+            .search-group ul.search-type label {
+                font-size: 12px;
+                padding: 2px 8px;
+                margin-bottom: 4px;
+                white-space: nowrap;
+            }
+            #super-search-fm {
+                margin-top: 0;
+                border-radius: 8px !important;
+                flex-direction: row;
+            }
+            #search-text {
+                min-height: 36px;
+                padding: 6px 10px;
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="left-section">
+        <div class="left-section" style="display: flex; align-items: center;">
             <h1>
                 <img src="https://www.likunming.cn/image/logo.png" alt="Logo">
-                </h1>
-            <img src="https://www.likunming/image/wzlogotm.png" alt="New Logo" class="new-logo">
+                <img src="https://www.likunming.cn/image/wzlogotm.png" alt="Secondary Logo" style="width: 50px; height: 50px; margin-left: 8px;">
+                <span style="font-size: 0px;">网址导航</span>
+            </h1>
         </div>
         <div class="sidebar-toggle">
             <i class="fa fa-bars"></i>
         </div>
-        </div>
+    </div>
 
     <div id="search" class="s-search">
         <div id="search-list">
@@ -884,8 +991,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
+            <div class="col-sm-4 col-md-3 livestock                <div class="tool-card">
                     <a href="https://m.douban.com/home_guide" target="_blank">
                         <img src="https://www.douban.com/favicon.ico" alt="豆瓣">
                         <h3>豆瓣</h3>
@@ -935,7 +1041,7 @@
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
                     <a href="https://www.calorietech.com/blog/plan" target="_blank">
-                        <img src="https://www.calorietech.com/icons/favicon.ico" alt="KEEP Icon">
+                        <img src="https://www.calorietech.com/icons/favicon.ico" alt="K  Icon">
                         <h3>KEEP</h3>
                     </a>
                 </div>
@@ -964,7 +1070,7 @@
             <i class="fa fa-angle-up"></i>
         </div>
         <div>
-            版权 © <span id="copyright-year">2025</span> 网址导航。设计灵感来源于 <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">Webstack</a>。
+            版权 © 2025 网址导航。设计灵感来源于 <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">Webstack</a>。
         </div>
     </footer>
 
@@ -987,7 +1093,7 @@
                 if (target === 'body') {
                     offsetTop = 0;
                 } else if ($(target).length) {
-                    const headerHeight = $(window).width() <= 768 ? 40 : 50; // Use updated header height
+                    const headerHeight = $(window).width() <= 768 ? 40 : 50;
                     offsetTop = $(target).offset().top - headerHeight - 10;
                 } else {
                     console.warn("Scroll target not found:", target);
@@ -1019,7 +1125,6 @@
 
             $(document).click(function(e) {
                 if ($(window).width() <= 768) {
-                    // Check if click is outside sidebar AND outside toggle button
                     if (!$('.sidebar').is(e.target) && $('.sidebar').has(e.target).length === 0 && !$('.sidebar-toggle').is(e.target) && $('.sidebar-toggle').has(e.target).length === 0) {
                          if($('.sidebar').hasClass('active')){
                              $('.sidebar').removeClass('active');
@@ -1034,36 +1139,23 @@
             });
 
             function initializeSidebarState() {
-                 const headerHeight = $(window).width() <= 768 ? 40 : 50; // Consistent height check
-                 $('.sidebar').css('top', headerHeight + 'px'); // Adjust sidebar top based on header
-                 $('.main-content').css('margin-top', (headerHeight + 10) + 'px'); // Adjust main content margin
-
                 if ($(window).width() > 768) {
                     $('body').removeClass('sidebar-hidden');
-                    $('.sidebar').removeClass('active'); // Ensure mobile state is reset
+                    $('.sidebar').removeClass('active');
                 } else {
-                    // On mobile, ensure sidebar-hidden is removed and active state is managed by toggle
                     $('body').removeClass('sidebar-hidden');
-                    //$('.sidebar').removeClass('active'); // Don't reset active on resize if already open
+                    $('.sidebar').removeClass('active');
                 }
             }
 
-            initializeSidebarState(); // Run on load
+            initializeSidebarState();
 
-            // Debounce resize event
-            let resizeTimer;
             $(window).resize(function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function(){
+                clearTimeout(window.resizedFinished);
+                window.resizedFinished = setTimeout(function(){
                     initializeSidebarState();
                 }, 250);
             });
-
-            // Removed date display function
-            // displayCurrentDate();
-
-            // Update copyright year dynamically
-            document.getElementById('copyright-year').textContent = new Date().getFullYear();
         });
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1089,18 +1181,17 @@
             engineRadios.forEach(radio => {
                 radio.addEventListener('change', updateSearchEngine);
             });
-            updateSearchEngine(); // Initial setup
-            searchForm.target = '_blank'; // Ensure searches open in new tab
+            updateSearchEngine();
+            searchForm.target = '_blank';
             searchForm.addEventListener('submit', function(e) {
                 if (searchInput.value.trim() === '') {
                     searchInput.focus();
-                    e.preventDefault(); // Prevent empty search submission
+                    e.preventDefault();
                     return false;
                 }
             });
         });
 
-        // Dark Mode Logic
         function updateTheme() {
             const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (isDarkMode) {
@@ -1109,34 +1200,25 @@
                 document.documentElement.classList.remove('dark-mode');
             }
         }
-        updateTheme(); // Set theme on load
-        // Listen for changes in system theme preference
+        updateTheme();
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
 
-
-        // --- Toast Notification Logic ---
         function isMobileDevice() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
             const isMobileUA = mobileRegex.test(userAgent.toLowerCase());
-            // Consider touch capability and screen width as well for broader mobile detection
             const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
             return isMobileUA || (hasTouch && window.innerWidth <= 768);
         }
-
         let toastManuallyClosed = false;
         let toastStartTime = null;
-        let toastAlreadyHidden = false; // Flag to prevent repeated hiding
+        let toastAlreadyHidden = false;
 
         function showToast() {
             const toastBar = document.getElementById('toastBar');
-            // Only show if it's a mobile device, toast exists, hasn't been manually closed, and isn't already hidden
             if (!toastBar || !isMobileDevice() || toastManuallyClosed || toastAlreadyHidden) return;
-
             toastBar.style.display = 'block';
             toastBar.style.visibility = 'visible';
-
-            // Start the timer only once when the toast first appears
             if (!toastStartTime) {
                 toastStartTime = Date.now();
                 checkToastTimeout();
@@ -1147,44 +1229,39 @@
             const toastBar = document.getElementById('toastBar');
             if (toastBar) {
                 toastBar.style.display = 'none';
-                toastAlreadyHidden = true; // Mark as hidden to prevent reappearing on scroll/resize
+                toastAlreadyHidden = true;
             }
         }
 
         function checkToastTimeout() {
             const interval = setInterval(() => {
-                // Stop checking if manually closed or already hidden
                 if (toastManuallyClosed || toastAlreadyHidden) {
                     clearInterval(interval);
                     return;
                 }
-
                 const elapsed = Date.now() - toastStartTime;
-                // Hide after 20 seconds (20000 ms)
                 if (elapsed >= 20000) {
                     hideToast();
                     clearInterval(interval);
                 }
-            }, 1000); // Check every second
+            }, 1000);
         }
 
-        // Show toast logic initialization
         window.onload = function () {
-            showToast(); // Attempt to show on load
+            showToast();
         };
 
-        // Re-check if toast should be shown on scroll or resize (e.g., orientation change)
         window.addEventListener('scroll', showToast);
         window.addEventListener('resize', showToast);
 
-        // Close button event listener
         const toastClose = document.getElementById('toastClose');
         if (toastClose) {
             toastClose.addEventListener('click', function () {
-                toastManuallyClosed = true; // Mark as manually closed
+                toastManuallyClosed = true;
                 hideToast();
             });
         }
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9352af9dbe674533',t:'MTc0NTQ2NzE0NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93580f91f8717bd5',t:'MTc0NTUyMzUwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
