@@ -295,7 +295,6 @@
         }
         #super-search-fm button i {
             font-size: 1em;
-;
         }
         .google-text { font-weight: normal; }
         .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
@@ -327,7 +326,8 @@
             width: 0;
             height: 0;
             border-left: 10px solid transparent;
-            border-right: alternate: 10   border-top: 10px solid #fff;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #fff;
         }
         .toast-content {
             display: flex;
@@ -465,7 +465,7 @@
             background: #2C2E2F;
             color: white;
             text-align: center;
-            padding: 10px; /* 修改：高度减半，调整内边距 */
+            padding: 10px;
             margin-top: 40px;
             margin-left: 200px;
             transition: margin-left 0.3s;
@@ -564,7 +564,7 @@
             }
             .footer {
                 margin-left: 0;
-                padding: 10px; /* 修改：移动端页脚高度减半 */
+                padding: 10px;
             }
             .sidebar-hidden .footer {
                 margin-left: 0;
@@ -614,8 +614,6 @@
             }
         }
         @media (min-width: 769px) {
-            .section-title {
-            }
             .row {
                 display: flex;
                 flex-wrap: wrap;
@@ -630,8 +628,6 @@
                 margin: 0 1%;
                 padding: 0;
                 margin-bottom: 20px;
-            }
-            .tool-card {
             }
         }
         @media (max-width: 768px) {
@@ -669,7 +665,7 @@
             </div>
             <h1>
                 <img src="https://www.likunming.cn/image/logo.png" alt="Logo">
-                <span style="font-size: 0px;">网址导航</span> <!-- 修改：隐藏“网址导航”文字 -->
+                <span style="font-size: 0px;">网址导航</span>
             </h1>
         </div>
         <div class="date" id="current-date"></div>
@@ -731,7 +727,7 @@
                 </div>
             </div>
             <div class="col-sm-4 col-md-3">
-                <div class="tool meinerCard">
+                <div class="tool-card"> <!-- 修正：从 tool Card 改为 tool-card -->
                     <a href="https://cn.wsj.com/zh-hans" target="_blank">
                         <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报中文网 Icon">
                         <h3>华尔街日报中文网</h3>
@@ -1048,7 +1044,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            // 滚动到指定区域的函数
             function scrollToSection(target) {
                 let offsetTop = 0;
                 if (target === 'body') {
@@ -1065,7 +1060,6 @@
                 }, 500);
             }
 
-            // 侧边栏项目点击事件
             $('.sidebar li').click(function() {
                 $('.sidebar li').removeClass('active');
                 $(this).addClass('active');
@@ -1076,7 +1070,6 @@
                 }
             });
 
-            // 侧边栏切换按钮点击事件
             $('.sidebar-toggle').click(function(e) {
                 e.stopPropagation();
                 if ($(window).width() <= 768) {
@@ -1086,7 +1079,6 @@
                 }
             });
 
-            // 点击页面其他区域关闭移动端侧边栏
             $(document).click(function(e) {
                 if ($(window).width() <= 768) {
                     if (!$('.sidebar').is(e.target) && $('.sidebar').has(e.target).length === 0 && !$('.sidebar-toggle').is(e.target) && $('.sidebar-toggle').has(e.target).length === 0) {
@@ -1097,13 +1089,11 @@
                 }
             });
 
-            // 返回顶部按钮点击事件
             $('.go-up').click(function(e) {
                 e.preventDefault();
                 scrollToSection('body');
             });
 
-            // 根据窗口大小初始化 body 类
             function initializeSidebarState() {
                 if ($(window).width() > 768) {
                     $('body').removeClass('sidebar-hidden');
@@ -1114,10 +1104,8 @@
                 }
             }
 
-            // 初始化
             initializeSidebarState();
 
-            // 窗口大小改变时重新判断
             $(window).resize(function() {
                 clearTimeout(window.resizedFinished);
                 window.resizedFinished = setTimeout(function(){
@@ -1125,7 +1113,6 @@
                 }, 250);
             });
 
-            // 显示当前日期
             function displayCurrentDate() {
                 const dateElement = document.getElementById('current-date');
                 const today = new Date();
@@ -1137,7 +1124,6 @@
             displayCurrentDate();
         });
 
-        // 搜索框 JavaScript
         document.addEventListener('DOMContentLoaded', function() {
             const searchContainer = document.getElementById('search');
             const searchForm = document.getElementById('super-search-fm');
@@ -1172,7 +1158,6 @@
             });
         });
 
-        // 黑暗模式 JavaScript
         function updateTheme() {
             const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (isDarkMode) {
@@ -1184,7 +1169,6 @@
         updateTheme();
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
 
-        // Toast JavaScript
         function isMobileDevice() {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i;
