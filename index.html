@@ -29,7 +29,7 @@
             padding: 10px 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* 修改：确保日期在右边 */
+            justify-content: space-between;
             position: fixed;
             width: 100%;
             top: 0;
@@ -53,7 +53,7 @@
             color: #333;
         }
         .header h1 img {
-            width: 50px; /* 修改：Logo尺寸与条幅高度一致 */
+            width: 50px;
             height: 50px;
             margin-right: 8px;
         }
@@ -295,6 +295,7 @@
         }
         #super-search-fm button i {
             font-size: 1em;
+;
         }
         .google-text { font-weight: normal; }
         .google-text .g1 { color: #4285f4; } .google-text .g2 { color: #ea4335; } .google-text .g3 { color: #fbbc05; } .google-text .g4 { color: #4285f4; } .google-text .g5 { color: #34a853; } .google-text .g6 { color: #ea4335; }
@@ -326,8 +327,7 @@
             width: 0;
             height: 0;
             border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #fff;
+            border-right: alternate: 10   border-top: 10px solid #fff;
         }
         .toast-content {
             display: flex;
@@ -465,7 +465,7 @@
             background: #2C2E2F;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 10px; /* 修改：高度减半，调整内边距 */
             margin-top: 40px;
             margin-left: 200px;
             transition: margin-left 0.3s;
@@ -508,7 +508,7 @@
                 margin-left: 10px;
             }
             .header h1 img {
-                width: 40px; /* 修改：移动端Logo尺寸与条幅高度一致 */
+                width: 40px;
                 height: 40px;
                 margin-right: 8px;
             }
@@ -564,6 +564,7 @@
             }
             .footer {
                 margin-left: 0;
+                padding: 10px; /* 修改：移动端页脚高度减半 */
             }
             .sidebar-hidden .footer {
                 margin-left: 0;
@@ -668,7 +669,7 @@
             </div>
             <h1>
                 <img src="https://www.likunming.cn/image/logo.png" alt="Logo">
-                网址导航
+                <span style="font-size: 0px;">网址导航</span> <!-- 修改：隐藏“网址导航”文字 -->
             </h1>
         </div>
         <div class="date" id="current-date"></div>
@@ -730,7 +731,7 @@
                 </div>
             </div>
             <div class="col-sm-4 col-md-3">
-                <div class="tool-card">
+                <div class="tool meinerCard">
                     <a href="https://cn.wsj.com/zh-hans" target="_blank">
                         <img src="https://www.wsj.com/favicon.ico" alt="华尔街日报中文网 Icon">
                         <h3>华尔街日报中文网</h3>
@@ -1007,17 +1008,17 @@
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
-                    <a href="https://www.enidli.cn" target="_blank">
-                        <img src="https://www.likunming.cn/image/logo.png" alt="Docker Icon">
-                        <h3>待加</h3>
+                    <a href="https://www.calorietech.com/blog/plan" target="_blank">
+                        <img src="https://www.calorietech.com/icons/favicon.ico" alt="KEEP Icon">
+                        <h3>KEEP</h3>
                     </a>
                 </div>
             </div>
             <div class="col-sm-4 col-md-3">
                 <div class="tool-card">
-                    <a href="https://www.enidli.cn" target="_blank">
-                        <img src="https://www.likunming.cn/image/logo.png" alt="Cheatsheet Icon">
-                        <h3>待加</h3>
+                    <a href="https://v.flomoapp.com/mine" target="_blank">
+                        <img src="https://v.flomoapp.com/favicon.ico" alt="Cheatsheet Icon">
+                        <h3>flomo浮墨笔记</h3>
                     </a>
                 </div>
             </div>
